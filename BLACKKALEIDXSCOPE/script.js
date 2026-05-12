@@ -25,11 +25,11 @@ const BLACK_GATE_PERIODS = [
 ];
 
 const BLACK_PERFECT_PERIODS = [
-    { start: '4.29', end: '5.6', type: 'master', life: 1 },
-    { start: '5.6', end: '5.13', type: 'master', life: 10 },
-    { start: '5.13', end: '5.20', type: 'expert', life: 50 },
-    { start: '5.20', end: '5.27', type: 'basic', life: 100 },
-    { start: '5.27', end: '12.31', type: 'basic', life: 300 }
+    { start: '4.28', end: '5.5', type: 'master', life: 1 },
+    { start: '5.5', end: '5.12', type: 'master', life: 10 },
+    { start: '5.12', end: '5.19', type: 'expert', life: 50 },
+    { start: '5.19', end: '5.26', type: 'basic', life: 100 },
+    { start: '5.26', end: '12.31', type: 'basic', life: 300 }
 ];
 
 function parsePeriodDate(str, year, resetHour) {
