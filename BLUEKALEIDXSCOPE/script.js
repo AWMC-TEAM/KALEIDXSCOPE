@@ -227,7 +227,7 @@ function renderSongs() {
     filteredSongs.forEach(song => {
         const songCard = document.createElement('div');
         songCard.className = `song-card ${progress[song.id] ? 'completed' : ''}`;
-        const coverUrl = `https://assets.awmc.cc/covers/${song.id}.png`;
+        const coverUrl = `https://assets.awmc.team/covers/${song.id}.png`;
         songCard.innerHTML = `
             <div class="song-cover" data-song-id="${song.id}" title="双击/长按查看乐曲详情">
                 <img src="${coverUrl}" alt="暂无曲绘" onerror="this.onerror=null;this.src='${noCoverSvg}'">
@@ -294,7 +294,7 @@ function renderBlueGateChallengeRun() {
     function renderTrack(pool, selectedId) {
         return pool.map(s => {
             const isSelected = s.id === selectedId;
-            const coverUrl = `https://assets.awmc.cc/covers/${s.id}.png`;
+            const coverUrl = `https://assets.awmc.team/covers/${s.id}.png`;
             return `
                 <div class="gate-song-chip expandable ${isSelected ? 'selected' : ''}" data-id="${s.id}">
                     <div class="gate-chip-cover" data-song-id="${s.id}" title="双击/长按查看乐曲详情">
@@ -311,7 +311,7 @@ function renderBlueGateChallengeRun() {
     track3El.innerHTML = `
         <div class="gate-song-chip expandable selected" data-id="${BLUE_GATE_TRACK3_FIXED.id}">
             <div class="gate-chip-cover" data-song-id="${BLUE_GATE_TRACK3_FIXED.id}" title="双击/长按查看乐曲详情">
-                <img src="https://assets.awmc.cc/covers/${BLUE_GATE_TRACK3_FIXED.id}.png" alt="${BLUE_GATE_TRACK3_FIXED.name}" onerror="this.src='${noCoverSvg}'">
+                <img src="https://assets.awmc.team/covers/${BLUE_GATE_TRACK3_FIXED.id}.png" alt="${BLUE_GATE_TRACK3_FIXED.name}" onerror="this.src='${noCoverSvg}'">
             </div>
             <span class="gate-chip-name">${BLUE_GATE_TRACK3_FIXED.name}</span>
         </div>
@@ -368,7 +368,7 @@ function updateRemainingList() {
     remainingList.innerHTML = remainingSongs.map(song => `
         <div class="remaining-item">
             <div class="remaining-cover-wrap" data-song-id="${song.id}" title="双击/长按查看乐曲详情">
-                <img src="https://assets.awmc.cc/covers/${song.id}.png" alt="暂无曲绘" class="remaining-cover" onerror="this.onerror=null;this.src='${noCoverSvg}'">
+                <img src="https://assets.awmc.team/covers/${song.id}.png" alt="暂无曲绘" class="remaining-cover" onerror="this.onerror=null;this.src='${noCoverSvg}'">
             </div>
             <div class="remaining-info" data-song-id="${song.id}"><strong>${(song.name || '').replace(/</g, '&lt;')}</strong></div>
         </div>
