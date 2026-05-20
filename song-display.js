@@ -49,7 +49,7 @@
     }
 
     function getDxQueryDiffFromLevel(levelKey) {
-        // v.awmc.team diff 对应：2 Basic、3 Advance、4 Expert、5 Master
+        // v.awmc.cc diff 对应：2 Basic、3 Advance、4 Expert、5 Master
         const map = {
             basic: 2,
             advanced: 3,
@@ -62,13 +62,13 @@
     function updateAwmcConfirmLinks() {
         if (typeof document === 'undefined') return;
         const diff = getDxQueryDiffFromLevel(getDifficultyLevel());
-        const anchors = document.querySelectorAll('a[href^="https://v.awmc.team/?song="], a[href*="v.awmc.team/?song="]');
+        const anchors = document.querySelectorAll('a[href^="https://v.awmc.cc/?song="], a[href*="v.awmc.cc/?song="]');
         anchors.forEach(a => {
             const href = a.getAttribute('href');
             if (!href) return;
             try {
                 const url = new URL(href);
-                if (url.hostname !== 'v.awmc.team') return;
+                if (url.hostname !== 'v.awmc.cc') return;
                 if (!url.searchParams.has('song')) return;
                 url.searchParams.set('diff', String(diff));
                 a.href = url.toString();
