@@ -112,3 +112,63 @@ body.theme-black .qq-footer-link svg {
 body.theme-black .kook-footer-link svg {
     fill: #5865f2;
 }
+
+/* 备案号底栏 */
+.beian-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    color: #999;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.beian-footer a {
+    color: #999;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.beian-footer a:hover {
+    color: #333;
+}
+
+.beian-divider {
+    margin: 0 6px;
+    color: #ccc;
+}
+
+.beian-police-icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+}
+
+@media (prefers-color-scheme: dark) {
+    .beian-footer {
+        background: rgba(30, 30, 30, 0.95);
+        border-top-color: #333;
+        color: #777;
+    }
+    .beian-footer a {
+        color: #777;
+    }
+    .beian-footer a:hover {
+        color: #ccc;
+    }
+    .beian-divider {
+        color: #555;
+    }
+}
