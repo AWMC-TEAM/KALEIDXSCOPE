@@ -26,7 +26,7 @@
         const normalized = normalizeSongIdForAwmc(songId);
         if (normalized == null) return null;
         const diff = getDxQueryDiffFromDisplaySetting();
-        const url = new URL('https://v.awmc.cc/');
+        const url = new URL('https://v.awmc.team/');
         url.searchParams.set('song', String(normalized));
         url.searchParams.set('kind', 'dx');
         url.searchParams.set('diff', String(diff));
