@@ -160,7 +160,6 @@
             if (cover && cover.dataset.songId) {
                 longPressTimer = setTimeout(() => {
                     longPressTimer = null;
-                    e.preventDefault();
                     handleCoverActivate(cover);
                 }, LONG_PRESS_MS);
             }
