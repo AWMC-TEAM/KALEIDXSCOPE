@@ -254,9 +254,26 @@ body {
     }
 }
 
-/* 黄色之门：默认直接显示（与蓝/白门一致） */
+/* 黄色之门：默认隐藏（与紫/黑门一致），到开放时间自动显示 */
 .yellow-door-card {
+    display: none !important;
     position: relative;
+}
+
+.yellow-door-card.yellow-revealed {
+    display: block !important;
+    animation: yellow-reveal 1.2s ease forwards;
+}
+
+@keyframes yellow-reveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .yellow-door-card .door-placeholder-yellow {
