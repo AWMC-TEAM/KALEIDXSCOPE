@@ -254,6 +254,17 @@ body {
     }
 }
 
+/* 黄色之门：默认直接显示（与蓝/白门一致） */
+.yellow-door-card {
+    position: relative;
+}
+
+.yellow-door-card .door-placeholder-yellow {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+    border-radius: 12px;
+    border: 2px dashed #eab308;
+}
+
 /* 说明区域 */
 .info-section {
     padding: 30px;

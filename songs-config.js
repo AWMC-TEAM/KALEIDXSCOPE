@@ -135,10 +135,79 @@
         track3: { id: '11753', name: '宙天' }
     };
 
+    // 黄门（七彩区域）：钥匙采用「抽卡」式（12 选 1）；门内 TRACK 1/2 各从池中随机；TRACK 3 固定为 Åntinomiε
+    // ID 为 '0' 表示乐曲尚未收录
+    const YELLOW_KEY_SONGS = [
+        { id: '11003', name: 'でらっくmaimai♪てんてこまい!' },
+        { id: '11095', name: '絡めトリック利己ライザー' },
+        { id: '11152', name: 'ぼくたちいつでも しゅわっしゅわ！' },
+        { id: '11224', name: 'Paradisoda' },
+        { id: '11296', name: 'とびだせ！TO THE COSMIC!!' },
+        { id: '11375', name: 'ミルキースター・シューティングスター' },
+        { id: '11452', name: 'ホシシズク' },
+        { id: '11529', name: 'ツムギボシ' },
+        { id: '11608', name: 'NOIZY BOUNCE' },
+        { id: '11669', name: 'エスオーエス' },
+        { id: '11736', name: 'プリズム△▽リズム' },
+        { id: '0', name: 'Fraq' }
+    ];
+    const YELLOW_GATE = {
+        track1: [
+            { id: '11003', name: 'でらっくmaimai♪てんてこまい!' },
+            { id: '11007', name: '超常マイマイン' },
+            { id: '11006', name: 'P-qoq' },
+            { id: '11005', name: 'バーチャルダム　ネーション' },
+            { id: '11094', name: 'ここからはじまるプロローグ。' },
+            { id: '11095', name: '絡めトリック利己ライザー' },
+            { id: '11096', name: 'モ°ルモ°ル' },
+            { id: '11152', name: 'ぼくたちいつでも　しゅわっしゅわ！' },
+            { id: '11153', name: "Boys O'Clock" },
+            { id: '11154', name: '居並ぶ穀物と溜息まじりの運送屋' },
+            { id: '11224', name: 'Paradisoda' },
+            { id: '11225', name: 'VANTABLACK RAVER' },
+            { id: '11226', name: '時計の国のジェミニ' },
+            { id: '11296', name: 'とびだせ！TO THE COSMIC!!' },
+            { id: '11297', name: '噛み係' },
+            { id: '11298', name: 'トリアージ' },
+            { id: '11375', name: 'ミルキースター・シューティングスター' },
+            { id: '11376', name: 'ｉｓｏｐｈｏｔｅ' },
+            { id: '0', name: 'パラマント☆ショータイム！！' },
+            { id: '11452', name: 'ホシシズク' },
+            { id: '11453', name: 'Rainbow Rush Story' },
+            { id: '11454', name: 'Tricolor⁂circuS' },
+            { id: '11526', name: 'トノサマビーム' },
+            { id: '11527', name: 'enchanted wanderer' },
+            { id: '11528', name: 'Comet Panto Men!' },
+            { id: '11608', name: 'NOIZY BOUNCE' },
+            { id: '11609', name: 'サンバディ！' },
+            { id: '11610', name: 'Horoscope Express' },
+            { id: '11669', name: 'エスオーエス' },
+            { id: '11670', name: 'のじゃロリック' },
+            { id: '11671', name: 'Edelweiss' },
+            { id: '0', name: 'Fraq' },
+            { id: '0', name: 'ウタヒメナイトストーム' }
+        ],
+        track2: [
+            { id: '11004', name: 'MAXRAGE' },
+            { id: '11093', name: 'UniTas' },
+            { id: '11155', name: 'ARAIS' },
+            { id: '11227', name: 'Xenovcipher' },
+            { id: '11299', name: 'NAGAREBOSHI☆ROCKET' },
+            { id: '11378', name: 'Strive against fate' },
+            { id: '11455', name: '[X]' },
+            { id: '11529', name: 'ツムギボシ' },
+            { id: '11611', name: 'Party☆People☆Princess' },
+            { id: '11672', name: 'QuiQ' },
+            { id: '0', name: 'Feel The Luv' }
+        ],
+        track3: { id: '0', name: 'Åntinomiε' }
+    };
+
     global.SongsConfig = {
         blue: { songs: BLUE_SONGS, gate: BLUE_GATE },
         white: { songs: WHITE_SONGS, gate: WHITE_GATE },
         purple: { songs: PURPLE_SONGS, gate: PURPLE_GATE },
-        black: { songs: BLACK_SONGS, gate: BLACK_GATE }
+        black: { songs: BLACK_SONGS, gate: BLACK_GATE },
+        yellow: { songs: YELLOW_KEY_SONGS, gate: YELLOW_GATE }
     };
 })(typeof window !== 'undefined' ? window : globalThis);
