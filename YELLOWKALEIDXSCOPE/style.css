@@ -1242,6 +1242,25 @@ header h1 {
     gap: 4px;
 }
 
+.reference-data-note {
+    margin-top: 14px;
+    padding: 10px 14px;
+    font-size: 0.88em;
+    color: #92400e;
+    background: rgba(245, 158, 11, 0.10);
+    border-left: 3px solid #f59e0b;
+    border-radius: 6px;
+    line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+    .reference-data-note {
+        color: #fde68a;
+        background: rgba(251, 191, 36, 0.12);
+        border-left-color: #d97706;
+    }
+}
+
 .reference-song-name {
     font-size: 0.95em;
     font-weight: 500;

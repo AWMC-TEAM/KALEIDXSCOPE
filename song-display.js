@@ -213,13 +213,14 @@
         renderSongDetailsHtml,
         initDisplaySettings,
         getMusicDataThen: (songId, fallback, cb) => {
+            const localFallback = (typeof LocalSongData !== 'undefined') ? LocalSongData.getSongById(songId) : null;
             if (typeof MusicData === 'undefined') {
-                cb(getSongDisplayInfo(null, fallback?.name));
+                cb(getSongDisplayInfo(localFallback, fallback?.name));
                 return;
             }
             MusicData.getSongById(songId).then(song => {
-                cb(getSongDisplayInfo(song, fallback?.name));
-            }).catch(() => cb(getSongDisplayInfo(null, fallback?.name)));
+                cb(getSongDisplayInfo(song || localFallback, fallback?.name));
+            }).catch(() => cb(getSongDisplayInfo(localFallback, fallback?.name)));
         }
     };
 })(typeof window !== 'undefined' ? window : globalThis);

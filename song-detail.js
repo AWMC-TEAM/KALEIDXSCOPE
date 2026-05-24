@@ -101,6 +101,13 @@
         errEl.textContent = '';
 
         if (typeof MusicData === 'undefined') {
+            const local = (typeof LocalSongData !== 'undefined') ? LocalSongData.getSongById(songId) : null;
+            if (local) {
+                loading.style.display = 'none';
+                content.innerHTML = renderSongDetail(local);
+                content.style.display = 'block';
+                return;
+            }
             errEl.textContent = '乐曲数据模块未加载';
             errEl.style.display = 'block';
             loading.style.display = 'none';
@@ -109,15 +116,22 @@
 
         MusicData.getSongById(songId).then(song => {
             loading.style.display = 'none';
-            if (!song) {
+            const finalSong = song || ((typeof LocalSongData !== 'undefined') ? LocalSongData.getSongById(songId) : null);
+            if (!finalSong) {
                 errEl.textContent = '未找到该曲目信息（可能尚未收录或 ID 有误）';
                 errEl.style.display = 'block';
                 return;
             }
-            content.innerHTML = renderSongDetail(song);
+            content.innerHTML = renderSongDetail(finalSong);
             content.style.display = 'block';
         }).catch(e => {
+            const local = (typeof LocalSongData !== 'undefined') ? LocalSongData.getSongById(songId) : null;
             loading.style.display = 'none';
+            if (local) {
+                content.innerHTML = renderSongDetail(local);
+                content.style.display = 'block';
+                return;
+            }
             errEl.textContent = '加载失败：' + (e.message || '未知错误');
             errEl.style.display = 'block';
         });

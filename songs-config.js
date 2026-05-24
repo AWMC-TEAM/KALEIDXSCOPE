@@ -136,7 +136,6 @@
     };
 
     // 黄门（七彩区域）：钥匙采用「抽卡」式（12 选 1）；门内 TRACK 1/2 各从池中随机；TRACK 3 固定为 Åntinomiε
-    // ID 为 '0' 表示乐曲尚未收录
     const YELLOW_KEY_SONGS = [
         { id: '11003', name: 'でらっくmaimai♪てんてこまい!' },
         { id: '11095', name: '絡めトリック利己ライザー' },
@@ -149,7 +148,7 @@
         { id: '11608', name: 'NOIZY BOUNCE' },
         { id: '11669', name: 'エスオーエス' },
         { id: '11736', name: 'プリズム△▽リズム' },
-        { id: '0', name: 'Fraq' }
+        { id: '11806', name: 'Fraq' }
     ];
     const YELLOW_GATE = {
         track1: [
@@ -171,7 +170,7 @@
             { id: '11298', name: 'トリアージ' },
             { id: '11375', name: 'ミルキースター・シューティングスター' },
             { id: '11376', name: 'ｉｓｏｐｈｏｔｅ' },
-            { id: '0', name: 'パラマント☆ショータイム！！' },
+            { id: '11377', name: 'パラマウント☆ショータイム！！' },
             { id: '11452', name: 'ホシシズク' },
             { id: '11453', name: 'Rainbow Rush Story' },
             { id: '11454', name: 'Tricolor⁂circuS' },
@@ -184,8 +183,8 @@
             { id: '11669', name: 'エスオーエス' },
             { id: '11670', name: 'のじゃロリック' },
             { id: '11671', name: 'Edelweiss' },
-            { id: '0', name: 'Fraq' },
-            { id: '0', name: 'ウタヒメナイトストーム' }
+            { id: '11806', name: 'Fraq' },
+            { id: '11807', name: 'ウタヒメナイトストーム' }
         ],
         track2: [
             { id: '11004', name: 'MAXRAGE' },
@@ -198,9 +197,9 @@
             { id: '11529', name: 'ツムギボシ' },
             { id: '11611', name: 'Party☆People☆Princess' },
             { id: '11672', name: 'QuiQ' },
-            { id: '0', name: 'Feel The Luv' }
+            { id: '11808', name: 'Feel The Luv' }
         ],
-        track3: { id: '0', name: 'Åntinomiε' }
+        track3: { id: '11809', name: 'Åntinomiε' }
     };
 
     global.SongsConfig = {
