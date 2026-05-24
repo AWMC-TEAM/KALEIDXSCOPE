@@ -12,23 +12,6 @@
 (function (global) {
     const ENTRIES = [
         {
-            id: '11377',
-            title: 'パラマウント☆ショータイム！！',
-            type: 'DX',
-            ds: [5.0, 8.0, 11.7, 14.0],
-            level: ['5', '8', '11+', '14'],
-            cids: [],
-            basic_info: {
-                title: 'パラマウント☆ショータイム！！',
-                artist: '翡乃イスカ',
-                genre: 'maimai',
-                bpm: 222,
-                release_date: '',
-                from: 'maimai でらっくす PRiSM PLUS',
-                is_new: true
-            }
-        },
-        {
             id: '11806',
             title: 'Fraq',
             type: 'DX',
