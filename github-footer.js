@@ -35,12 +35,12 @@ var SITE_CONFIG = {
         document.title = document.title.replace(/__APP_VERSION__/g, version);
     }
 
-    // 替换页脚 .github-footer-update 中的占位符
+    // 替换页脚 .github-footer-update 中的占位符（兼容两种占位符）
     var updateEls = document.querySelectorAll('.github-footer-update');
     updateEls.forEach(function (el) {
-        if (el.textContent.indexOf('__LAST_UPDATE__') >= 0) {
-            el.textContent = el.textContent.replace(/__LAST_UPDATE__/g, version);
-        }
+        el.textContent = el.textContent
+            .replace(/__APP_VERSION__/g, version)
+            .replace(/__LAST_UPDATE__/g, version);
     });
 })();
 
