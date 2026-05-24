@@ -11,7 +11,8 @@ var SITE_CONFIG = {
     // ICP 备案号
     icp: {
         text: '晋ICP备2025069504号-7',
-        url: 'https://beian.miit.gov.cn/'
+        url: 'https://beian.miit.gov.cn/',
+        icon: 'https://www.mc5173.cn/logo.png'
     },
 
     // 公安备案号
@@ -52,8 +53,14 @@ var SITE_CONFIG = {
 
     var footer = document.createElement('div');
     footer.className = 'beian-footer';
+    var icpIconHtml = SITE_CONFIG.icp.icon
+        ? '<img class="beian-icp-icon" src="' + SITE_CONFIG.icp.icon + '" alt="ICP 备案">'
+        : '';
     footer.innerHTML =
-        '<a href="' + SITE_CONFIG.icp.url + '" target="_blank" rel="noopener noreferrer">' + SITE_CONFIG.icp.text + '</a>' +
+        '<a href="' + SITE_CONFIG.icp.url + '" target="_blank" rel="noopener noreferrer">' +
+            icpIconHtml +
+            SITE_CONFIG.icp.text +
+        '</a>' +
         '<span class="beian-divider">|</span>' +
         '<a href="' + SITE_CONFIG.police.url + '" target="_blank" rel="noopener noreferrer">' +
             '<img class="beian-police-icon" src="' + policeIcon + '" alt="公安备案">' +

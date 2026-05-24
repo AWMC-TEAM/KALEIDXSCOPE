@@ -156,6 +156,13 @@ body.theme-black .kook-footer-link svg {
     vertical-align: middle;
 }
 
+.beian-icp-icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
 @media (prefers-color-scheme: dark) {
     .beian-footer {
         background: rgba(30, 30, 30, 0.95);
