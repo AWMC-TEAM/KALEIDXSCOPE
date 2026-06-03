@@ -72,7 +72,7 @@
             </table>
             <div class="song-detail-actions">
                 <a class="btn btn-info btn-sm song-detail-awmc-link" href="${escapeHtml(buildAwmcPreviewUrl(song.id) || '')}" target="_blank" rel="noopener noreferrer" data-song-id="${escapeHtml(song.id)}">
-                    铺面预览
+                    谱面预览
                 </a>
             </div>
             <div class="song-detail-meta">
