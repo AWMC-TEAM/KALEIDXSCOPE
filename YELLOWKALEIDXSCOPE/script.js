@@ -121,7 +121,7 @@ function renderKeyGachaResult() {
     const unreleased = isUnreleased(song);
     const coverHtml = unreleased
         ? `<div class="key-gacha-cover key-gacha-cover--unreleased"><span>未收录</span></div>`
-        : `<div class="key-gacha-cover" data-song-id="${escapeAttr(song.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.team/covers/${escapeAttr(song.id)}.png" alt="${escapeAttr(song.name)}" onerror="this.src='${noCoverSvg}'"></div>`;
+        : `<div class="key-gacha-cover" data-song-id="${escapeAttr(song.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.cc/covers/${escapeAttr(song.id)}.png" alt="${escapeAttr(song.name)}" onerror="this.src='${noCoverSvg}'"></div>`;
 
     const unreleasedNotice = unreleased
         ? `<div class="key-gacha-unreleased-notice">⚠️ 该曲目尚未收录，曲绘与定数信息将在游戏更新后补充。本次抽卡有效，可正常游玩。</div>`
@@ -172,7 +172,7 @@ function renderKeySongsPool() {
         const isHit = keyGachaResult && keyGachaResult.index === i;
         const coverHtml = unreleased
             ? `<div class="song-cover song-cover--unreleased"><span>未收录</span></div>`
-            : `<div class="song-cover" data-song-id="${escapeAttr(song.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.team/covers/${escapeAttr(song.id)}.png" alt="${escapeAttr(song.name)}" onerror="this.src='${noCoverSvg}'"></div>`;
+            : `<div class="song-cover" data-song-id="${escapeAttr(song.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.cc/covers/${escapeAttr(song.id)}.png" alt="${escapeAttr(song.name)}" onerror="this.src='${noCoverSvg}'"></div>`;
         return `
             <div class="pool-song-card ${isHit ? 'gacha-hit' : ''} ${unreleased ? 'unreleased' : ''}" data-index="${i}">
                 ${coverHtml}
@@ -215,7 +215,7 @@ function renderGateChallengeRun() {
             const unreleased = isUnreleased(s);
             const coverHtml = unreleased
                 ? `<div class="gate-chip-cover gate-chip-cover--unreleased"><span>未收录</span></div>`
-                : `<div class="gate-chip-cover" data-song-id="${escapeAttr(s.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.team/covers/${escapeAttr(s.id)}.png" alt="${escapeAttr(s.name)}" onerror="this.src='${noCoverSvg}'"></div>`;
+                : `<div class="gate-chip-cover" data-song-id="${escapeAttr(s.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.cc/covers/${escapeAttr(s.id)}.png" alt="${escapeAttr(s.name)}" onerror="this.src='${noCoverSvg}'"></div>`;
             return `
                 <div class="gate-song-chip expandable ${isSelected ? 'selected' : ''} ${unreleased ? 'unreleased' : ''}" data-pool-index="${i}" data-umami-event="gate-chip-expand-yellow" data-umami-event-song-id="${escapeAttr(s.id)}" data-umami-event-song-name="${escapeAttr(s.name)}">
                     ${coverHtml}
@@ -233,7 +233,7 @@ function renderGateChallengeRun() {
         <div class="gate-song-chip expandable selected ${t3Unreleased ? 'unreleased' : ''}" data-umami-event="gate-chip-expand-yellow" data-umami-event-song-id="${escapeAttr(t3.id)}" data-umami-event-song-name="${escapeAttr(t3.name)}">
             ${t3Unreleased
                 ? `<div class="gate-chip-cover gate-chip-cover--unreleased"><span>未收录</span></div>`
-                : `<div class="gate-chip-cover" data-song-id="${escapeAttr(t3.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.team/covers/${escapeAttr(t3.id)}.png" alt="${escapeAttr(t3.name)}" onerror="this.src='${noCoverSvg}'"></div>`}
+                : `<div class="gate-chip-cover" data-song-id="${escapeAttr(t3.id)}" title="双击/长按查看乐曲详情"><img src="https://assets.awmc.cc/covers/${escapeAttr(t3.id)}.png" alt="${escapeAttr(t3.name)}" onerror="this.src='${noCoverSvg}'"></div>`}
             <span class="gate-chip-name">${escapeText(t3.name)}${t3Unreleased ? ' <span class="unreleased-badge">未收录</span>' : ''}</span>
         </div>
     `;

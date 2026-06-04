@@ -284,7 +284,7 @@ function renderSongs() {
     filteredSongs.forEach(song => {
         const songCard = document.createElement('div');
         songCard.className = `song-card ${progress[song.id] ? 'completed' : ''}`;
-        const coverUrl = `https://assets.awmc.team/covers/${song.id}.png`;
+        const coverUrl = `https://assets.awmc.cc/covers/${song.id}.png`;
         songCard.innerHTML = `
             <div class="song-cover" data-song-id="${song.id}" title="双击/长按查看乐曲详情">
                 <img src="${coverUrl}" alt="暂无曲绘" onerror="this.onerror=null;this.src='${noCoverSvg}'">
@@ -346,7 +346,7 @@ function renderBlackGateChallengeRun() {
     function renderTrack(pool, selectedId) {
         return pool.map(s => {
             const isSelected = s.id === selectedId;
-            const coverUrl = `https://assets.awmc.team/covers/${s.id}.png`;
+            const coverUrl = `https://assets.awmc.cc/covers/${s.id}.png`;
             return `
                 <div class="gate-song-chip expandable ${isSelected ? 'selected' : ''}" data-id="${s.id}" data-umami-event="gate-chip-expand-black" data-umami-event-song-id="${s.id}" data-umami-event-song-name="${(s.name || '').replace(/"/g, '&quot;')}">
                     <div class="gate-chip-cover" data-song-id="${s.id}" title="双击/长按查看乐曲详情">
@@ -363,7 +363,7 @@ function renderBlackGateChallengeRun() {
     track3El.innerHTML = `
         <div class="gate-song-chip expandable selected" data-id="${BLACK_GATE_TRACK3_FIXED.id}" data-umami-event="gate-chip-expand-black" data-umami-event-song-id="${BLACK_GATE_TRACK3_FIXED.id}" data-umami-event-song-name="${(BLACK_GATE_TRACK3_FIXED.name || '').replace(/"/g, '&quot;')}">
             <div class="gate-chip-cover" data-song-id="${BLACK_GATE_TRACK3_FIXED.id}" title="双击/长按查看乐曲详情">
-                <img src="https://assets.awmc.team/covers/${BLACK_GATE_TRACK3_FIXED.id}.png" alt="${(BLACK_GATE_TRACK3_FIXED.name || '').replace(/"/g, '&quot;')}" onerror="this.src='${noCoverSvg}'">
+                <img src="https://assets.awmc.cc/covers/${BLACK_GATE_TRACK3_FIXED.id}.png" alt="${(BLACK_GATE_TRACK3_FIXED.name || '').replace(/"/g, '&quot;')}" onerror="this.src='${noCoverSvg}'">
             </div>
             <span class="gate-chip-name">${(BLACK_GATE_TRACK3_FIXED.name || '').replace(/</g, '&lt;')}</span>
         </div>
@@ -412,7 +412,7 @@ function updateRemainingList() {
     remainingList.innerHTML = remainingSongs.map(song => `
         <div class="remaining-item">
             <div class="remaining-cover-wrap" data-song-id="${song.id}" title="双击/长按查看乐曲详情">
-                <img src="https://assets.awmc.team/covers/${song.id}.png" alt="暂无曲绘" class="remaining-cover" onerror="this.onerror=null;this.src='${noCoverSvg}'">
+                <img src="https://assets.awmc.cc/covers/${song.id}.png" alt="暂无曲绘" class="remaining-cover" onerror="this.onerror=null;this.src='${noCoverSvg}'">
             </div>
             <div class="remaining-info" data-song-id="${song.id}">
                 <strong>${(song.name || '').replace(/</g, '&lt;')}</strong>
