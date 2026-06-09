@@ -5,8 +5,8 @@ const GATE_TRACK1_POOL = gate.track1;
 const GATE_TRACK2_POOL = gate.track2;
 const GATE_TRACK3_FIXED = gate.track3;
 
-// 区域开放时间 2026/06/11 10:00:00 (UTC+8 北京时间) — 预测时间
-const OPEN_TIME = new Date('2026-06-11T10:00:00+08:00');
+// 区域开放时间 2026/06/10 10:00:00 (UTC+8 北京时间) — 预测时间
+const OPEN_TIME = new Date('2026-06-10T10:00:00+08:00');
 
 const noCoverSvg = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect fill=%22%23ddd%22 width=%2280%22 height=%2280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2210%22%3E%E6%9A%82%E6%97%A0%E6%9B%B2%E7%BB%98%3C/text%3E%3C/svg%3E";
 
