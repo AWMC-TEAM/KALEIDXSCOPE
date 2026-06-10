@@ -156,66 +156,20 @@ function updateYellowScheduleCountdown() {
     );
 }
 
-function periodDaySpan(period, index, periods) {
-    const year = 2026;
-    const start = parseScheduleDate(period.start, year);
-    if (index < periods.length - 1) {
-        const end = parseScheduleDate(periods[index + 1].start, year);
-        return Math.max(1, Math.round((end - start) / 86400000));
-    }
-    const prev = periods.length > 1 ? periodDaySpan(periods[index - 1], index - 1, periods) : 7;
-    return Math.max(prev, 8);
-}
-
-function periodStartDayIndex(index, periods) {
-    let day = 1;
-    for (let i = 0; i < index; i++) {
-        day += periodDaySpan(periods[i], i, periods);
-    }
-    return day;
-}
-
-function renderHpTimelineBar(periods) {
-    const segments = [];
-    const markers = [];
-    periods.forEach((p, i) => {
-        const span = periodDaySpan(p, i, periods);
-        const startDay = periodStartDayIndex(i, periods);
-        segments.push(
-            `<div class="hp-timeline-segment hp-timeline-segment--${p.type}" style="flex:${span}" title="${p.type.toUpperCase()} ${p.life}">` +
-            `<span class="hp-value hp-value--${p.type}">${p.life}</span></div>`
-        );
-        markers.push(
-            `<span class="hp-timeline-marker" style="flex:${span}">` +
-            `<span class="hp-timeline-marker-day">${startDay}日</span></span>`
-        );
-    });
-    return `<div class="hp-timeline-bar">${segments.join('')}</div>` +
-        `<div class="hp-timeline-markers">${markers.join('')}</div>`;
-}
-
-function renderYellowHpRelaxedTable() {
-    const perfectEl = document.getElementById('yellow-perfect-timeline');
-    const kaleidoEl = document.getElementById('yellow-kaleido-timeline');
-    if (perfectEl) perfectEl.innerHTML = renderHpTimelineBar(YELLOW_PERFECT_PERIODS);
-    if (kaleidoEl) kaleidoEl.innerHTML = renderHpTimelineBar(YELLOW_KALEIDO_PERIODS);
-}
-
 function applyYellowScheduleView() {
     const view = localStorage.getItem('yellow-gate-schedule-view') || 'countdown';
     const countdownView = document.getElementById('countdown-view');
-    const calendarView = document.getElementById('calendar-view');
+    const timelineView = document.getElementById('timeline-view');
     const btnCountdown = document.getElementById('view-countdown');
     const btnCalendar = document.getElementById('view-calendar');
-    const isCalendar = view === 'calendar';
-    if (countdownView) countdownView.style.display = isCalendar ? 'none' : 'block';
-    if (calendarView) calendarView.style.display = isCalendar ? 'block' : 'none';
-    if (btnCountdown) btnCountdown.classList.toggle('active', !isCalendar);
-    if (btnCalendar) btnCalendar.classList.toggle('active', isCalendar);
+    const isTimeline = view === 'calendar';
+    if (countdownView) countdownView.style.display = isTimeline ? 'none' : 'block';
+    if (timelineView) timelineView.style.display = isTimeline ? 'block' : 'none';
+    if (btnCountdown) btnCountdown.classList.toggle('active', !isTimeline);
+    if (btnCalendar) btnCalendar.classList.toggle('active', isTimeline);
 }
 
 function initYellowScheduleView() {
-    renderYellowHpRelaxedTable();
     applyYellowScheduleView();
     document.getElementById('view-countdown')?.addEventListener('click', () => {
         localStorage.setItem('yellow-gate-schedule-view', 'countdown');
