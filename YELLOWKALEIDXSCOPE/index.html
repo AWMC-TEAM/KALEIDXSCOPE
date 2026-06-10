@@ -71,17 +71,27 @@
                     <button type="button" id="view-calendar" class="toggle-btn" data-umami-event="yellow-view-calendar">放宽表</button>
                 </div>
             </div>
-            <p class="schedule-switch-note">门条件：次日凌晨 4:00（北京时间）切换 · 时间为社群预测</p>
+            <p class="schedule-switch-note">以 6/10 开放为第 1 日 · 次日凌晨 4:00（北京时间）切换 · 时间为社群预测</p>
             <div class="countdown-view" id="countdown-view">
-                <div class="countdown-block" id="yellow-gate-countdown">
-                    <h3 class="countdown-title">黄门 Åntinomiε</h3>
-                    <div class="countdown-period-info" id="yellow-gate-period"></div>
+                <div class="countdown-block" id="yellow-perfect-countdown">
+                    <h3 class="countdown-title">完美挑战</h3>
+                    <div class="countdown-period-info" id="yellow-perfect-period"></div>
                     <div class="countdown-bar-wrap">
                         <div class="countdown-bar">
-                            <div class="countdown-fill" id="yellow-gate-fill"></div>
+                            <div class="countdown-fill" id="yellow-perfect-fill"></div>
                         </div>
                     </div>
-                    <div class="countdown-text" id="yellow-gate-countdown-text"></div>
+                    <div class="countdown-text" id="yellow-perfect-countdown-text"></div>
+                </div>
+                <div class="countdown-block" id="yellow-kaleido-countdown">
+                    <h3 class="countdown-title">万花筒</h3>
+                    <div class="countdown-period-info" id="yellow-kaleido-period"></div>
+                    <div class="countdown-bar-wrap">
+                        <div class="countdown-bar">
+                            <div class="countdown-fill" id="yellow-kaleido-fill"></div>
+                        </div>
+                    </div>
+                    <div class="countdown-text" id="yellow-kaleido-countdown-text"></div>
                 </div>
             </div>
             <div class="calendar-view" id="calendar-view" style="display: none;">
@@ -89,11 +99,15 @@
                     <span class="legend-item master">MASTER</span>
                     <span class="legend-item expert">EXPERT</span>
                     <span class="legend-item basic">BASIC</span>
-                    <span class="legend-hint">数字为当日凌晨 4:00 起生效的血量 · 斜体带「血」为 MASTER 阶段</span>
+                    <span class="legend-hint">以 6/10 为第 1 日，数字为对应阶段血量，颜色表示难度</span>
                 </div>
-                <div class="hp-calendar-wrap">
-                    <p class="hp-calendar-heading">血量变化：</p>
-                    <div class="hp-calendar" id="yellow-hp-calendar" aria-label="2026年6月黄门血量放宽日历"></div>
+                <div class="hp-relaxed-block">
+                    <h3 class="hp-relaxed-title">完美挑战</h3>
+                    <div class="hp-timeline" id="yellow-perfect-timeline" aria-label="完美挑战血量放宽"></div>
+                </div>
+                <div class="hp-relaxed-block">
+                    <h3 class="hp-relaxed-title">万花筒</h3>
+                    <div class="hp-timeline" id="yellow-kaleido-timeline" aria-label="万花筒血量放宽"></div>
                 </div>
             </div>
         </div>

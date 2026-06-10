@@ -11,14 +11,21 @@ const OPEN_TIME = new Date('2026-06-10T10:00:00+08:00');
 // 门条件切换：次日凌晨 4:00 北京时间（与青/白/紫/黑门一致）
 const RESET_HOUR = 4;
 
-// 黄门各阶段（倒计时用；end 为「下一段开始日」）
-const YELLOW_GATE_PERIODS = [
-    { start: '6.10', end: '6.13', type: 'master', life: 1 },   // 6.10–6.12
-    { start: '6.13', end: '6.16', type: 'master', life: 10 },  // 6.13–6.15
-    { start: '6.16', end: '6.19', type: 'master', life: 30 },  // 6.16–6.18
-    { start: '6.19', end: '6.23', type: 'master', life: 50 },  // 6.19–6.22
-    { start: '6.23', end: '6.30', type: 'expert', life: 100 }, // 6.23–6.29
-    { start: '6.30', end: '12.31', type: 'basic', life: 999 }  // 6.30–后续
+// 以 6/10 开放日为第 1 日；end 为「下一段开始日」（次日凌晨 4:00 切换）
+const YELLOW_PERFECT_PERIODS = [
+    { start: '6.10', end: '6.11', type: 'master', life: 1 },   // 第 1 日
+    { start: '6.11', end: '6.13', type: 'master', life: 10 },  // 第 2–3 日
+    { start: '6.13', end: '6.17', type: 'expert', life: 50 },  // 第 4–7 日
+    { start: '6.17', end: '6.24', type: 'basic', life: 100 },   // 第 8–14 日
+    { start: '6.24', end: '12.31', type: 'basic', life: 300 }  // 第 15 日–后续
+];
+const YELLOW_KALEIDO_PERIODS = [
+    { start: '6.10', end: '6.13', type: 'master', life: 1 },   // 第 1–3 日
+    { start: '6.13', end: '6.17', type: 'master', life: 10 },  // 第 4–7 日
+    { start: '6.17', end: '6.19', type: 'master', life: 30 },  // 第 8–9 日
+    { start: '6.19', end: '6.24', type: 'master', life: 50 },  // 第 10–14 日
+    { start: '6.24', end: '6.30', type: 'expert', life: 100 }, // 第 15–20 日
+    { start: '6.30', end: '12.31', type: 'basic', life: 999 }  // 第 21 日–后续
 ];
 
 const noCoverSvg = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect fill=%22%23ddd%22 width=%2280%22 height=%2280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2210%22%3E%E6%9A%82%E6%97%A0%E6%9B%B2%E7%BB%98%3C/text%3E%3C/svg%3E";
@@ -59,22 +66,22 @@ function formatSwitchDate(d) {
     return `${d.getMonth() + 1}月${d.getDate()}日 ${String(RESET_HOUR).padStart(2, '0')}:00`;
 }
 
-function updateYellowScheduleCountdown() {
+function formatRemaining(ms) {
+    if (ms <= 0) return '即将切换';
+    const d = Math.floor(ms / 86400000);
+    const h = Math.floor((ms % 86400000) / 3600000);
+    const m = Math.floor((ms % 3600000) / 60000);
+    return `${d} 天 ${h} 小时 ${m} 分`;
+}
+
+function renderScheduleCountdownBlock(periods, fillId, textId, periodId) {
     const year = 2026;
     const now = new Date();
-    const period = getCurrentPeriod(YELLOW_GATE_PERIODS, year);
-    const nextSwitch = getNextConditionSwitch(YELLOW_GATE_PERIODS, year);
-    const fmt = (ms) => {
-        if (ms <= 0) return '即将切换';
-        const d = Math.floor(ms / 86400000);
-        const h = Math.floor((ms % 86400000) / 3600000);
-        const m = Math.floor((ms % 3600000) / 60000);
-        return `${d} 天 ${h} 小时 ${m} 分`;
-    };
-
-    const fillEl = document.getElementById('yellow-gate-fill');
-    const textEl = document.getElementById('yellow-gate-countdown-text');
-    const periodEl = document.getElementById('yellow-gate-period');
+    const period = getCurrentPeriod(periods, year);
+    const nextSwitch = getNextConditionSwitch(periods, year);
+    const fillEl = document.getElementById(fillId);
+    const textEl = document.getElementById(textId);
+    const periodEl = document.getElementById(periodId);
 
     if (!period) {
         if (periodEl) {
@@ -104,7 +111,7 @@ function updateYellowScheduleCountdown() {
         return;
     }
 
-    const nextPhase = YELLOW_GATE_PERIODS[period.index + 1];
+    const nextPhase = periods[period.index + 1];
     if (periodEl) {
         periodEl.style.display = '';
         if (nextPhase) {
@@ -119,7 +126,7 @@ function updateYellowScheduleCountdown() {
         }
     }
 
-    const periodStart = getPeriodStart(YELLOW_GATE_PERIODS, year, period.index);
+    const periodStart = getPeriodStart(periods, year, period.index);
     const totalMs = nextSwitch - periodStart;
     const elapsed = now - periodStart;
     const remaining = nextSwitch - now;
@@ -129,92 +136,69 @@ function updateYellowScheduleCountdown() {
         fillEl.className = 'countdown-fill countdown-fill--' + period.type;
     }
     if (textEl) {
-        textEl.textContent = `下次切换：${formatSwitchDate(nextSwitch)} · 剩余 ${fmt(remaining)}`;
+        textEl.textContent = `下次切换：${formatSwitchDate(nextSwitch)} · 剩余 ${formatRemaining(remaining)}`;
         textEl.className = 'countdown-text countdown-text--' + period.type;
     }
 }
 
-function getHpMarkersFromPeriods(periods) {
-    const markers = {};
-    periods.forEach((p) => {
-        const [, d] = p.start.split('.').map(Number);
-        markers[d] = { type: p.type, life: p.life };
-    });
-    return markers;
+function updateYellowScheduleCountdown() {
+    renderScheduleCountdownBlock(
+        YELLOW_PERFECT_PERIODS,
+        'yellow-perfect-fill',
+        'yellow-perfect-countdown-text',
+        'yellow-perfect-period'
+    );
+    renderScheduleCountdownBlock(
+        YELLOW_KALEIDO_PERIODS,
+        'yellow-kaleido-fill',
+        'yellow-kaleido-countdown-text',
+        'yellow-kaleido-period'
+    );
 }
 
-function getActivePeriodForDay(day, periods) {
-    for (let i = periods.length - 1; i >= 0; i--) {
-        const [, startD] = periods[i].start.split('.').map(Number);
-        if (day >= startD) return periods[i];
-    }
-    return null;
-}
-
-function renderYellowHpCalendar() {
-    const container = document.getElementById('yellow-hp-calendar');
-    if (!container) return;
-
+function periodDaySpan(period, index, periods) {
     const year = 2026;
-    const month = 5; // June (0-indexed)
-    const markers = getHpMarkersFromPeriods(YELLOW_GATE_PERIODS);
-    const today = new Date();
-    const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+    const start = parseScheduleDate(period.start, year);
+    if (index < periods.length - 1) {
+        const end = parseScheduleDate(periods[index + 1].start, year);
+        return Math.max(1, Math.round((end - start) / 86400000));
+    }
+    const prev = periods.length > 1 ? periodDaySpan(periods[index - 1], index - 1, periods) : 7;
+    return Math.max(prev, 8);
+}
 
-    const weeks = [];
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+function periodStartDayIndex(index, periods) {
     let day = 1;
-    while (day <= daysInMonth) {
-        const monday = day;
-        const row = { monday, days: [] };
-        for (let offset = 1; offset <= 6 && day + offset <= daysInMonth; offset++) {
-            row.days.push(day + offset);
-        }
-        weeks.push(row);
-        day += 7;
+    for (let i = 0; i < index; i++) {
+        day += periodDaySpan(periods[i], i, periods);
     }
+    return day;
+}
 
-    function renderHpLabel(marker) {
-        if (!marker) return '';
-        if (marker.type === 'master') {
-            return `<span class="hp-value hp-value--master">${marker.life}血</span>`;
-        }
-        return `<span class="hp-value hp-value--${marker.type}">${marker.life}</span>`;
-    }
+function renderHpTimelineBar(periods) {
+    const segments = [];
+    const markers = [];
+    periods.forEach((p, i) => {
+        const span = periodDaySpan(p, i, periods);
+        const startDay = periodStartDayIndex(i, periods);
+        segments.push(
+            `<div class="hp-timeline-segment hp-timeline-segment--${p.type}" style="flex:${span}" title="${p.type.toUpperCase()} ${p.life}">` +
+            `<span class="hp-value hp-value--${p.type}">${p.life}</span></div>`
+        );
+        markers.push(
+            `<span class="hp-timeline-marker" style="flex:${span}">` +
+            `<span class="hp-timeline-marker-day">${startDay}日</span></span>`
+        );
+    });
+    return `<div class="hp-timeline-bar">${segments.join('')}</div>` +
+        `<div class="hp-timeline-markers">${markers.join('')}</div>`;
+}
 
-    function renderCell(dayNum, isMondayCol) {
-        if (!dayNum) return '<td class="hp-cell hp-cell--empty"></td>';
-        const marker = markers[dayNum];
-        const activePeriod = getActivePeriodForDay(dayNum, YELLOW_GATE_PERIODS);
-        const isToday = isCurrentMonth && today.getDate() === dayNum;
-        const classes = [
-            'hp-cell',
-            isMondayCol ? 'hp-cell--mon' : '',
-            marker ? `hp-cell--marker hp-cell--${marker.type}` : '',
-            activePeriod ? `hp-cell--period-${activePeriod.type}` : '',
-            isToday ? 'hp-cell--today' : ''
-        ].filter(Boolean).join(' ');
-        return `<td class="${classes}"><span class="hp-day">${dayNum}</span>${renderHpLabel(marker)}</td>`;
-    }
-
-    const header = `
-        <thead>
-            <tr>
-                <th class="hp-month">6月</th>
-                <th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>七</th>
-            </tr>
-        </thead>
-    `;
-
-    const body = weeks.map((week) => {
-        const cells = [renderCell(week.monday, true)];
-        for (let i = 0; i < 6; i++) {
-            cells.push(renderCell(week.days[i] || null, false));
-        }
-        return `<tr>${cells.join('')}</tr>`;
-    }).join('');
-
-    container.innerHTML = `<table class="hp-calendar-table">${header}<tbody>${body}</tbody></table>`;
+function renderYellowHpRelaxedTable() {
+    const perfectEl = document.getElementById('yellow-perfect-timeline');
+    const kaleidoEl = document.getElementById('yellow-kaleido-timeline');
+    if (perfectEl) perfectEl.innerHTML = renderHpTimelineBar(YELLOW_PERFECT_PERIODS);
+    if (kaleidoEl) kaleidoEl.innerHTML = renderHpTimelineBar(YELLOW_KALEIDO_PERIODS);
 }
 
 function applyYellowScheduleView() {
@@ -231,7 +215,7 @@ function applyYellowScheduleView() {
 }
 
 function initYellowScheduleView() {
-    renderYellowHpCalendar();
+    renderYellowHpRelaxedTable();
     applyYellowScheduleView();
     document.getElementById('view-countdown')?.addEventListener('click', () => {
         localStorage.setItem('yellow-gate-schedule-view', 'countdown');

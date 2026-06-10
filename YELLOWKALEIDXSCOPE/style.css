@@ -1690,6 +1690,10 @@ header h1 {
 }
 
 .schedule-section--yellow .countdown-block {
+    margin-bottom: 20px;
+}
+
+.schedule-section--yellow .countdown-block:last-child {
     margin-bottom: 0;
 }
 
@@ -1829,171 +1833,115 @@ header h1 {
     }
 }
 
-/* 日历放宽表 */
-.hp-calendar-wrap {
+/* 放宽表时间轴 */
+.hp-relaxed-block {
     background: rgba(255, 255, 255, 0.75);
     border: 2px solid rgba(234, 179, 8, 0.3);
     border-radius: 12px;
     padding: 16px;
+    margin-bottom: 16px;
     overflow-x: auto;
 }
 
+.hp-relaxed-block:last-child {
+    margin-bottom: 0;
+}
+
 @media (prefers-color-scheme: dark) {
-    .hp-calendar-wrap {
+    .hp-relaxed-block {
         background: rgba(30, 28, 20, 0.75);
         border-color: rgba(202, 138, 4, 0.35);
     }
 }
 
-.hp-calendar-heading {
-    font-weight: 700;
-    font-size: 1em;
-    margin-bottom: 12px;
-    color: #1f2937;
-}
-
-@media (prefers-color-scheme: dark) {
-    .hp-calendar-heading {
-        color: #f0e8d0;
-    }
-}
-
-.hp-calendar-table {
-    width: 100%;
-    min-width: 480px;
-    border-collapse: collapse;
-    table-layout: fixed;
-    font-size: 0.95em;
-}
-
-.hp-calendar-table th,
-.hp-calendar-table td {
-    border: 1px solid #d1d5db;
-    text-align: center;
-    vertical-align: middle;
-    padding: 10px 6px;
-    height: 64px;
-}
-
-@media (prefers-color-scheme: dark) {
-    .hp-calendar-table th,
-    .hp-calendar-table td {
-        border-color: #57534e;
-    }
-}
-
-.hp-calendar-table th {
-    background: #f3f4f6;
-    font-weight: 700;
-    color: #374151;
-    height: auto;
-    padding: 8px 6px;
-}
-
-.hp-calendar-table th.hp-month {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    color: #92400e;
+.hp-relaxed-title {
     font-size: 1.05em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #92400e;
 }
 
 @media (prefers-color-scheme: dark) {
-    .hp-calendar-table th {
-        background: #3d3a30;
-        color: #e7e5e4;
-    }
-    .hp-calendar-table th.hp-month {
-        background: linear-gradient(135deg, #5a3d10, #78350f);
-        color: #fde68a;
+    .hp-relaxed-title {
+        color: #fbbf24;
     }
 }
 
-.hp-cell {
-    position: relative;
-    background: #fff;
-    transition: background 0.2s;
+.hp-timeline {
+    min-width: 520px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .hp-cell {
-        background: #2d2a20;
-    }
+.hp-timeline-bar {
+    display: flex;
+    height: 44px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-.hp-cell--period-master {
-    background: rgba(124, 58, 237, 0.04);
+.hp-timeline-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
 }
 
-.hp-cell--period-expert {
-    background: rgba(220, 38, 38, 0.04);
+.hp-timeline-segment--master {
+    background: #6f42c1;
 }
 
-.hp-cell--period-basic {
-    background: rgba(22, 163, 74, 0.04);
+.hp-timeline-segment--expert {
+    background: #9b1b30;
 }
 
-@media (prefers-color-scheme: dark) {
-    .hp-cell--period-master { background: rgba(124, 58, 237, 0.12); }
-    .hp-cell--period-expert { background: rgba(220, 38, 38, 0.1); }
-    .hp-cell--period-basic { background: rgba(22, 163, 74, 0.1); }
+.hp-timeline-segment--basic {
+    background: #28a745;
 }
 
-.hp-cell--marker {
+.hp-timeline-markers {
+    display: flex;
+    margin-top: 6px;
+}
+
+.hp-timeline-marker {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 28px;
+}
+
+.hp-timeline-marker-day {
+    font-size: 0.78em;
+    color: #78716c;
     font-weight: 600;
 }
 
-.hp-cell--marker.hp-cell--master {
-    background: rgba(124, 58, 237, 0.1);
-}
-
-.hp-cell--marker.hp-cell--expert {
-    background: rgba(220, 38, 38, 0.1);
-}
-
-.hp-cell--marker.hp-cell--basic {
-    background: rgba(22, 163, 74, 0.1);
-}
-
-.hp-cell--today {
-    outline: 2px solid #f59e0b;
-    outline-offset: -2px;
-    box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.3);
-}
-
-.hp-day {
-    display: block;
-    font-size: 0.9em;
-    color: #6b7280;
-    margin-bottom: 4px;
-}
-
 @media (prefers-color-scheme: dark) {
-    .hp-day {
+    .hp-timeline-marker-day {
         color: #a8a29e;
     }
 }
 
 .hp-value {
-    display: block;
+    font-weight: 800;
+    font-size: 1em;
     line-height: 1.2;
+}
+
+.hp-timeline-segment .hp-value {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .hp-value--master {
     color: #6f42c1;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 1.05em;
 }
 
 .hp-value--expert {
     color: #dc3545;
-    font-weight: 800;
-    font-size: 1.15em;
 }
 
 .hp-value--basic {
     color: #28a745;
-    font-weight: 800;
-    font-size: 1.15em;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -2007,15 +1955,16 @@ header h1 {
         font-size: 1.15em;
     }
 
-    .hp-calendar-table {
-        font-size: 0.82em;
-        min-width: 360px;
+    .hp-timeline {
+        min-width: 400px;
     }
 
-    .hp-calendar-table th,
-    .hp-calendar-table td {
-        padding: 6px 3px;
-        height: 52px;
+    .hp-timeline-bar {
+        height: 38px;
+    }
+
+    .hp-value {
+        font-size: 0.88em;
     }
 }
 
