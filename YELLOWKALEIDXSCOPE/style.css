@@ -1571,13 +1571,14 @@ header h1 {
     border: 2px solid rgba(234, 179, 8, 0.45);
     border-radius: 16px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .schedule-section--yellow::before {
     content: '';
     position: absolute;
     inset: 0;
+    border-radius: inherit;
     background: linear-gradient(90deg,
         rgba(239, 68, 68, 0.06) 0%,
         rgba(234, 179, 8, 0.08) 20%,
@@ -1900,8 +1901,9 @@ header h1 {
     overflow-x: auto;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
-    padding: 28px 4px 8px;
+    padding: 4px 4px 12px;
     margin: 0;
+    min-height: 148px;
 }
 
 .timeline-block--prism .timeline-bar-scroll::-webkit-scrollbar {
@@ -1987,7 +1989,7 @@ header h1 {
 .timeline-bar--prism .segment-label-full {
     display: none;
     position: absolute;
-    bottom: calc(100% + 10px);
+    top: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
     min-width: 148px;
@@ -2009,11 +2011,11 @@ header h1 {
 .timeline-bar--prism .segment-label-full::after {
     content: '';
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     border: 7px solid transparent;
-    border-top-color: rgba(234, 179, 8, 0.45);
+    border-bottom-color: rgba(234, 179, 8, 0.45);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -2043,7 +2045,7 @@ header h1 {
 @keyframes prism-tooltip-in {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(4px);
+        transform: translateX(-50%) translateY(-4px);
     }
     to {
         opacity: 1;
