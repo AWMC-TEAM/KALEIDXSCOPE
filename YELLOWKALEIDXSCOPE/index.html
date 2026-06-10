@@ -62,6 +62,42 @@
             <p class="countdown-disclaimer">⚠️ 时间为社群预测，正式开放时间以游戏官方公告为准</p>
         </div>
 
+        <!-- 黄门时间表（次日凌晨 4:00 切换；放宽表为大版本专属日历视图） -->
+        <div class="schedule-section schedule-section--yellow">
+            <div class="schedule-header">
+                <h2>黄门时间表 <span class="schedule-version-tag">七彩大版本</span></h2>
+                <div class="view-toggle">
+                    <button type="button" id="view-countdown" class="toggle-btn active" data-umami-event="yellow-view-countdown">倒计时</button>
+                    <button type="button" id="view-calendar" class="toggle-btn" data-umami-event="yellow-view-calendar">放宽表</button>
+                </div>
+            </div>
+            <p class="schedule-switch-note">门条件：次日凌晨 4:00（北京时间）切换 · 时间为社群预测</p>
+            <div class="countdown-view" id="countdown-view">
+                <div class="countdown-block" id="yellow-gate-countdown">
+                    <h3 class="countdown-title">黄门 Åntinomiε</h3>
+                    <div class="countdown-period-info" id="yellow-gate-period"></div>
+                    <div class="countdown-bar-wrap">
+                        <div class="countdown-bar">
+                            <div class="countdown-fill" id="yellow-gate-fill"></div>
+                        </div>
+                    </div>
+                    <div class="countdown-text" id="yellow-gate-countdown-text"></div>
+                </div>
+            </div>
+            <div class="calendar-view" id="calendar-view" style="display: none;">
+                <div class="hp-calendar-legend">
+                    <span class="legend-item master">MASTER</span>
+                    <span class="legend-item expert">EXPERT</span>
+                    <span class="legend-item basic">BASIC</span>
+                    <span class="legend-hint">数字为当日凌晨 4:00 起生效的血量 · 斜体带「血」为 MASTER 阶段</span>
+                </div>
+                <div class="hp-calendar-wrap">
+                    <p class="hp-calendar-heading">血量变化：</p>
+                    <div class="hp-calendar" id="yellow-hp-calendar" aria-label="2026年6月黄门血量放宽日历"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- 解锁说明 -->
         <div class="requirements-section">
             <h2>🔑 钥匙获取条件</h2>

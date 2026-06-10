@@ -8,7 +8,240 @@ const GATE_TRACK3_FIXED = gate.track3;
 // 区域开放时间 2026/06/10 10:00:00 (UTC+8 北京时间) — 预测时间
 const OPEN_TIME = new Date('2026-06-10T10:00:00+08:00');
 
+// 门条件切换：次日凌晨 4:00 北京时间（与青/白/紫/黑门一致）
+const RESET_HOUR = 4;
+
+// 黄门各阶段（倒计时用；end 为「下一段开始日」）
+const YELLOW_GATE_PERIODS = [
+    { start: '6.10', end: '6.13', type: 'master', life: 1 },   // 6.10–6.12
+    { start: '6.13', end: '6.16', type: 'master', life: 10 },  // 6.13–6.15
+    { start: '6.16', end: '6.19', type: 'master', life: 30 },  // 6.16–6.18
+    { start: '6.19', end: '6.23', type: 'master', life: 50 },  // 6.19–6.22
+    { start: '6.23', end: '6.30', type: 'expert', life: 100 }, // 6.23–6.29
+    { start: '6.30', end: '12.31', type: 'basic', life: 999 }  // 6.30–后续
+];
+
 const noCoverSvg = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect fill=%22%23ddd%22 width=%2280%22 height=%2280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2210%22%3E%E6%9A%82%E6%97%A0%E6%9B%B2%E7%BB%98%3C/text%3E%3C/svg%3E";
+
+function parseScheduleDate(str, year) {
+    const [m, d] = str.split('.').map(Number);
+    return new Date(year, m - 1, d, RESET_HOUR, 0, 0);
+}
+
+function getCurrentPeriod(periods, year) {
+    const now = new Date();
+    for (let i = 0; i < periods.length; i++) {
+        const start = parseScheduleDate(periods[i].start, year);
+        const end = parseScheduleDate(periods[i].end, year);
+        if (now >= start && now < end) return { ...periods[i], index: i };
+    }
+    if (periods.length > 0) {
+        const last = periods[periods.length - 1];
+        const start = parseScheduleDate(last.start, year);
+        if (now >= start) return { ...last, index: periods.length - 1 };
+    }
+    return null;
+}
+
+function getNextConditionSwitch(periods, year) {
+    const period = getCurrentPeriod(periods, year);
+    if (!period || period.index >= periods.length - 1) return null;
+    const nextPeriod = periods[period.index + 1];
+    return parseScheduleDate(nextPeriod.start, year);
+}
+
+function getPeriodStart(periods, year, index) {
+    return parseScheduleDate(periods[index].start, year);
+}
+
+function formatSwitchDate(d) {
+    if (!d) return '';
+    return `${d.getMonth() + 1}月${d.getDate()}日 ${String(RESET_HOUR).padStart(2, '0')}:00`;
+}
+
+function updateYellowScheduleCountdown() {
+    const year = 2026;
+    const now = new Date();
+    const period = getCurrentPeriod(YELLOW_GATE_PERIODS, year);
+    const nextSwitch = getNextConditionSwitch(YELLOW_GATE_PERIODS, year);
+    const fmt = (ms) => {
+        if (ms <= 0) return '即将切换';
+        const d = Math.floor(ms / 86400000);
+        const h = Math.floor((ms % 86400000) / 3600000);
+        const m = Math.floor((ms % 3600000) / 60000);
+        return `${d} 天 ${h} 小时 ${m} 分`;
+    };
+
+    const fillEl = document.getElementById('yellow-gate-fill');
+    const textEl = document.getElementById('yellow-gate-countdown-text');
+    const periodEl = document.getElementById('yellow-gate-period');
+
+    if (!period) {
+        if (periodEl) {
+            periodEl.textContent = '活动尚未开始';
+            periodEl.className = 'countdown-period-info countdown-period-info--pending';
+            periodEl.style.display = '';
+        }
+        if (fillEl) fillEl.style.width = '0%';
+        if (textEl) textEl.textContent = '—';
+        return;
+    }
+
+    if (!nextSwitch) {
+        if (periodEl) {
+            periodEl.textContent = `当前阶段：${period.type.toUpperCase()} LIFE ${period.life}`;
+            periodEl.className = 'countdown-period-info countdown-period-info--' + period.type;
+            periodEl.style.display = '';
+        }
+        if (fillEl) {
+            fillEl.style.width = '100%';
+            fillEl.className = 'countdown-fill countdown-fill--' + period.type;
+        }
+        if (textEl) {
+            textEl.textContent = '当前为最终阶段，无下次切换';
+            textEl.className = 'countdown-text countdown-text--final countdown-text--' + period.type;
+        }
+        return;
+    }
+
+    const nextPhase = YELLOW_GATE_PERIODS[period.index + 1];
+    if (periodEl) {
+        periodEl.style.display = '';
+        if (nextPhase) {
+            periodEl.innerHTML =
+                `<span class="countdown-period-part countdown-period-info--${period.type}">当前阶段：${period.type.toUpperCase()} LIFE ${period.life}</span>` +
+                `<span class="countdown-period-sep"> · </span>` +
+                `<span class="countdown-period-part countdown-period-info--${nextPhase.type}">下个阶段：${nextPhase.type.toUpperCase()} LIFE ${nextPhase.life}</span>`;
+            periodEl.className = 'countdown-period-info';
+        } else {
+            periodEl.textContent = `当前阶段：${period.type.toUpperCase()} LIFE ${period.life}`;
+            periodEl.className = 'countdown-period-info countdown-period-info--' + period.type;
+        }
+    }
+
+    const periodStart = getPeriodStart(YELLOW_GATE_PERIODS, year, period.index);
+    const totalMs = nextSwitch - periodStart;
+    const elapsed = now - periodStart;
+    const remaining = nextSwitch - now;
+    const progress = Math.min(100, Math.max(0, (elapsed / totalMs) * 100));
+    if (fillEl) {
+        fillEl.style.width = progress + '%';
+        fillEl.className = 'countdown-fill countdown-fill--' + period.type;
+    }
+    if (textEl) {
+        textEl.textContent = `下次切换：${formatSwitchDate(nextSwitch)} · 剩余 ${fmt(remaining)}`;
+        textEl.className = 'countdown-text countdown-text--' + period.type;
+    }
+}
+
+function getHpMarkersFromPeriods(periods) {
+    const markers = {};
+    periods.forEach((p) => {
+        const [, d] = p.start.split('.').map(Number);
+        markers[d] = { type: p.type, life: p.life };
+    });
+    return markers;
+}
+
+function getActivePeriodForDay(day, periods) {
+    for (let i = periods.length - 1; i >= 0; i--) {
+        const [, startD] = periods[i].start.split('.').map(Number);
+        if (day >= startD) return periods[i];
+    }
+    return null;
+}
+
+function renderYellowHpCalendar() {
+    const container = document.getElementById('yellow-hp-calendar');
+    if (!container) return;
+
+    const year = 2026;
+    const month = 5; // June (0-indexed)
+    const markers = getHpMarkersFromPeriods(YELLOW_GATE_PERIODS);
+    const today = new Date();
+    const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+
+    const weeks = [];
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    let day = 1;
+    while (day <= daysInMonth) {
+        const monday = day;
+        const row = { monday, days: [] };
+        for (let offset = 1; offset <= 6 && day + offset <= daysInMonth; offset++) {
+            row.days.push(day + offset);
+        }
+        weeks.push(row);
+        day += 7;
+    }
+
+    function renderHpLabel(marker) {
+        if (!marker) return '';
+        if (marker.type === 'master') {
+            return `<span class="hp-value hp-value--master">${marker.life}血</span>`;
+        }
+        return `<span class="hp-value hp-value--${marker.type}">${marker.life}</span>`;
+    }
+
+    function renderCell(dayNum, isMondayCol) {
+        if (!dayNum) return '<td class="hp-cell hp-cell--empty"></td>';
+        const marker = markers[dayNum];
+        const activePeriod = getActivePeriodForDay(dayNum, YELLOW_GATE_PERIODS);
+        const isToday = isCurrentMonth && today.getDate() === dayNum;
+        const classes = [
+            'hp-cell',
+            isMondayCol ? 'hp-cell--mon' : '',
+            marker ? `hp-cell--marker hp-cell--${marker.type}` : '',
+            activePeriod ? `hp-cell--period-${activePeriod.type}` : '',
+            isToday ? 'hp-cell--today' : ''
+        ].filter(Boolean).join(' ');
+        return `<td class="${classes}"><span class="hp-day">${dayNum}</span>${renderHpLabel(marker)}</td>`;
+    }
+
+    const header = `
+        <thead>
+            <tr>
+                <th class="hp-month">6月</th>
+                <th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>七</th>
+            </tr>
+        </thead>
+    `;
+
+    const body = weeks.map((week) => {
+        const cells = [renderCell(week.monday, true)];
+        for (let i = 0; i < 6; i++) {
+            cells.push(renderCell(week.days[i] || null, false));
+        }
+        return `<tr>${cells.join('')}</tr>`;
+    }).join('');
+
+    container.innerHTML = `<table class="hp-calendar-table">${header}<tbody>${body}</tbody></table>`;
+}
+
+function applyYellowScheduleView() {
+    const view = localStorage.getItem('yellow-gate-schedule-view') || 'countdown';
+    const countdownView = document.getElementById('countdown-view');
+    const calendarView = document.getElementById('calendar-view');
+    const btnCountdown = document.getElementById('view-countdown');
+    const btnCalendar = document.getElementById('view-calendar');
+    const isCalendar = view === 'calendar';
+    if (countdownView) countdownView.style.display = isCalendar ? 'none' : 'block';
+    if (calendarView) calendarView.style.display = isCalendar ? 'block' : 'none';
+    if (btnCountdown) btnCountdown.classList.toggle('active', !isCalendar);
+    if (btnCalendar) btnCalendar.classList.toggle('active', isCalendar);
+}
+
+function initYellowScheduleView() {
+    renderYellowHpCalendar();
+    applyYellowScheduleView();
+    document.getElementById('view-countdown')?.addEventListener('click', () => {
+        localStorage.setItem('yellow-gate-schedule-view', 'countdown');
+        applyYellowScheduleView();
+    });
+    document.getElementById('view-calendar')?.addEventListener('click', () => {
+        localStorage.setItem('yellow-gate-schedule-view', 'calendar');
+        applyYellowScheduleView();
+    });
+}
 
 // ----- 区域开放倒计时 -----
 function updateCountdown() {
@@ -391,6 +624,9 @@ function initEventListeners() {
 document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
+    updateYellowScheduleCountdown();
+    setInterval(updateYellowScheduleCountdown, 60000);
+    initYellowScheduleView();
     keyGachaResult = loadKeyGacha();
     renderKeyGachaResult();
     renderKeySongsPool();
