@@ -23,8 +23,8 @@ const YELLOW_KALEIDO_PERIODS = [
     { start: '6.10', end: '6.13', type: 'master', life: 1 },   // 第 1–3 日
     { start: '6.13', end: '6.17', type: 'master', life: 10 },  // 第 4–7 日
     { start: '6.17', end: '6.19', type: 'master', life: 30 },  // 第 8–9 日
-    { start: '6.19', end: '6.24', type: 'master', life: 50 },  // 第 10–14 日
-    { start: '6.24', end: '6.30', type: 'expert', life: 100 }, // 第 15–20 日
+    { start: '6.19', end: '6.23', type: 'master', life: 50 },  // 第 10–13 日
+    { start: '6.23', end: '6.30', type: 'expert', life: 100 }, // 第 14–20 日
     { start: '6.30', end: '12.31', type: 'basic', life: 999 }  // 第 21 日–后续
 ];
 
