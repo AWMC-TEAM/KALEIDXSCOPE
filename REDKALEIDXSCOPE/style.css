@@ -1,0 +1,141 @@
+@import url("../BLUEKALEIDXSCOPE/style.css");
+
+body.theme-red {
+    background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 50%, #ffe4e6 100%);
+}
+
+body.theme-red .container { border: 2px solid rgba(220, 38, 38, .24); }
+body.theme-red .back-home-link { color: #dc2626; }
+body.theme-red .back-home-link:hover { color: #991b1b; background: rgba(220,38,38,.1); }
+body.theme-red header h1, body.theme-red .section-title, body.theme-red .requirements-section h2,
+body.theme-red .reference-section-title { color: #991b1b; }
+body.theme-red .subtitle { line-height: 1.55; }
+
+.countdown-section {
+    margin-bottom: 28px;
+    padding: 25px;
+    text-align: center;
+    background: linear-gradient(135deg, #fff7f7, #fee2e2);
+    border: 2px solid #fca5a5;
+    border-radius: 15px;
+}
+.countdown-section.open { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-color: #86efac; }
+.countdown-section .countdown-title { color: #991b1b; margin-bottom: 8px; }
+.countdown-note { color: #7f1d1d; margin-bottom: 16px; }
+.countdown-display { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-bottom: 12px; }
+.countdown-unit { display: flex; min-width: 70px; flex-direction: column; }
+.countdown-value { color: #dc2626; font-size: 2.35em; font-weight: 800; font-variant-numeric: tabular-nums; }
+.countdown-label { color: #9f6767; }
+.countdown-status { color: #b91c1c; font-weight: 700; }
+.countdown-section.open .countdown-title, .countdown-section.open .countdown-status { color: #15803d; }
+
+.schedule-section--red { background: #fff7f7; border-color: #fecaca; }
+.schedule-switch-note { margin: -10px 0 18px; color: #8f6262; font-size: .9em; }
+.toggle-btn.active { background: #dc2626; border-color: #dc2626; color: #fff; }
+.countdown-period-info--master { color: #7e22ce; }
+.countdown-period-info--expert { color: #dc2626; }
+.countdown-period-info--basic { color: #15803d; }
+.countdown-fill--master { background: #9333ea; }
+.countdown-fill--expert { background: #ef4444; }
+.countdown-fill--basic { background: #22c55e; }
+
+.requirements-section {
+    margin-bottom: 30px;
+    padding: 24px;
+    background: linear-gradient(135deg, #fff7f7, #fff);
+    border: 2px solid #fecaca;
+    border-radius: 15px;
+}
+.requirements-section h2 { margin-bottom: 12px; }
+.requirements-list { padding-left: 24px; color: #5f3535; line-height: 1.8; }
+.activation-card { display: flex; align-items: center; gap: 18px; margin-top: 18px; padding: 14px 18px; background: #fff1f2; border-radius: 12px; }
+.activation-card img { width: 90px; height: 72px; object-fit: contain; }
+.activation-card div { display: flex; flex-direction: column; gap: 5px; }
+.activation-card strong { color: #991b1b; }
+.activation-card span { color: #8f6262; font-size: .9em; }
+
+body.theme-red .stat-card { background: #fff7f7; border-color: #fecaca; }
+body.theme-red .stat-number { color: #b91c1c; }
+body.theme-red .btn-info, body.theme-red .btn-primary { background: #dc2626; }
+body.theme-red .song-card { background: #fffafa; border-color: #fecaca; }
+body.theme-red .song-card:hover { border-color: #ef4444; box-shadow: 0 7px 18px rgba(185,28,28,.12); }
+body.theme-red .song-card.completed { background: #dcfce7; border-color: #22c55e; }
+body.theme-red .song-details { color: #754a4a; }
+body.theme-red .song-checkbox input { accent-color: #dc2626; }
+body.theme-red .song-detail-hint { color: #7f1d1d; background: rgba(254,226,226,.8); border-color: #fecaca; }
+body.theme-red .song-detail-tag { color: #7f1d1d; background: #fee2e2; border: 1px solid #fecaca; }
+body.theme-red .remaining-item { background: #fff7f7; border-left-color: #dc2626; }
+
+.reference-section { margin-top: 34px; }
+.region-reference { display: flex; align-items: center; gap: 18px; }
+.reference-door-image { width: 86px; height: 72px; object-fit: contain; }
+.region-reference .reference-info { flex: 1; }
+.region-reference .reference-song-name, .region-reference .reference-song-id { display: block; }
+.region-reference .reference-song-id { margin-top: 5px; color: #8f6262; }
+.region-reference .bilibili-btn { flex-shrink: 0; }
+.github-footer-link { width: auto !important; padding: 0 8px; color: inherit; text-decoration: none; font-size: .72rem; }
+
+/* 参考视频分块标题 - 红色主题 */
+.reference-block-title { color: #b91c1c; }
+
+/* 门内抽卡选曲 - 红色主题（结构样式继承自 BLUEKALEIDXSCOPE/style.css） */
+.gate-challenge-section--red .gate-track-title,
+.gate-challenge-section--red .gate-song-chip.selected .gate-chip-name {
+    color: #dc2626;
+}
+
+.gate-challenge-section--red .gate-song-chip.selected {
+    border-color: #dc2626;
+    background: rgba(220, 38, 38, 0.12);
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.35);
+}
+
+.gate-challenge-section--red .gate-challenge-desc { color: #7f1d1d; }
+
+body.theme-red .gate-challenge-section {
+    background: #fff7f7;
+    border-color: #fecaca;
+}
+
+@media (prefers-color-scheme: dark) {
+    .reference-block-title { color: #fda4af; }
+    .gate-challenge-section--red .gate-track-title,
+    .gate-challenge-section--red .gate-song-chip.selected .gate-chip-name {
+        color: #fb7185;
+    }
+    .gate-challenge-section--red .gate-song-chip.selected {
+        border-color: #fb7185;
+        background: rgba(251, 113, 133, 0.18);
+        box-shadow: 0 0 12px rgba(251, 113, 133, 0.45);
+    }
+    .gate-challenge-section--red .gate-challenge-desc { color: #fecdd3; }
+    body.theme-red .gate-challenge-section {
+        background: #402328;
+        border-color: #6d303a;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body.theme-red { background: linear-gradient(135deg, #310b12, #57131d 50%, #25080d); }
+    body.theme-red .container { background: #321f22; border-color: rgba(251,113,133,.3); }
+    body.theme-red header h1, body.theme-red .section-title, body.theme-red .requirements-section h2,
+    body.theme-red .reference-section-title { color: #fda4af; }
+    body.theme-red .back-home-link { color: #fb7185; }
+    body.theme-red .subtitle, .requirements-list { color: #e7bdc1; }
+    .countdown-section, .schedule-section--red, .requirements-section, body.theme-red .stat-card,
+    body.theme-red .song-card, body.theme-red .reference-section, body.theme-red .reference-item { background: #402328; border-color: #6d303a; }
+    .countdown-section .countdown-title, .countdown-note, .countdown-status, .activation-card strong { color: #fda4af; }
+    .activation-card, body.theme-red .remaining-item { background: #4a272e; }
+    .activation-card span, .schedule-switch-note, .region-reference .reference-song-id { color: #d9aeb3; }
+    body.theme-red .song-name, body.theme-red .stat-number, body.theme-red .stat-label { color: #ffe4e6; }
+    body.theme-red .song-details { color: #fecdd3; }
+    body.theme-red .song-detail-tag { color: #ffe4e6; background: #5b2b34; border-color: #7f3946; }
+    body.theme-red .song-detail-hint { color: #fecdd3; background: #4a272e; border-color: #7f3946; }
+}
+
+@media (max-width: 600px) {
+    .activation-card { align-items: flex-start; }
+    .activation-card img { width: 64px; height: 58px; }
+    .region-reference { flex-wrap: wrap; }
+    .region-reference .reference-info { min-width: calc(100% - 105px); }
+}

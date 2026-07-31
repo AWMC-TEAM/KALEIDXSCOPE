@@ -12,6 +12,91 @@
 (function (global) {
     const ENTRIES = [
         {
+            id: '11852',
+            title: '好きな惣菜発表ドラゴン',
+            type: 'DX',
+            ds: [3.0, 6.0, 9.0, 12.5],
+            level: ['3', '6', '9', '12'],
+            cids: [],
+            basic_info: {
+                title: '好きな惣菜発表ドラゴン',
+                artist: 'ンバヂ',
+                genre: 'niconico & VOCALOID',
+                bpm: 160,
+                release_date: '2025-05-09',
+                from: 'maimai でらっくす PRiSM PLUS',
+                is_new: true
+            }
+        },
+        {
+            id: '11811',
+            title: '概して過誤',
+            type: 'DX',
+            ds: [4.0, 7.6, 10.6, 13.7],
+            level: ['4', '7+', '10+', '13+'],
+            cids: [],
+            basic_info: {
+                title: '概して過誤',
+                artist: 'isonosuke feat.知声',
+                genre: 'maimai',
+                bpm: 170,
+                release_date: '2025-05-09',
+                from: 'maimai でらっくす PRiSM PLUS',
+                is_new: true
+            }
+        },
+        {
+            id: '11812',
+            title: 'Unfinished Epic',
+            type: 'DX',
+            ds: [5.0, 8.6, 11.0, 13.8],
+            level: ['5', '8+', '11', '13+'],
+            cids: [],
+            basic_info: {
+                title: 'Unfinished Epic',
+                artist: 'SLAVE.V-V-R feat.Sor△',
+                genre: 'maimai',
+                bpm: 185,
+                release_date: '2025-05-09',
+                from: 'maimai でらっくす PRiSM PLUS',
+                is_new: true
+            }
+        },
+        {
+            id: '11813',
+            title: '忙シー日',
+            type: 'DX',
+            ds: [3.0, 7.6, 11.6, 14.2],
+            level: ['3', '7+', '11+', '14'],
+            cids: [],
+            basic_info: {
+                title: '忙シー日',
+                artist: '原口沙輔, 式部めぐり',
+                genre: 'maimai',
+                bpm: 150,
+                release_date: '2025-05-09',
+                from: 'maimai でらっくす PRiSM PLUS',
+                is_new: true
+            }
+        },
+        {
+            id: '11814',
+            title: 'FLΛME/FRΦST',
+            type: 'DX',
+            ds: [5.0, 8.0, 12.9, 14.8],
+            level: ['5', '8', '12+', '14+'],
+            cids: [],
+            basic_info: {
+                title: 'FLΛME/FRΦST',
+                artist: 'FANTAGIRAFF',
+                genre: 'maimai',
+                bpm: 174,
+                release_date: '2025-05-09',
+                from: 'maimai でらっくす PRiSM PLUS',
+                is_new: true
+            }
+        },
+        {
             id: '11806',
             title: 'Fraq',
             type: 'DX',

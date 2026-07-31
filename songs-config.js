@@ -202,11 +202,56 @@
         track3: { id: '11809', name: 'Åntinomiε' }
     };
 
+    // 红门（龙之区域 4）：版本更新后至少游玩一次下列全部曲目即可获得钥匙
+    const RED_KEY_SONGS = [
+        { id: '212', name: '神室雪月花' },
+        { id: '11095', name: '絡めトリック利己ライザー' },
+        { id: '337', name: '鼓動' },
+        { id: '270', name: "Outlaw's Lullaby" },
+        { id: '271', name: 'Brand-new Japanesque' },
+        { id: '11504', name: 'ばかみたい【Taxi Driver Edition】' },
+        { id: '339', name: 'DRAGONLADY' },
+        { id: '453', name: 'Garden Of The Dragon' },
+        { id: '11336', name: 'ドラゴンエネルギー' },
+        {
+            id: '11852',
+            name: '好きな惣菜発表ドラゴン',
+            cover: 'https://maimaidx-eng.com/maimai-mobile/img/Music/f5f0c148fc18e746.png'
+        }
+    ];
+    // 红门 门曲：TRACK 1 从世界树区域（龙之区域 1-4）课题曲随机；TRACK 2 从世界树区域完美挑战曲与「一か罰」随机；TRACK 3 固定为 FLΛME/FRΦST
+    const RED_GATE = {
+        track1: [
+            { id: '11016', name: 'キリキリ舞Mine' },
+            { id: '11017', name: '福宿音屋魂音泉' },
+            { id: '11018', name: 'Now or Never' },
+            { id: '11015', name: '一か罰' },
+            { id: '11545', name: '隠密あんみつDX' },
+            { id: '11546', name: '地球' },
+            { id: '11547', name: 'Churros Parlor' },
+            { id: '11548', name: '超熊猫的周遊記（ワンダーパンダートラベラー）' },
+            { id: '11678', name: 'RE:INCARNATED DRAGNER' },
+            { id: '11679', name: 'Beginning together!' },
+            { id: '11680', name: 'Shining Ray ～僕らの絆～' },
+            { id: '11681', name: 'DEVOTION' },
+            { id: '11811', name: '概して過誤' },
+            { id: '11812', name: 'Unfinished Epic' }
+        ],
+        track2: [
+            { id: '11015', name: '一か罰' },
+            { id: '11548', name: '超熊猫的周遊記（ワンダーパンダートラベラー）' },
+            { id: '11681', name: 'DEVOTION' },
+            { id: '11813', name: '忙シー日' }
+        ],
+        track3: { id: '11814', name: 'FLΛME/FRΦST' }
+    };
+
     global.SongsConfig = {
         blue: { songs: BLUE_SONGS, gate: BLUE_GATE },
         white: { songs: WHITE_SONGS, gate: WHITE_GATE },
         purple: { songs: PURPLE_SONGS, gate: PURPLE_GATE },
         black: { songs: BLACK_SONGS, gate: BLACK_GATE },
-        yellow: { songs: YELLOW_KEY_SONGS, gate: YELLOW_GATE }
+        yellow: { songs: YELLOW_KEY_SONGS, gate: YELLOW_GATE },
+        red: { songs: RED_KEY_SONGS, gate: RED_GATE }
     };
 })(typeof window !== 'undefined' ? window : globalThis);
