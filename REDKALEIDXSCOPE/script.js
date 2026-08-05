@@ -276,7 +276,7 @@ function updateSongDetailsInCard(container, fallbackSong) {
         || gate.track1.find(s => s.id === songId)
         || gate.track2.find(s => s.id === songId)
         || { id: songId, name: '-' };
-    SongDisplay.getMusicDataThen(songId, fallback, (info) => {
+    SongDisplay.getMusicDataThen(fallback.detailId || songId, fallback, (info) => {
         container.innerHTML = SongDisplay.renderSongDetailsHtml(SongDisplay.getDisplayFields(), info);
     });
 }
@@ -292,7 +292,7 @@ function renderSongs() {
 
     list.innerHTML = visibleSongs.map(song => `
         <div class="song-card ${progress[song.id] ? 'completed' : ''}">
-            <div class="song-cover" data-song-id="${escapeAttr(song.id)}" title="双击/长按查看乐曲详情">
+            <div class="song-cover" data-song-id="${escapeAttr(song.detailId || song.id)}" title="双击/长按查看乐曲详情">
                 <img src="${escapeAttr(getCoverUrl(song))}" alt="${escapeAttr(song.name)}" loading="lazy" onerror="this.onerror=null;this.src='${noCoverSvg}'">
             </div>
             <label class="song-checkbox">
@@ -343,12 +343,12 @@ function updateRemainingList() {
     }
     list.innerHTML = remaining.map(song => `
         <div class="remaining-item">
-            <div class="remaining-cover-wrap" data-song-id="${escapeAttr(song.id)}" title="双击/长按查看乐曲详情"><img src="${escapeAttr(getCoverUrl(song))}" alt="${escapeAttr(song.name)}" class="remaining-cover" loading="lazy" onerror="this.onerror=null;this.src='${noCoverSvg}'"></div>
+            <div class="remaining-cover-wrap" data-song-id="${escapeAttr(song.detailId || song.id)}" title="双击/长按查看乐曲详情"><img src="${escapeAttr(getCoverUrl(song))}" alt="${escapeAttr(song.name)}" class="remaining-cover" loading="lazy" onerror="this.onerror=null;this.src='${noCoverSvg}'"></div>
             <div class="remaining-info" data-song-id="${escapeAttr(song.id)}"><strong>${escapeText(song.name)}</strong></div>
         </div>`).join('');
     list.querySelectorAll('.remaining-info[data-song-id]').forEach(container => {
         const song = songs.find(item => item.id === container.dataset.songId);
-        SongDisplay?.getMusicDataThen(song.id, song, info => {
+        SongDisplay?.getMusicDataThen(song.detailId || song.id, song, info => {
             const tags = SongDisplay.renderSongDetailsHtml(SongDisplay.getDisplayFields(), info);
             container.innerHTML = `<strong>${escapeText(info.name || song.name)}</strong>${tags ? `<div class="remaining-tags">${tags}</div>` : ''}`;
         });

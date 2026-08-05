@@ -205,7 +205,7 @@
     // 红门（龙之区域 4）：版本更新后至少游玩一次下列全部曲目即可获得钥匙
     const RED_KEY_SONGS = [
         { id: '212', name: '神室雪月花' },
-        { id: '11095', name: '絡めトリック利己ライザー' },
+        { id: '213', name: '絡めトリック利己ライザー', detailId: '11095', cover: 'https://assets.awmc.cc/covers/11095.png' },
         { id: '337', name: '鼓動' },
         { id: '270', name: "Outlaw's Lullaby" },
         { id: '271', name: 'Brand-new Japanesque' },
