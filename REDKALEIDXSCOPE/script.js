@@ -277,6 +277,7 @@ function updateSongDetailsInCard(container, fallbackSong) {
         || gate.track2.find(s => s.id === songId)
         || { id: songId, name: '-' };
     SongDisplay.getMusicDataThen(fallback.detailId || songId, fallback, (info) => {
+        if (info?.fields) info.fields.id = fallback.id;
         container.innerHTML = SongDisplay.renderSongDetailsHtml(SongDisplay.getDisplayFields(), info);
     });
 }
@@ -349,6 +350,7 @@ function updateRemainingList() {
     list.querySelectorAll('.remaining-info[data-song-id]').forEach(container => {
         const song = songs.find(item => item.id === container.dataset.songId);
         SongDisplay?.getMusicDataThen(song.detailId || song.id, song, info => {
+            if (info?.fields) info.fields.id = song.id;
             const tags = SongDisplay.renderSongDetailsHtml(SongDisplay.getDisplayFields(), info);
             container.innerHTML = `<strong>${escapeText(info.name || song.name)}</strong>${tags ? `<div class="remaining-tags">${tags}</div>` : ''}`;
         });
