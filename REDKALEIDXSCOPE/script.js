@@ -26,8 +26,8 @@ const RED_GATE_PERIODS = [
 
 // 完美挑战（忙シー日）：以 7 日为周期放宽
 const RED_PERFECT_PERIODS = [
-    { start: '8.5', end: '8.12', type: 'master', life: 1 },
-    { start: '8.12', end: '8.19', type: 'master', life: 10 },
+    { start: '8.5', end: '8.12', type: 'master', life: 10 },
+    { start: '8.12', end: '8.19', type: 'master', life: 50 },
     { start: '8.19', end: '8.26', type: 'expert', life: 50 },
     { start: '8.26', end: '9.2', type: 'basic', life: 100 },
     { start: '9.2', end: '12.31', type: 'basic', life: 300 }
