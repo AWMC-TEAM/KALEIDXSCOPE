@@ -24,13 +24,13 @@ const RED_GATE_PERIODS = [
     { start: '8.25', end: '12.31', type: 'basic', life: 999 }
 ];
 
-// 完美挑战（忙シー日）：以 7 日为周期放宽
+// 完美挑战（忙シー日）：参照黄门节奏 1日→2日→4日→7日→后续
 const RED_PERFECT_PERIODS = [
-    { start: '8.5', end: '8.12', type: 'master', life: 10 },
-    { start: '8.12', end: '8.19', type: 'master', life: 50 },
-    { start: '8.19', end: '8.26', type: 'expert', life: 50 },
-    { start: '8.26', end: '9.2', type: 'basic', life: 100 },
-    { start: '9.2', end: '12.31', type: 'basic', life: 300 }
+    { start: '8.5', end: '8.6', type: 'master', life: 1 },
+    { start: '8.6', end: '8.8', type: 'master', life: 10 },
+    { start: '8.8', end: '8.12', type: 'expert', life: 50 },
+    { start: '8.12', end: '8.19', type: 'basic', life: 100 },
+    { start: '8.19', end: '12.31', type: 'basic', life: 300 }
 ];
 
 const noCoverSvg = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect fill=%22%23ddd%22 width=%2280%22 height=%2280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2210%22%3E%E6%9A%82%E6%97%A0%E6%9B%B2%E7%BB%98%3C/text%3E%3C/svg%3E";
