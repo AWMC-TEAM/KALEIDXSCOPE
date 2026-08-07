@@ -24,7 +24,7 @@ const RED_GATE_PERIODS = [
     { start: '8.25', end: '12.31', type: 'basic', life: 999 }
 ];
 
-// 完美挑战（忙シー日）：可拉倒什么玩意以7天为周期，，这才是对的。
+// 完美挑战（忙シー日）：1日→2日→4日→7日→后续（参照黄门节奏）
 const RED_PERFECT_PERIODS = [
     { start: '8.5', end: '8.6', type: 'master', life: 1 },
     { start: '8.6', end: '8.8', type: 'master', life: 10 },
