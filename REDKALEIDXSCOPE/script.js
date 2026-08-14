@@ -11,8 +11,8 @@ const STORAGE_KEY = 'maimai-red-gate-key-progress';
 
 // 门条件切换：次日凌晨 4:00 北京时间
 const RED_GATE_RESET_HOUR = 4;
-// 完美挑战：每日凌晨 0:00 北京时间
-const RED_PERFECT_RESET_HOUR = 0;
+// 完美挑战：每日凌晨 4:00 北京时间（与门条件切换一致）
+const RED_PERFECT_RESET_HOUR = 4;
 
 // 红门 门曲阶段（end 为「下一段开始」的时刻）
 const RED_GATE_PERIODS = [
@@ -49,7 +49,8 @@ function getCoverUrl(song) {
 
 function parsePeriodDate(str, year, resetHour) {
     const [m, d] = str.split('.').map(Number);
-    return new Date(year, m - 1, d, resetHour, 0, 0);
+    // 门血量 / 条件切换按 UTC+8（北京时间）计算：游戏每日 04:00 重置
+    return new Date(`${year}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}T${String(resetHour).padStart(2, '0')}:00:00+08:00`);
 }
 
 function getCurrentPeriod(periods, year, resetHour) {

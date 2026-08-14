@@ -32,7 +32,8 @@ const noCoverSvg = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/sv
 
 function parseScheduleDate(str, year) {
     const [m, d] = str.split('.').map(Number);
-    return new Date(year, m - 1, d, RESET_HOUR, 0, 0);
+    // 门血量 / 条件切换按 UTC+8（北京时间）计算：游戏每日 04:00 重置
+    return new Date(`${year}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}T${String(RESET_HOUR).padStart(2, '0')}:00:00+08:00`);
 }
 
 function getCurrentPeriod(periods, year) {
