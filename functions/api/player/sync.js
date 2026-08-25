@@ -4,6 +4,7 @@ const REQUEST_TIMEOUT_MS = 10_000;
 const RETRY_DELAY_MS = 250;
 const RATE_WINDOW_MS = 10_000;
 const MAX_REQUESTS_PER_WINDOW = 2;
+const UPSTREAM_RETRYABLE_STATUSES = new Set([502, 503, 504]);
 
 const buckets = globalThis.__kaleidxscopeSyncBuckets || (globalThis.__kaleidxscopeSyncBuckets = new Map());
 
@@ -171,11 +172,14 @@ export async function onRequestPost(context) {
 
     try {
         let result = await fetchUpstream(token, env.WMC_SESSION_COOKIE, qrcode);
-        if (result.response.status === 429 || result.response.status >= 500) {
+        if (result.response.status === 429 || UPSTREAM_RETRYABLE_STATUSES.has(result.response.status)) {
             await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
             result = await fetchUpstream(token, env.WMC_SESSION_COOKIE, qrcode);
         }
         if (!result.response.ok) {
+            if (UPSTREAM_RETRYABLE_STATUSES.has(result.response.status)) {
+                return json({ error: '成绩服务暂时繁忙，请稍后重试' }, 503, { 'Retry-After': '10' });
+            }
             return json({ error: `成绩服务返回 HTTP ${result.response.status}` }, result.response.status === 429 ? 429 : 502);
         }
         const normalized = normalizeResponse(result.payload);
