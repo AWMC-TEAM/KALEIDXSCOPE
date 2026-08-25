@@ -415,102 +415,6 @@ document.getElementById('reset').addEventListener('click', () => {
     }
 });
 
-// 导出为Base64
-document.getElementById('export-base64').addEventListener('click', () => {
-    const dataStr = JSON.stringify(progress);
-    const base64 = btoa(encodeURIComponent(dataStr));
-    const textarea = document.createElement('textarea');
-    textarea.value = base64;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    alert('Base64 数据已复制到剪贴板！\n\n' + base64);
-});
-
-// 打开导入模态框
-document.getElementById('import-btn').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'flex';
-    document.getElementById('import-data').value = '';
-    document.getElementById('import-error').style.display = 'none';
-});
-
-// 关闭模态框
-document.getElementById('modal-close').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'none';
-});
-
-document.getElementById('import-cancel').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'none';
-});
-
-// 点击模态框外部关闭
-document.getElementById('import-modal').addEventListener('click', (e) => {
-    if (e.target.id === 'import-modal') {
-        document.getElementById('import-modal').style.display = 'none';
-    }
-});
-
-// 确认导入
-document.getElementById('import-confirm').addEventListener('click', () => {
-    const importData = document.getElementById('import-data').value.trim();
-    const errorDiv = document.getElementById('import-error');
-    
-    if (!importData) {
-        errorDiv.textContent = '请输入要导入的数据';
-        errorDiv.style.display = 'block';
-        return;
-    }
-    
-    let importedProgress = {};
-    
-    try {
-        // 尝试解析为Base64
-        if (importData.length > 0 && !importData.startsWith('{')) {
-            try {
-                const decoded = decodeURIComponent(atob(importData));
-                importedProgress = JSON.parse(decoded);
-            } catch (e) {
-                throw new Error('Base64 解码失败，请检查数据格式');
-            }
-        } else {
-            // 尝试解析为JSON
-            importedProgress = JSON.parse(importData);
-        }
-        
-        // 验证数据格式
-        if (typeof importedProgress !== 'object' || Array.isArray(importedProgress)) {
-            throw new Error('数据格式不正确，应为对象格式');
-        }
-        
-        // 验证数据有效性（检查是否包含有效的歌曲ID）
-        const validIds = songs.map(s => s.id);
-        const importedIds = Object.keys(importedProgress);
-        const invalidIds = importedIds.filter(id => !validIds.includes(id));
-        
-        if (invalidIds.length > 0 && importedIds.length > 0) {
-            console.warn('发现无效的歌曲ID:', invalidIds);
-        }
-        
-        // 确认导入
-        if (confirm(`确定要导入数据吗？这将覆盖当前的进度。\n\n将导入 ${Object.keys(importedProgress).length} 个曲目的状态。`)) {
-            progress = importedProgress;
-            saveProgress(progress);
-            updateStats();
-            renderSongs();
-            updateRemainingList();
-            document.getElementById('import-modal').style.display = 'none';
-            alert('导入成功！');
-        }
-        
-    } catch (error) {
-        errorDiv.textContent = '导入失败：' + error.message;
-        errorDiv.style.display = 'block';
-    }
-});
-
 // 门中抽卡按钮
 const gateRandomBtn = document.getElementById('gate-random');
 if (gateRandomBtn) {
@@ -544,3 +448,23 @@ setInterval(updateCountdown, 1000);
 if (typeof SongDetail !== 'undefined') SongDetail.init();
 if (typeof SongDisplay !== 'undefined') SongDisplay.initDisplaySettings('blue');
 window.addEventListener('song-display-changed', () => { renderSongs(); updateRemainingList(); });
+
+function applyPlayerSyncProgress() {
+    if (!window.PlayerSync) return;
+    const played = PlayerSync.getPlayedSongIds();
+    let changed = false;
+    songs.forEach(song => {
+        if (played.has(String(song.id)) && progress[song.id] !== true) {
+            progress[song.id] = true;
+            changed = true;
+        }
+    });
+    if (changed) {
+        saveProgress(progress);
+        updateStats();
+        renderSongs();
+        updateRemainingList();
+    }
+}
+window.addEventListener('player-records-updated', applyPlayerSyncProgress);
+applyPlayerSyncProgress();

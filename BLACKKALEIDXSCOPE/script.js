@@ -467,45 +467,6 @@ document.getElementById('reset').addEventListener('click', () => {
     }
 });
 
-document.getElementById('export-base64').addEventListener('click', () => {
-    const data = btoa(unescape(encodeURIComponent(JSON.stringify(progress))));
-    navigator.clipboard.writeText(data).then(() => alert('已复制到剪贴板')).catch(() => prompt('请手动复制以下 Base64 数据：', data));
-    if (typeof umami !== 'undefined') umami.track('button-export-base64-black');
-});
-
-document.getElementById('import-btn').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'flex';
-    document.getElementById('import-error').style.display = 'none';
-    if (typeof umami !== 'undefined') umami.track('button-import-black');
-});
-
-document.getElementById('modal-close').addEventListener('click', () => document.getElementById('import-modal').style.display = 'none');
-document.getElementById('import-cancel').addEventListener('click', () => document.getElementById('import-modal').style.display = 'none');
-
-document.getElementById('import-confirm').addEventListener('click', () => {
-    const raw = document.getElementById('import-data').value.trim();
-    const errEl = document.getElementById('import-error');
-    if (!raw) {
-        errEl.textContent = '请输入数据';
-        errEl.style.display = 'block';
-        return;
-    }
-    try {
-        const decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
-        if (typeof decoded !== 'object') throw new Error('Invalid format');
-        progress = decoded;
-        saveProgress(progress);
-        updateStats();
-        renderSongs();
-        updateRemainingList();
-        document.getElementById('import-modal').style.display = 'none';
-        if (typeof umami !== 'undefined') umami.track('black-gate-import-success');
-    } catch (e) {
-        errEl.textContent = '导入失败：' + (e.message || '数据格式错误');
-        errEl.style.display = 'block';
-    }
-});
-
 window.addEventListener('song-display-changed', () => {
     renderSongs();
     updateRemainingList();
@@ -555,3 +516,23 @@ initBlackGateChallengeSection();
 initDiagramZoom();
 if (typeof SongDetail !== 'undefined') SongDetail.init();
 if (typeof SongDisplay !== 'undefined') SongDisplay.initDisplaySettings('black');
+
+function applyPlayerSyncProgress() {
+    if (!window.PlayerSync) return;
+    const played = PlayerSync.getPlayedSongIds();
+    let changed = false;
+    songs.forEach(song => {
+        if (played.has(String(song.id)) && progress[song.id] !== true) {
+            progress[song.id] = true;
+            changed = true;
+        }
+    });
+    if (changed) {
+        saveProgress(progress);
+        updateStats();
+        renderSongs();
+        updateRemainingList();
+    }
+}
+window.addEventListener('player-records-updated', applyPlayerSyncProgress);
+applyPlayerSyncProgress();

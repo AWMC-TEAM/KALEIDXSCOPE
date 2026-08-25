@@ -590,12 +590,6 @@ function initEventListeners() {
     const soloRandom = document.getElementById('solo-random');
     const multiRandom = document.getElementById('multi-random');
     const resetBtn = document.getElementById('reset');
-    const exportBtn = document.getElementById('export-base64');
-    const importBtn = document.getElementById('import-btn');
-    const modalClose = document.getElementById('modal-close');
-    const importCancel = document.getElementById('import-cancel');
-    const importModal = document.getElementById('import-modal');
-    const importConfirm = document.getElementById('import-confirm');
 
     if (soloRandom) soloRandom.addEventListener('click', doSoloRandom);
     if (multiRandom) multiRandom.addEventListener('click', doMultiRandom);
@@ -651,99 +645,6 @@ function initEventListeners() {
         });
     }
 
-    if (exportBtn) {
-        exportBtn.addEventListener('click', () => {
-            const dataStr = JSON.stringify(progress);
-            const base64 = btoa(encodeURIComponent(dataStr));
-            const textarea = document.createElement('textarea');
-            textarea.value = base64;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('Base64 数据已复制到剪贴板！\n\n' + base64);
-        });
-    }
-
-    if (importBtn) {
-        importBtn.addEventListener('click', () => {
-            const modal = document.getElementById('import-modal');
-            const importData = document.getElementById('import-data');
-            const importError = document.getElementById('import-error');
-            if (modal) modal.style.display = 'flex';
-            if (importData) importData.value = '';
-            if (importError) importError.style.display = 'none';
-        });
-    }
-
-    if (modalClose) {
-        modalClose.addEventListener('click', () => {
-            const modal = document.getElementById('import-modal');
-            if (modal) modal.style.display = 'none';
-        });
-    }
-
-    if (importCancel) {
-        importCancel.addEventListener('click', () => {
-            const modal = document.getElementById('import-modal');
-            if (modal) modal.style.display = 'none';
-        });
-    }
-
-    if (importModal) {
-        importModal.addEventListener('click', (e) => {
-            if (e.target.id === 'import-modal') {
-                importModal.style.display = 'none';
-            }
-        });
-    }
-
-    if (importConfirm) {
-        importConfirm.addEventListener('click', () => {
-            const importDataEl = document.getElementById('import-data');
-            const errorDiv = document.getElementById('import-error');
-            const importData = importDataEl ? importDataEl.value.trim() : '';
-            
-            if (!importData) {
-                if (errorDiv) {
-                    errorDiv.textContent = '请输入要导入的数据';
-                    errorDiv.style.display = 'block';
-                }
-                return;
-            }
-            
-            try {
-                let data;
-                if (importData.startsWith('{')) {
-                    data = JSON.parse(importData);
-                } else {
-                    data = JSON.parse(decodeURIComponent(atob(importData)));
-                }
-                
-                if (!data.solo || !data.multi) {
-                    throw new Error('数据格式不正确');
-                }
-                
-                if (confirm('确定要导入数据吗？这将覆盖当前的进度。')) {
-                    progress = data;
-                    saveProgress(progress);
-                    renderSoloRun();
-                    renderMultiRun();
-                    updateCompletionStatus();
-                    const modal = document.getElementById('import-modal');
-                    if (modal) modal.style.display = 'none';
-                    alert('导入成功！');
-                }
-            } catch (error) {
-                if (errorDiv) {
-                    errorDiv.textContent = '导入失败：' + error.message;
-                    errorDiv.style.display = 'block';
-                }
-            }
-        });
-    }
 }
 
 function initDiagramZoom() {
@@ -793,3 +694,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof SongDisplay !== 'undefined') SongDisplay.initDisplaySettings('white');
     window.addEventListener('song-display-changed', () => { renderSoloRun(); renderMultiRun(); renderSongsPool(); });
 });
+
+function applyPlayerSyncProgress() {
+    if (!window.PlayerSync) return;
+    const played = PlayerSync.getPlayedSongIds();
+    let changed = false;
+    songs.forEach(song => {
+        if (played.has(String(song.id))) {
+            if (!progress.solo.completed[song.id]) { progress.solo.completed[song.id] = true; changed = true; }
+            if (!progress.multi.completed[song.id]) { progress.multi.completed[song.id] = true; changed = true; }
+        }
+    });
+    if (changed) {
+        saveProgress(progress);
+        renderSoloRun();
+        renderMultiRun();
+        updateCompletionStatus();
+        renderSongsPool();
+    }
+}
+window.addEventListener('player-records-updated', applyPlayerSyncProgress);
+applyPlayerSyncProgress();

@@ -482,56 +482,6 @@ document.getElementById('reset').addEventListener('click', () => {
     }
 });
 
-document.getElementById('export-base64').addEventListener('click', () => {
-    const data = btoa(unescape(encodeURIComponent(JSON.stringify(progress))));
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(data).then(
-            () => alert('已复制到剪贴板'),
-            () => prompt('请手动复制以下 Base64 数据：', data)
-        );
-    } else {
-        prompt('请手动复制以下 Base64 数据：', data);
-    }
-    if (typeof umami !== 'undefined') umami.track('button-export-base64-red');
-});
-
-document.getElementById('import-btn').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'flex';
-    document.getElementById('import-error').style.display = 'none';
-    if (typeof umami !== 'undefined') umami.track('button-import-red');
-});
-document.getElementById('modal-close').addEventListener('click', () => document.getElementById('import-modal').style.display = 'none');
-document.getElementById('import-cancel').addEventListener('click', () => document.getElementById('import-modal').style.display = 'none');
-document.getElementById('import-confirm').addEventListener('click', () => {
-    const raw = document.getElementById('import-data').value.trim();
-    const error = document.getElementById('import-error');
-    if (!raw) {
-        error.textContent = '请输入数据';
-        error.style.display = 'block';
-        return;
-    }
-    try {
-        let decoded;
-        if (raw.startsWith('{')) {
-            decoded = JSON.parse(raw);
-        } else {
-            decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
-        }
-        if (!decoded || typeof decoded !== 'object' || Array.isArray(decoded)) throw new Error('数据格式错误');
-        progress = Object.fromEntries(songs.map(song => [song.id, decoded[song.id] === true]));
-        saveProgress();
-        updateStats();
-        renderSongs();
-        updateRemainingList();
-        document.getElementById('import-modal').style.display = 'none';
-        if (typeof umami !== 'undefined') umami.track('red-gate-import-success');
-        alert('导入成功！');
-    } catch (err) {
-        error.textContent = `导入失败：${err.message || '数据格式错误'}`;
-        error.style.display = 'block';
-    }
-});
-
 window.addEventListener('song-display-changed', () => {
     renderSongs();
     updateRemainingList();
@@ -553,3 +503,23 @@ initExpandClick();
 initRedGateChallengeSection();
 if (typeof SongDetail !== 'undefined') SongDetail.init();
 if (typeof SongDisplay !== 'undefined') SongDisplay.initDisplaySettings('red');
+
+function applyPlayerSyncProgress() {
+    if (!window.PlayerSync) return;
+    const played = PlayerSync.getPlayedSongIds();
+    let changed = false;
+    songs.forEach(song => {
+        if (played.has(String(song.id)) && progress[song.id] !== true) {
+            progress[song.id] = true;
+            changed = true;
+        }
+    });
+    if (changed) {
+        saveProgress();
+        updateStats();
+        renderSongs();
+        updateRemainingList();
+    }
+}
+window.addEventListener('player-records-updated', applyPlayerSyncProgress);
+applyPlayerSyncProgress();

@@ -33,6 +33,12 @@ npx serve .
    - 名称：`EDGEONE_API_TOKEN`
    - 值：EdgeOne API Token（[获取方式](https://pages.edgeone.ai/document/api-token)）
 
+2. 在 EdgeOne Pages 项目的**运行时环境变量/密钥**中配置成绩接口凭证：
+   - `WMC_API_TOKEN`：成绩接口的 Bearer Token
+   - `WMC_SESSION_COOKIE`：接口要求会话 Cookie 时再配置；没有则留空
+
+   这两个变量只供 `functions/api/player/sync.js` 在服务端读取，**不要写入仓库、HTML、前端 JavaScript、GitHub Actions 日志或聊天机器人配置**。成绩同步接口会自动做请求体校验、超时、有限重试和单实例限流；部署后还应在 EdgeOne 的 WAF/访问控制中为 `/api/player/sync` 配置全局 QPS 限制，建议先用“全局 1 req/s、单 IP 1 req/10s”作为保守起点，再按上游配额调整。建议把已经暴露过的旧 Token 立即撤销并重新生成。
+
 ## 贡献
 
 欢迎提交 [Issue](https://github.com/Michaelwucoc/KALEIDXSCOPE/issues) 或 Pull Request：

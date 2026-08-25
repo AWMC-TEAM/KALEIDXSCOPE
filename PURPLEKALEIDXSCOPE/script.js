@@ -565,77 +565,6 @@ document.getElementById('reset').addEventListener('click', () => {
     }
 });
 
-document.getElementById('export-base64').addEventListener('click', () => {
-    const dataStr = JSON.stringify(progress);
-    const base64 = btoa(encodeURIComponent(dataStr));
-    const textarea = document.createElement('textarea');
-    textarea.value = base64;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    alert('Base64 数据已复制到剪贴板！\n\n' + base64);
-});
-
-document.getElementById('import-btn').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'flex';
-    document.getElementById('import-data').value = '';
-    document.getElementById('import-error').style.display = 'none';
-});
-
-document.getElementById('modal-close').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'none';
-});
-
-document.getElementById('import-cancel').addEventListener('click', () => {
-    document.getElementById('import-modal').style.display = 'none';
-});
-
-document.getElementById('import-modal').addEventListener('click', (e) => {
-    if (e.target.id === 'import-modal') {
-        document.getElementById('import-modal').style.display = 'none';
-    }
-});
-
-document.getElementById('import-confirm').addEventListener('click', () => {
-    const importData = document.getElementById('import-data').value.trim();
-    const errorDiv = document.getElementById('import-error');
-
-    if (!importData) {
-        errorDiv.textContent = '请输入要导入的数据';
-        errorDiv.style.display = 'block';
-        return;
-    }
-
-    let importedProgress = {};
-    try {
-        if (importData.length > 0 && !importData.startsWith('{')) {
-            importedProgress = JSON.parse(decodeURIComponent(atob(importData)));
-        } else {
-            importedProgress = JSON.parse(importData);
-        }
-        if (typeof importedProgress !== 'object' || Array.isArray(importedProgress)) {
-            throw new Error('数据格式不正确');
-        }
-        if (confirm('确定要导入数据吗？这将覆盖当前的单人/双人列表。')) {
-            progress = importedProgress;
-            if (!progress.solo) progress.solo = { run: [], completed: {} };
-            if (!progress.multi) progress.multi = { run: [], completed: {} };
-            saveProgress(progress);
-            renderSoloRun();
-            renderMultiRun();
-            updateCompletionStatus();
-            document.getElementById('import-modal').style.display = 'none';
-            alert('导入成功！');
-        }
-    } catch (error) {
-        errorDiv.textContent = '导入失败：' + error.message;
-        errorDiv.style.display = 'block';
-    }
-});
-
 document.getElementById('solo-random')?.addEventListener('click', doSoloRandom);
 document.getElementById('multi-random')?.addEventListener('click', doMultiRandom);
 document.getElementById('solo-clear')?.addEventListener('click', () => {
@@ -714,3 +643,24 @@ updateCompletionStatus();
 if (typeof SongDetail !== 'undefined') SongDetail.init();
 if (typeof SongDisplay !== 'undefined') SongDisplay.initDisplaySettings('purple');
 window.addEventListener('song-display-changed', () => { renderSoloRun(); renderMultiRun(); renderSongsPool(); });
+
+function applyPlayerSyncProgress() {
+    if (!window.PlayerSync) return;
+    const played = PlayerSync.getPlayedSongIds();
+    let changed = false;
+    songs.forEach(song => {
+        if (played.has(String(song.id))) {
+            if (!progress.solo.completed[song.id]) { progress.solo.completed[song.id] = true; changed = true; }
+            if (!progress.multi.completed[song.id]) { progress.multi.completed[song.id] = true; changed = true; }
+        }
+    });
+    if (changed) {
+        saveProgress(progress);
+        renderSoloRun();
+        renderMultiRun();
+        updateCompletionStatus();
+        renderSongsPool();
+    }
+}
+window.addEventListener('player-records-updated', applyPlayerSyncProgress);
+applyPlayerSyncProgress();

@@ -444,84 +444,9 @@ function initExpandClick() {
     });
 }
 
-// ----- 导入导出 -----
-function getProgressSnapshot() {
-    return {
-        keyGachaIndex: keyGachaResult ? keyGachaResult.index : null
-    };
-}
-
-function applyProgressSnapshot(data) {
-    if (data && typeof data.keyGachaIndex === 'number' && data.keyGachaIndex >= 0 && data.keyGachaIndex < KEY_SONGS.length) {
-        keyGachaResult = { index: data.keyGachaIndex, song: KEY_SONGS[data.keyGachaIndex] };
-        saveKeyGacha(keyGachaResult);
-    } else {
-        keyGachaResult = null;
-        saveKeyGacha(null);
-    }
-}
-
-function initExportImport() {
-    document.getElementById('export-base64')?.addEventListener('click', () => {
-        const data = btoa(unescape(encodeURIComponent(JSON.stringify(getProgressSnapshot()))));
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(data).then(
-                () => alert('已复制到剪贴板'),
-                () => prompt('请手动复制以下 Base64 数据：', data)
-            );
-        } else {
-            prompt('请手动复制以下 Base64 数据：', data);
-        }
-        if (typeof umami !== 'undefined') umami.track('button-export-base64-yellow');
-    });
-
-    document.getElementById('import-btn')?.addEventListener('click', () => {
-        const modal = document.getElementById('import-modal');
-        const errEl = document.getElementById('import-error');
-        const ta = document.getElementById('import-data');
-        if (modal) modal.style.display = 'flex';
-        if (errEl) errEl.style.display = 'none';
-        if (ta) ta.value = '';
-    });
-
-    const closeModal = () => {
-        const modal = document.getElementById('import-modal');
-        if (modal) modal.style.display = 'none';
-    };
-    document.getElementById('modal-close')?.addEventListener('click', closeModal);
-    document.getElementById('import-cancel')?.addEventListener('click', closeModal);
-
-    document.getElementById('import-confirm')?.addEventListener('click', () => {
-        const raw = (document.getElementById('import-data')?.value || '').trim();
-        const errEl = document.getElementById('import-error');
-        if (!raw) {
-            if (errEl) {
-                errEl.textContent = '请输入数据';
-                errEl.style.display = 'block';
-            }
-            return;
-        }
-        try {
-            let decoded;
-            if (raw.startsWith('{')) {
-                decoded = JSON.parse(raw);
-            } else {
-                decoded = JSON.parse(decodeURIComponent(escape(atob(raw))));
-            }
-            applyProgressSnapshot(decoded);
-            renderKeyGachaResult();
-            renderKeySongsPool();
-            closeModal();
-            if (typeof umami !== 'undefined') umami.track('yellow-gate-import-success');
-            alert('导入成功！');
-        } catch (e) {
-            if (errEl) {
-                errEl.textContent = '导入失败：' + (e.message || '数据格式错误');
-                errEl.style.display = 'block';
-            }
-        }
-    });
-
+function initEventListeners() {
+    document.getElementById('key-gacha-random')?.addEventListener('click', doKeyGacha);
+    document.getElementById('key-gacha-clear')?.addEventListener('click', clearKeyGacha);
     document.getElementById('reset')?.addEventListener('click', () => {
         if (confirm('确定要重置所有进度吗？此操作不可恢复。')) {
             keyGachaResult = null;
@@ -531,11 +456,6 @@ function initExportImport() {
             if (typeof umami !== 'undefined') umami.track('yellow-gate-reset-confirmed');
         }
     });
-}
-
-function initEventListeners() {
-    document.getElementById('key-gacha-random')?.addEventListener('click', doKeyGacha);
-    document.getElementById('key-gacha-clear')?.addEventListener('click', clearKeyGacha);
     document.getElementById('gate-random')?.addEventListener('click', () => {
         gateChallengeRun = randomPickGateChallenge();
         renderGateChallengeRun();
@@ -573,7 +493,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initGateChallengeSection();
     initExpandClick();
     initEventListeners();
-    initExportImport();
     if (typeof SongDetail !== 'undefined') SongDetail.init();
     if (typeof SongDisplay !== 'undefined') SongDisplay.initDisplaySettings('yellow');
     window.addEventListener('song-display-changed', () => {

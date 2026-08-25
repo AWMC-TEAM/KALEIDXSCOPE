@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../song-detail.css">
     <link rel="stylesheet" href="../github-footer.css">
+    <link rel="stylesheet" href="../player-sync.css">
     <script src="../site-config.js?v=8-5-1"></script>
     <script defer src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
     <script defer src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
@@ -156,9 +157,11 @@
         </div>
 
         <div class="controls">
-            <button id="export-base64" class="btn btn-success" data-umami-event="button-export-base64-purple">导出数据</button>
-            <button id="import-btn" class="btn btn-warning" data-umami-event="button-import-purple">导入数据</button>
             <button id="reset" class="btn btn-danger" data-umami-event="button-reset-purple">重置</button>
+            <div class="player-sync-widget">
+                <button type="button" id="player-sync-btn" class="player-sync-button"><span class="player-sync-button-icon">↻</span>同步成绩</button>
+                <span id="player-sync-status" class="player-sync-status">尚未同步</span>
+            </div>
         </div>
 
         <!-- 乐曲详情模态框 -->
@@ -175,25 +178,6 @@
                 </div>
                 <div class="song-detail-footer">
                     <button id="song-detail-refresh" class="btn btn-info btn-sm">刷新乐曲数据</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 导入模态框 -->
-        <div id="import-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>导入单人/双人列表</h2>
-                    <span class="modal-close" id="modal-close" data-umami-event="modal-close-purple">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <p>请粘贴 Base64 格式的数据：</p>
-                    <textarea id="import-data" placeholder="粘贴数据 here..."></textarea>
-                    <div class="modal-buttons">
-                        <button id="import-confirm" class="btn btn-primary" data-umami-event="button-import-confirm-purple">确认导入</button>
-                        <button id="import-cancel" class="btn btn-secondary" data-umami-event="button-import-cancel-purple">取消</button>
-                    </div>
-                    <div id="import-error" class="error-message" style="display: none;"></div>
                 </div>
             </div>
         </div>
@@ -314,6 +298,7 @@
     <script src="../local-songs.js"></script>
     <script src="../song-display.js"></script>
     <script src="../song-detail.js"></script>
+    <script src="../player-sync.js"></script>
     <script src="script.js" data-performance="true"></script>
     <div class="github-footer-float">
         <div class="footer-float-item">
