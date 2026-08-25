@@ -78,12 +78,18 @@
 
     function decoratePlayedSongs(root) {
         const played = getPlayedSongIds();
-        const seen = new Set();
-        (root || document).querySelectorAll?.('[data-song-id]').forEach(element => {
-            const target = element.closest('.song-card, .pool-song-card, .run-song-card, .remaining-song, .song-item') || element;
-            if (seen.has(target)) return;
-            seen.add(target);
-            target.classList.toggle('player-sync-played', played.has(String(element.dataset.songId)));
+        const scope = root || document;
+        const targets = new Map();
+        scope.querySelectorAll?.('[data-song-id]').forEach(element => {
+            const target = element.closest('.song-card, .pool-song-card, .run-song-card, .remaining-item, .reference-item, .song-item') || element;
+            const isPlayed = played.has(String(element.dataset.songId));
+            targets.set(target, Boolean(targets.get(target)) || isPlayed);
+        });
+        scope.querySelectorAll?.('.player-sync-played').forEach(element => {
+            if (!targets.get(element)) element.classList.remove('player-sync-played');
+        });
+        targets.forEach((isPlayed, target) => {
+            target.classList.toggle('player-sync-played', isPlayed);
         });
     }
 

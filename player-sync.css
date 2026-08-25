@@ -104,8 +104,8 @@
 .player-sync-modal-status { min-height: 1.35em; margin: 10px 0 0; color: #b9d5ff; font-size: 0.82rem; }
 .player-sync-modal-open { overflow: hidden; }
 
-[data-song-id].player-sync-played { position: relative; }
-[data-song-id].player-sync-played::after {
+.player-sync-played { position: relative; }
+.player-sync-played::after {
     content: "已游玩";
     position: absolute;
     z-index: 3;
@@ -118,7 +118,15 @@
     font-size: 0.66rem;
     font-weight: 800;
     line-height: 1.2;
+    white-space: nowrap;
     pointer-events: none;
+}
+
+.reference-item.player-sync-played::after,
+.remaining-item.player-sync-played::after {
+    position: static;
+    flex: 0 0 auto;
+    margin-left: auto;
 }
 
 @media (max-width: 720px) {
