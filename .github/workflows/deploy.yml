@@ -1,0 +1,43 @@
+name: Deploy EdgeOne Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: edgeone-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.11.0'
+
+      - name: Inject version metadata
+        shell: bash
+        run: |
+          LAST_UPDATE=$(git log -1 --format=%cd --date=format:'%Y-%m-%d')
+          find . -name '*.html' -not -path './.git/*' -print0 | while IFS= read -r -d '' file; do
+            sed -i "s/__LAST_UPDATE__/$LAST_UPDATE/g" "$file"
+            sed -i "s/__APP_VERSION__/$LAST_UPDATE/g" "$file"
+          done
+
+      - name: Deploy production
+        env:
+          EDGEONE_API_TOKEN: ${{ secrets.EDGEONE_API_TOKEN }}
+        run: |
+          test -n "$EDGEONE_API_TOKEN"
+          npx --yes edgeone pages deploy . -n kaleidxscope -t "$EDGEONE_API_TOKEN" -e production
