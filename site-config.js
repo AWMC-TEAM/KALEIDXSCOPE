@@ -1,3 +1,19 @@
+// Redirect legacy AWMC hosts before the page renders.
+(() => {
+    const targetHost = 'kaleidxscope.awmc.team';
+    const hostname = window.location.hostname.toLowerCase();
+    const shouldRedirect = hostname !== targetHost && (
+        hostname.includes('awmc.cc') || hostname === 'scope.awmc.team'
+    );
+
+    if (shouldRedirect) {
+        const targetUrl = new URL(window.location.href);
+        targetUrl.hostname = targetHost;
+        targetUrl.protocol = 'https:';
+        window.location.replace(targetUrl.href);
+    }
+})();
+
 // 站点全局配置（修改版本时请同步更新各 HTML 中 site-config.js 的 ?v= 参数）
 window.SITE_CONFIG = {
     version: '8/5',
