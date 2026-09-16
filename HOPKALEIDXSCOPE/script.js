@@ -38,7 +38,7 @@ function renderHopeGateTracks() {
 }
 
 function initHopeGateChallengeSection() {
-    const expanded = localStorage.getItem('hope-gate-challenge-expanded') === 'true';
+    const expanded = localStorage.getItem('hope-gate-challenge-expanded') !== 'false';
     const body = document.getElementById('gate-challenge-body');
     const toggle = document.getElementById('gate-challenge-toggle');
     const icon = toggle?.querySelector('.toggle-icon');
@@ -52,7 +52,7 @@ function initHopeGateChallengeSection() {
     }
     setExpanded(expanded);
     toggle?.addEventListener('click', () => {
-        setExpanded(localStorage.getItem('hope-gate-challenge-expanded') !== 'true');
+        setExpanded(localStorage.getItem('hope-gate-challenge-expanded') === 'false');
     });
 }
 

@@ -277,7 +277,7 @@ function renderPurpleGateChallengeRun() {
 }
 
 function initPurpleGateChallengeSection() {
-    const expanded = localStorage.getItem('purple-gate-challenge-expanded') === 'true';
+    const expanded = localStorage.getItem('purple-gate-challenge-expanded') !== 'false';
     const body = document.getElementById('gate-challenge-body');
     const toggle = document.getElementById('gate-challenge-toggle');
     const icon = toggle?.querySelector('.toggle-icon');
@@ -294,7 +294,7 @@ function initPurpleGateChallengeSection() {
     setExpanded(expanded);
 
     toggle?.addEventListener('click', () => {
-        const cur = localStorage.getItem('purple-gate-challenge-expanded') === 'true';
+        const cur = localStorage.getItem('purple-gate-challenge-expanded') !== 'false';
         setExpanded(!cur);
     });
 }

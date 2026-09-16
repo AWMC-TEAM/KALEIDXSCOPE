@@ -68,7 +68,7 @@ function renderPrismGateChallengeRun() {
 }
 
 function initPrismGateChallengeSection() {
-    const expanded = localStorage.getItem('prism-gate-challenge-expanded') === 'true';
+    const expanded = localStorage.getItem('prism-gate-challenge-expanded') !== 'false';
     const body = document.getElementById('gate-challenge-body');
     const toggle = document.getElementById('gate-challenge-toggle');
     const icon = toggle?.querySelector('.toggle-icon');
@@ -82,7 +82,7 @@ function initPrismGateChallengeSection() {
     }
     setExpanded(expanded);
     toggle?.addEventListener('click', () => {
-        setExpanded(localStorage.getItem('prism-gate-challenge-expanded') !== 'true');
+        setExpanded(localStorage.getItem('prism-gate-challenge-expanded') === 'false');
     });
 }
 

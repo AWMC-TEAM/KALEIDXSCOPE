@@ -244,12 +244,12 @@
         <div class="gate-challenge-section gate-challenge-section--yellow">
             <div class="gate-challenge-header" id="gate-challenge-header">
                 <h2 class="gate-challenge-title">🎯 门内抽卡选曲</h2>
-                <button type="button" class="gate-challenge-toggle" id="gate-challenge-toggle" aria-expanded="false" data-umami-event="gate-challenge-toggle-yellow">
-                    <span class="toggle-icon">▼</span>
-                    <span class="toggle-text">展开</span>
+                <button type="button" class="gate-challenge-toggle" id="gate-challenge-toggle" aria-expanded="true" data-umami-event="gate-challenge-toggle-yellow">
+                    <span class="toggle-icon">▲</span>
+                    <span class="toggle-text">收起</span>
                 </button>
             </div>
-            <div class="gate-challenge-body" id="gate-challenge-body" style="display: none;">
+            <div class="gate-challenge-body" id="gate-challenge-body">
                 <p class="gate-challenge-desc">解锁门后挑战门时，前两首为随机曲目，第三首固定为 Åntinomiε。点击「抽卡！」随机抽取，选中曲目高亮。</p>
                 <div class="gate-challenge-actions">
                     <button id="gate-random" class="btn btn-primary" data-umami-event="gate-challenge-random-yellow">抽卡！</button>
@@ -314,7 +314,7 @@
     <script src="../song-display.js"></script>
     <script src="../song-detail.js"></script>
     <script src="../player-sync.js"></script>
-    <script src="script.js" data-performance="true"></script>
+    <script src="script.js?v=9-16" data-performance="true"></script>
     <div class="github-footer-float">
         <div class="footer-float-item">
             <a href="https://github.com/Michaelwucoc/KALEIDXSCOPE" target="_blank" rel="noopener noreferrer" class="footer-float-link github-footer-link" data-umami-event="github-link-yellow" title="GitHub 源码">

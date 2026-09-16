@@ -512,7 +512,7 @@ function initExpandClick() {
 
 // 门中选曲折叠/展开（localStorage 记忆）
 function initGateChallengeSection() {
-    const expanded = localStorage.getItem('white-gate-challenge-expanded') === 'true';
+    const expanded = localStorage.getItem('white-gate-challenge-expanded') !== 'false';
     const body = document.getElementById('gate-challenge-body');
     const toggle = document.getElementById('gate-challenge-toggle');
     const icon = toggle?.querySelector('.toggle-icon');
@@ -529,7 +529,7 @@ function initGateChallengeSection() {
     setExpanded(expanded);
 
     toggle?.addEventListener('click', () => {
-        const cur = localStorage.getItem('white-gate-challenge-expanded') === 'true';
+        const cur = localStorage.getItem('white-gate-challenge-expanded') !== 'false';
         setExpanded(!cur);
     });
 }

@@ -335,7 +335,7 @@ function initExpandClick() {
 
 // 门中选曲折叠/展开（localStorage 记忆）
 function initBlueGateChallengeSection() {
-    const expanded = localStorage.getItem('blue-gate-challenge-expanded') === 'true';
+    const expanded = localStorage.getItem('blue-gate-challenge-expanded') !== 'false';
     const body = document.getElementById('gate-challenge-body');
     const toggle = document.getElementById('gate-challenge-toggle');
     const icon = toggle?.querySelector('.toggle-icon');
@@ -352,7 +352,7 @@ function initBlueGateChallengeSection() {
     setExpanded(expanded);
 
     toggle?.addEventListener('click', () => {
-        const cur = localStorage.getItem('blue-gate-challenge-expanded') === 'true';
+        const cur = localStorage.getItem('blue-gate-challenge-expanded') !== 'false';
         setExpanded(!cur);
     });
 }
