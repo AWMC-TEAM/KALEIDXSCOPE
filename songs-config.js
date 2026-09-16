@@ -246,12 +246,99 @@
         track3: { id: '11814', name: 'FLΛME/FRΦST' }
     };
 
+    // 棱镜塔（プリズムタワー / 7sRef区域4 第27格 2000km）：Stage 2 第 7 相
+    // TRACK 1 = 7sRefちほー（区域 1~4 全部曲目，排除 ヨミビトシラズ）随机；
+    // TRACK 2 = 7sRef 各区域 Perfect Challenge 曲随机（7sRef1=躯樹の墓守、7sRef2=World's end loneliness、
+    //           7sRef3=Straight into the lights、7sRef4=Amereistr）；
+    // TRACK 3 = 固定 World's end BLACKBOX（artist 打打だいず）。
+    // 注意：区域 Bonus songs 列表为「该区域可用曲目」，含跨区域共享老歌，与现有各门配置口径一致；
+    //       IMBRUED:FLUX、砂の函、Amereistr 为 7sRef4 已知奖励曲（抓取文件中 PRiSM PLUS 部分不全，以 wiki 已知三首为准）；
+    //       id 为空字符串表示 music_data.json（2026-02 版）暂未收录该曲。
+    const PRISM_TRACK1_POOL = [
+        // 7sRefちほー（UNiVERSE）
+        { id: '11143', name: 'アトロポスと最果の探究者' }, { id: '11310', name: 'Trick tear' },
+        { id: '11309', name: '前衛的Landscape' }, { id: '11311', name: '躯樹の墓守' },
+        { id: '11232', name: 'Never Give Up!' }, { id: '11233', name: 'Starry Colors' },
+        { id: '11234', name: 'ほしぞらスペクタクル' }, { id: '11235', name: 'VIIIbit Explorer' },
+        { id: '11236', name: 'Last Samurai' }, { id: '11237', name: '蒼穹舞楽' },
+        { id: '11238', name: 'AMABIE' }, { id: '11222', name: 'BREaK! BREaK! BREaK!' },
+        { id: '11166', name: 'ワンダーシャッフェンの法則' }, { id: '11167', name: 'BIRTH' },
+        { id: '11165', name: 'Regulus' }, { id: '11159', name: 'Beautiful Future' },
+        { id: '11160', name: 'Mutation' }, { id: '11157', name: 'Aetheric Energy' },
+        { id: '11103', name: '渦状銀河のシンフォニエッタ' }, { id: '11101', name: 'GRÄNDIR' },
+        { id: '11102', name: '封焔の135秒' }, { id: '11158', name: 'Komplexe' },
+        { id: '11091', name: 'Stardust Memories' }, { id: '11090', name: 'Flashkick' },
+        { id: '11089', name: 'STEEL TRANSONIC' }, { id: '11026', name: 'TEmPTaTiON' },
+        { id: '11027', name: 'アポカリプスに反逆の焔を焚べろ' }, { id: '11092', name: 'My My My' },
+        { id: '11022', name: 'TwisteD! XD' }, { id: '11019', name: 'Scarlet Wings' },
+        { id: '11020', name: 'Technicians High' }, { id: '11023', name: 'Blows Up Everything' },
+        { id: '11021', name: '魔ジョ狩リ' }, { id: '495', name: 'Hyper Active' },
+        // 7sRefちほー2（UNiVERSE PLUS）
+        { id: '837', name: 'Altale' }, { id: '11051', name: 'Destr0yer' },
+        { id: '11140', name: 'Black Lair' }, { id: '462', name: '7thSense' },
+        { id: '566', name: '天火明命' }, { id: '834', name: 'PANDORA PARADOXXX' },
+        { id: '11228', name: '星めぐり、果ての君へ。' }, { id: '11301', name: '華の集落、秋のお届け' },
+        { id: '11303', name: '星詠みとデスペラード' }, { id: '11302', name: 'BLACK SWAN' },
+        { id: '11304', name: 'Round Round Spinning Around' }, { id: '11395', name: 'Jouez Avec Moi?' },
+        { id: '11393', name: '白花の天使' }, { id: '11392', name: 'Metamorphosism' },
+        { id: '11394', name: "World's end loneliness" },
+        // 7sRefちほー3（BUDDiES）
+        { id: '11652', name: 'HUMANBORG' }, { id: '11653', name: 'ULTRA POWER' },
+        { id: '11667', name: 'にっこり^^調査隊のテーマ' }, { id: '11665', name: 'RAD DOGS' },
+        { id: '11666', name: 'アイディスマイル' }, { id: '11650', name: 'ずんだもんの朝食　〜目覚ましずんラップ〜' },
+        { id: '11651', name: 'あなたは世界の終わりにずんだを食べるのだ' }, { id: '11207', name: 'Ether Strike' },
+        { id: '11425', name: 'First Dance' }, { id: '11534', name: 'The Great Banquet' },
+        { id: '11535', name: 'Redemption' }, { id: '11536', name: 'Ether Second' },
+        { id: '11537', name: 'Straight into the lights' }, { id: '11387', name: '星空パーティーチューン' },
+        { id: '11388', name: 'チューリングの跡' }, { id: '11389', name: 'Sage' },
+        { id: '11305', name: 'Alcyone' }, { id: '11306', name: 'Raven Emperor' },
+        { id: '11307', name: 'Yorugao' },
+        // 7sRefちほー4（PRiSM PLUS，wiki 已知奖励曲）
+        { id: '', name: 'IMBRUED:FLUX' }, { id: '', name: '砂の函' }, { id: '', name: 'Amereistr' }
+    ];
+    const PRISM_TRACK2_POOL = [
+        { id: '11311', name: '躯樹の墓守' },
+        { id: '11394', name: "World's end loneliness" },
+        { id: '11537', name: 'Straight into the lights' },
+        { id: '', name: 'Amereistr' }
+    ];
+    const PRISM_GATE = {
+        track1: PRISM_TRACK1_POOL,
+        track2: PRISM_TRACK2_POOL,
+        track3: { id: '', name: "World's end BLACKBOX" }
+    };
+    // track1 + track2 池合并去重（按曲名）
+    const PRISM_SONGS = (() => {
+        const seen = new Set();
+        const merged = [];
+        [...PRISM_TRACK1_POOL, ...PRISM_TRACK2_POOL].forEach(s => {
+            if (!seen.has(s.name)) { seen.add(s.name); merged.push(s); }
+        });
+        return merged;
+    })();
+
+    // 希望之门（希望の扉 / プリズムエリア）：Stage 2 第 8 相，通关 Phase #???（ERROR / プリズムタワー）后出现。
+    // 亚服/国行无 DX PASS，无需实体卡；三条 TRACK 均为固定曲目，不做随机抽卡。
+    // id 为空字符串表示 music_data.json（2026-02 版）暂未收录该曲。
+    const HOPE_FIXED_TRACKS = [
+        { id: '11736', name: 'プリズム△▽リズム' },        // TRACK 1 [STD]
+        { id: '', name: 'Believe The Rainbow' },          // TRACK 2 [DX]
+        { id: '', name: 'AFTER PANDORA' }                 // TRACK 3（artist 削除）
+    ];
+
+    // 最终相 KALEIDXSCOPE（FINAL SEQUENCE）：通关希望の扉后直接解锁。
+    // 仅 1 首课题曲 Xaleid◆scopiX（artist xi），仅 Re:MASTER。
+    const FINAL_TRACK = { id: '', name: 'Xaleid◆scopiX' };
+
     global.SongsConfig = {
         blue: { songs: BLUE_SONGS, gate: BLUE_GATE },
         white: { songs: WHITE_SONGS, gate: WHITE_GATE },
         purple: { songs: PURPLE_SONGS, gate: PURPLE_GATE },
         black: { songs: BLACK_SONGS, gate: BLACK_GATE },
         yellow: { songs: YELLOW_KEY_SONGS, gate: YELLOW_GATE },
-        red: { songs: RED_KEY_SONGS, gate: RED_GATE }
+        red: { songs: RED_KEY_SONGS, gate: RED_GATE },
+        prism: { songs: PRISM_SONGS, gate: PRISM_GATE },
+        hope: { fixedTracks: HOPE_FIXED_TRACKS },
+        final: { track: FINAL_TRACK }
     };
 })(typeof window !== 'undefined' ? window : globalThis);

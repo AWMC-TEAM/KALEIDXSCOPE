@@ -1,0 +1,103 @@
+@import url("../REDKALEIDXSCOPE/style.css");
+
+body.theme-prism {
+    background: linear-gradient(135deg, #ecfeff 0%, #a5f3fc 50%, #cffafe 100%);
+}
+
+body.theme-prism .container { border: 2px solid rgba(8, 145, 178, .24); }
+body.theme-prism .back-home-link { color: #0891b2; }
+body.theme-prism .back-home-link:hover { color: #155e75; background: rgba(8,145,178,.1); }
+body.theme-prism header h1, body.theme-prism .section-title, body.theme-prism .requirements-section h2,
+body.theme-prism .reference-section-title { color: #155e75; }
+body.theme-prism .subtitle { line-height: 1.55; }
+
+/* 棱镜塔倒计时区：国行 2026/10/1 10:00:00（北京时间）开放 */
+body.theme-prism .countdown-section {
+    background: linear-gradient(135deg, #f0fdff, #cffafe);
+    border-color: #67e8f9;
+}
+body.theme-prism .countdown-section .countdown-title { color: #155e75; }
+body.theme-prism .countdown-note { color: #155e75; font-weight: 700; }
+body.theme-prism .countdown-status { color: #0e7490; }
+
+.schedule-section--prism { background: #f0fdff; border-color: #a5f3fc; }
+
+.requirements-section {
+    background: linear-gradient(135deg, #f0fdff, #fff);
+    border-color: #a5f3fc;
+}
+.requirements-list { color: #155e75; }
+.activation-card { background: #ecfeff; }
+.activation-card strong { color: #155e75; }
+.activation-card span { color: #3f7f8f; }
+
+body.theme-prism .stat-card { background: #f0fdff; border-color: #a5f3fc; }
+body.theme-prism .stat-number { color: #0e7490; }
+body.theme-prism .btn-info, body.theme-prism .btn-primary { background: #0891b2; }
+body.theme-prism .song-card { background: #f7feff; border-color: #a5f3fc; }
+body.theme-prism .song-card:hover { border-color: #06b6d4; box-shadow: 0 7px 18px rgba(14,116,144,.12); }
+body.theme-prism .song-card.completed { background: #dcfce7; border-color: #22c55e; }
+body.theme-prism .song-details { color: #4f7d8a; }
+body.theme-prism .song-checkbox input { accent-color: #0891b2; }
+body.theme-prism .song-detail-hint { color: #155e75; background: rgba(207,250,254,.8); border-color: #a5f3fc; }
+body.theme-prism .song-detail-tag { color: #155e75; background: #cffafe; border: 1px solid #a5f3fc; }
+body.theme-prism .remaining-item { background: #f0fdff; border-left-color: #0891b2; }
+
+.reference-block-title { color: #0e7490; }
+
+/* 门内抽卡选曲 - 棱镜青蓝主题（结构样式继承自 BLUEKALEIDXSCOPE/style.css） */
+.gate-challenge-section--prism .gate-track-title,
+.gate-challenge-section--prism .gate-song-chip.selected .gate-chip-name {
+    color: #0891b2;
+}
+
+.gate-challenge-section--prism .gate-song-chip.selected {
+    border-color: #0891b2;
+    background: rgba(8, 145, 178, 0.12);
+    box-shadow: 0 0 12px rgba(8, 145, 178, 0.35);
+}
+
+.gate-challenge-section--prism .gate-challenge-desc { color: #155e75; }
+
+body.theme-prism .gate-challenge-section {
+    background: #f0fdff;
+    border-color: #a5f3fc;
+}
+
+body.theme-prism .timeline-note { color: #4f7d8a; margin: 10px 0 0; }
+
+@media (prefers-color-scheme: dark) {
+    .reference-block-title { color: #67e8f9; }
+    .gate-challenge-section--prism .gate-track-title,
+    .gate-challenge-section--prism .gate-song-chip.selected .gate-chip-name {
+        color: #22d3ee;
+    }
+    .gate-challenge-section--prism .gate-song-chip.selected {
+        border-color: #22d3ee;
+        background: rgba(34, 211, 238, 0.18);
+        box-shadow: 0 0 12px rgba(34, 211, 238, 0.45);
+    }
+    .gate-challenge-section--prism .gate-challenge-desc { color: #a5f3fc; }
+    body.theme-prism .gate-challenge-section {
+        background: #123b44;
+        border-color: #155e75;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body.theme-prism { background: linear-gradient(135deg, #082f49, #0e3a4a 50%, #06202b); }
+    body.theme-prism .container { background: #10303a; border-color: rgba(34,211,238,.3); }
+    body.theme-prism header h1, body.theme-prism .section-title, body.theme-prism .requirements-section h2,
+    body.theme-prism .reference-section-title { color: #67e8f9; }
+    body.theme-prism .back-home-link { color: #22d3ee; }
+    body.theme-prism .subtitle, .requirements-list { color: #b8e6ef; }
+    .countdown-section, .schedule-section--prism, .requirements-section, body.theme-prism .stat-card,
+    body.theme-prism .song-card, body.theme-prism .reference-section, body.theme-prism .reference-item { background: #123b44; border-color: #155e75; }
+    .countdown-section .countdown-title, .countdown-note, .countdown-status, .activation-card strong { color: #67e8f9; }
+    .activation-card, body.theme-prism .remaining-item { background: #164450; }
+    .activation-card span, .schedule-switch-note, body.theme-prism .timeline-note { color: #9dcdd8; }
+    body.theme-prism .song-name, body.theme-prism .stat-number, body.theme-prism .stat-label { color: #cffafe; }
+    body.theme-prism .song-details { color: #a5f3fc; }
+    body.theme-prism .song-detail-tag { color: #cffafe; background: #164450; border-color: #155e75; }
+    body.theme-prism .song-detail-hint { color: #a5f3fc; background: #164450; border-color: #155e75; }
+}

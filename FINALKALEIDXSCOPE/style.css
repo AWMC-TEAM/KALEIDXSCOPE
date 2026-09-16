@@ -1,0 +1,73 @@
+@import url("../PRISMKALEIDXSCOPE/style.css");
+
+/* 最终相：深紫黑 + 彩虹点缀主题 */
+body.theme-final {
+    background: linear-gradient(135deg, #1e1b2e 0%, #2d1b4e 45%, #0f0a1e 100%);
+}
+
+body.theme-final .container { border: 2px solid rgba(167, 139, 250, .3); background: rgba(20, 14, 34, .92); }
+body.theme-final .back-home-link { color: #c4b5fd; }
+body.theme-final .back-home-link:hover { color: #ddd6fe; background: rgba(167,139,250,.12); }
+body.theme-final header h1 {
+    color: #ddd6fe;
+    background: linear-gradient(90deg, #f87171, #fbbf24, #34d399, #38bdf8, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+body.theme-final .section-title, body.theme-final .requirements-section h2,
+body.theme-final .reference-section-title { color: #c4b5fd; }
+body.theme-final .subtitle { line-height: 1.55; color: #b6a8d8; }
+
+body.theme-final .countdown-section {
+    background: linear-gradient(135deg, #241a3d, #171027);
+    border-color: #6d5aa8;
+}
+body.theme-final .countdown-section .countdown-title { color: #ddd6fe; }
+body.theme-final .countdown-note { color: #c4b5fd; font-weight: 700; }
+body.theme-final .countdown-value { color: #f0abfc; }
+body.theme-final .countdown-label { color: #9a8cc0; }
+body.theme-final .countdown-status { color: #c4b5fd; }
+body.theme-final .countdown-section.open { background: linear-gradient(135deg, #12291d, #0f2a1c); border-color: #4ade80; }
+body.theme-final .countdown-section.open .countdown-title,
+body.theme-final .countdown-section.open .countdown-status { color: #86efac; }
+
+.schedule-section--final { background: #1c1430; border-color: #4c3a80; }
+.schedule-section--final .legend-item.master { color: #f0abfc; }
+.schedule-section--final .legend-item.expert { color: #fbbf24; }
+.schedule-section--final .legend-item.basic { color: #34d399; }
+
+body.theme-final .requirements-section {
+    background: linear-gradient(135deg, #221742, #171027);
+    border-color: #4c3a80;
+}
+body.theme-final .requirements-list { color: #cfc2ee; }
+body.theme-final .activation-card { background: #241a3d; }
+body.theme-final .activation-card strong { color: #ddd6fe; }
+body.theme-final .activation-card span { color: #9a8cc0; }
+
+body.theme-final .stat-card { background: #1c1430; border-color: #4c3a80; }
+body.theme-final .stat-number { color: #f0abfc; }
+body.theme-final .btn-info, body.theme-final .btn-primary { background: #7c3aed; }
+body.theme-final .song-card { background: #1c1430; border-color: #4c3a80; }
+body.theme-final .song-card:hover { border-color: #a78bfa; box-shadow: 0 7px 18px rgba(124,58,237,.2); }
+body.theme-final .song-card.completed { background: #12301f; border-color: #22c55e; }
+body.theme-final .song-details { color: #9a8cc0; }
+body.theme-final .song-checkbox input { accent-color: #7c3aed; }
+body.theme-final .song-detail-hint { color: #c4b5fd; background: rgba(36,26,61,.9); border-color: #4c3a80; }
+body.theme-final .song-detail-tag { color: #ddd6fe; background: #241a3d; border: 1px solid #4c3a80; }
+body.theme-final .remaining-item { background: #1c1430; border-left-color: #7c3aed; }
+
+.reference-block-title { color: #a78bfa; }
+body.theme-final .reference-section { background: #1c1430; border-color: #4c3a80; }
+body.theme-final .reference-item { background: #241a3d; border-color: #4c3a80; }
+body.theme-final .reference-song-name { color: #ddd6fe; }
+body.theme-final .reference-song-id { color: #9a8cc0; }
+body.theme-final .bilibili-btn { background: #7c3aed; }
+
+/* 最终相无抽卡选曲区（单课题曲），沿用门内卡片配色 */
+body.theme-final .gate-challenge-section {
+    background: #1c1430;
+    border-color: #4c3a80;
+}
+body.theme-final .timeline-note { color: #9a8cc0; margin: 10px 0 0; }

@@ -1,0 +1,99 @@
+@import url("../PRISMKALEIDXSCOPE/style.css");
+
+/* 希望之门：金白 / 暖金主题 */
+body.theme-hope {
+    background: linear-gradient(135deg, #fffbeb 0%, #fde68a 50%, #fef3c7 100%);
+}
+
+body.theme-hope .container { border: 2px solid rgba(217, 119, 6, .24); }
+body.theme-hope .back-home-link { color: #b45309; }
+body.theme-hope .back-home-link:hover { color: #92400e; background: rgba(217,119,6,.1); }
+body.theme-hope header h1, body.theme-hope .section-title, body.theme-hope .requirements-section h2,
+body.theme-hope .reference-section-title { color: #92400e; }
+body.theme-hope .subtitle { line-height: 1.55; }
+
+body.theme-hope .countdown-section {
+    background: linear-gradient(135deg, #fffdf5, #fef3c7);
+    border-color: #fcd34d;
+}
+body.theme-hope .countdown-section .countdown-title { color: #92400e; }
+body.theme-hope .countdown-note { color: #92400e; font-weight: 700; }
+body.theme-hope .countdown-status { color: #b45309; }
+
+.schedule-section--hope { background: #fffdf5; border-color: #fde68a; }
+
+body.theme-hope .requirements-section {
+    background: linear-gradient(135deg, #fffdf5, #fff);
+    border-color: #fde68a;
+}
+body.theme-hope .requirements-list { color: #92400e; }
+body.theme-hope .activation-card { background: #fffbeb; }
+body.theme-hope .activation-card strong { color: #92400e; }
+body.theme-hope .activation-card span { color: #a17c3f; }
+
+body.theme-hope .stat-card { background: #fffdf5; border-color: #fde68a; }
+body.theme-hope .stat-number { color: #b45309; }
+body.theme-hope .btn-info, body.theme-hope .btn-primary { background: #d97706; }
+body.theme-hope .song-card { background: #fffdf7; border-color: #fde68a; }
+body.theme-hope .song-card:hover { border-color: #f59e0b; box-shadow: 0 7px 18px rgba(180,83,9,.12); }
+body.theme-hope .song-card.completed { background: #dcfce7; border-color: #22c55e; }
+body.theme-hope .song-details { color: #8a6d3f; }
+body.theme-hope .song-checkbox input { accent-color: #d97706; }
+body.theme-hope .song-detail-hint { color: #92400e; background: rgba(254,243,199,.8); border-color: #fde68a; }
+body.theme-hope .song-detail-tag { color: #92400e; background: #fef3c7; border: 1px solid #fde68a; }
+body.theme-hope .remaining-item { background: #fffdf5; border-left-color: #d97706; }
+
+/* 门内固定课题 - 暖金主题（结构样式继承自 BLUEKALEIDXSCOPE/style.css） */
+.gate-challenge-section--hope .gate-track-title,
+.gate-challenge-section--hope .gate-song-chip.selected .gate-chip-name {
+    color: #b45309;
+}
+
+.gate-challenge-section--hope .gate-song-chip.selected {
+    border-color: #d97706;
+    background: rgba(217, 119, 6, 0.12);
+    box-shadow: 0 0 12px rgba(217, 119, 6, 0.35);
+}
+
+.gate-challenge-section--hope .gate-challenge-desc { color: #92400e; }
+
+body.theme-hope .gate-challenge-section {
+    background: #fffdf5;
+    border-color: #fde68a;
+}
+
+body.theme-hope .timeline-note { color: #8a6d3f; margin: 10px 0 0; }
+
+@media (prefers-color-scheme: dark) {
+    body.theme-hope { background: linear-gradient(135deg, #2d2306, #3a2c0a 50%, #1f1804); }
+    body.theme-hope .container { background: #332808; border-color: rgba(251,191,36,.3); }
+    body.theme-hope header h1, body.theme-hope .section-title, body.theme-hope .requirements-section h2,
+    body.theme-hope .reference-section-title { color: #fcd34d; }
+    body.theme-hope .back-home-link { color: #fbbf24; }
+    body.theme-hope .subtitle, body.theme-hope .requirements-list { color: #f0dfa8; }
+    .schedule-section--hope, body.theme-hope .requirements-section, body.theme-hope .stat-card,
+    body.theme-hope .song-card, body.theme-hope .reference-section, body.theme-hope .reference-item { background: #3a2e0b; border-color: #78520a; }
+    body.theme-hope .countdown-section { background: #3a2e0b; border-color: #78520a; }
+    body.theme-hope .countdown-section .countdown-title, body.theme-hope .countdown-note,
+    body.theme-hope .countdown-status, body.theme-hope .activation-card strong { color: #fcd34d; }
+    body.theme-hope .activation-card, body.theme-hope .remaining-item { background: #43360e; }
+    body.theme-hope .activation-card span, body.theme-hope .timeline-note { color: #d4bb7a; }
+    body.theme-hope .song-name, body.theme-hope .stat-number, body.theme-hope .stat-label { color: #fef3c7; }
+    body.theme-hope .song-details { color: #fde68a; }
+    body.theme-hope .song-detail-tag { color: #fef3c7; background: #43360e; border-color: #78520a; }
+    body.theme-hope .song-detail-hint { color: #fde68a; background: #43360e; border-color: #78520a; }
+    .gate-challenge-section--hope .gate-track-title,
+    .gate-challenge-section--hope .gate-song-chip.selected .gate-chip-name {
+        color: #fbbf24;
+    }
+    .gate-challenge-section--hope .gate-song-chip.selected {
+        border-color: #fbbf24;
+        background: rgba(251, 191, 36, 0.18);
+        box-shadow: 0 0 12px rgba(251, 191, 36, 0.45);
+    }
+    .gate-challenge-section--hope .gate-challenge-desc { color: #fde68a; }
+    body.theme-hope .gate-challenge-section {
+        background: #3a2e0b;
+        border-color: #78520a;
+    }
+}
