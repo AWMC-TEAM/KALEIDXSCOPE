@@ -1,0 +1,315 @@
+/**
+ * 各门曲目配置 - 仅保留 id/name 作为回退
+ * 乐曲详情（版本、难度等）优先从 MusicData/song-detail 获取
+ */
+(function (global) {
+    const BLUE_SONGS = [
+        { id: '11009', name: 'STEREOSCAPE' }, { id: '11008', name: 'Crazy Circle' },
+        { id: '11100', name: 'シエルブルーマルシェ' }, { id: '11097', name: 'ブレインジャックシンドローム' },
+        { id: '11098', name: '共鳴' }, { id: '11099', name: 'Ututu' }, { id: '11163', name: 'REAL VOICE' },
+        { id: '11162', name: 'ユメヒバナ' }, { id: '11161', name: 'オリフィス' },
+        { id: '11228', name: '星めぐり、果ての君へ。' }, { id: '11229', name: 'スローアライズ' },
+        { id: '11231', name: '生命不詳' }, { id: '11739', name: '184億回のマルチトニック' },
+        { id: '11463', name: 'RIFFRAIN' }, { id: '11464', name: 'Falling' }, { id: '11465', name: 'ピリオドサイン' },
+        { id: '11538', name: 'アンバークロニクル' }, { id: '11539', name: 'リフヴェイン' }, { id: '11541', name: '宵の鳥' },
+        { id: '11620', name: 'フェイクフェイス・フェイルセイフ' }, { id: '11622', name: 'シックスプラン' },
+        { id: '11623', name: 'フタタビ' }, { id: '11737', name: 'パラドクスイヴ' }, { id: '11738', name: 'YKWTD' },
+        { id: '11164', name: 'パラボラ' }, { id: '11230', name: 'チエルカ／エソテリカ' },
+        { id: '11466', name: '群青シグナル' }, { id: '11540', name: 'Kairos' }, { id: '11621', name: 'ふらふらふら、' }
+    ];
+    const BLUE_GATE = {
+        track1: [
+            { id: '11008', name: 'Crazy Circle' }, { id: '11009', name: 'STEREOSCAPE' },
+            { id: '11100', name: 'シエルブルーマルシェ' }, { id: '11097', name: 'ブレインジャックシンドローム' },
+            { id: '11098', name: '共鳴' }, { id: '11099', name: 'Ututu' }, { id: '11161', name: 'オリフィス' },
+            { id: '11162', name: 'ユメヒバナ' }, { id: '11163', name: 'REAL VOICE' },
+            { id: '11228', name: '星めぐり、果ての君へ。' }, { id: '11229', name: 'スローアライズ' },
+            { id: '11231', name: '生命不詳' }, { id: '11463', name: 'RIFFRAIN' }, { id: '11464', name: 'Falling' },
+            { id: '11465', name: 'ピリオドサイン' }, { id: '11538', name: 'アンバークロニクル' },
+            { id: '11539', name: 'リフヴェイン' }, { id: '11541', name: '宵の鳥' },
+            { id: '11620', name: 'フェイクフェイス・フェイルセイフ' }, { id: '11622', name: 'シックスプラン' },
+            { id: '11623', name: 'フタタビ' }, { id: '11737', name: 'パラドクスイヴ' }, { id: '11738', name: 'YKWTD' }
+        ],
+        track2: [
+            { id: '11164', name: 'パラボラ' }, { id: '11230', name: 'チエルカ／エソテリカ' },
+            { id: '11466', name: '群青シグナル' }, { id: '11540', name: 'Kairos' },
+            { id: '11621', name: 'ふらふらふら、' }, { id: '11739', name: '184億回のマルチトニック' }
+        ],
+        track3: { id: '11740', name: '果ての空、僕らが見た光。' }
+    };
+
+    const WHITE_SONGS = [
+        { id: '11102', name: '封焔の135秒' }, { id: '11234', name: 'ほしぞらスペクタクル' },
+        { id: '11300', name: 'U&iVERSE -銀河鸞翔-' }, { id: '11529', name: 'ツムギボシ' },
+        { id: '11542', name: 'ここからはじまるプロローグ。 (Kanon Remix)' }, { id: '11612', name: 'Latent Kingdom' }
+    ];
+    const WHITE_GATE = {
+        track1: [
+            { id: '11027', name: 'アポカリプスに反逆の焔を焚べろ' }, { id: '11101', name: 'GRÄNDIR' },
+            { id: '11103', name: '渦状銀河のシンフォニエッタ' }, { id: '11166', name: 'ワンダーシャッフェンの法則' },
+            { id: '11167', name: 'BIRTH' }, { id: '11236', name: 'Last Samurai' }, { id: '11237', name: '蒼穹舞楽' },
+            { id: '11301', name: '華の集落、秋のお届け' }, { id: '11303', name: '星詠みとデスペラード' },
+            { id: '11387', name: '星空パーティーチューン' }, { id: '11388', name: 'チューリングの跡' },
+            { id: '11386', name: 'Swift Swing' }, { id: '11467', name: 'Beat Opera op.1' },
+            { id: '11468', name: '星見草' }, { id: '11469', name: '"411Ψ892"' },
+            { id: '11682', name: 'Geranium' }, { id: '11683', name: 'The Cursed Doll' },
+            { id: '11684', name: 'RondeauX of RagnaroQ' }, { id: '11742', name: 'Ourania' }, { id: '11743', name: '天蓋' }
+        ],
+        track2: [
+            { id: '11026', name: 'TEmPTaTiON' }, { id: '11102', name: '封焔の135秒' },
+            { id: '11165', name: 'Regulus' }, { id: '11238', name: 'AMABIE' }, { id: '11302', name: 'BLACK SWAN' },
+            { id: '11389', name: 'Sage' }, { id: '11470', name: '康莊大道' }, { id: '11685', name: 'ℝ∈Χ LUNATiCA' },
+            { id: '11744', name: 'Deicide' }
+        ],
+        track3: { id: '11745', name: '氷滅の135小節' }
+    };
+
+    const PURPLE_SONGS = [
+        { id: '328', name: '言ノ葉カルマ' }, { id: '403', name: '悪戯' }, { id: '457', name: '言ノ葉遊戯' },
+        { id: '458', name: 'りばーぶ' }, { id: '532', name: '洗脳' }, { id: '533', name: 'Barbed Eye' },
+        { id: '559', name: '空威張りビヘイビア' }, { id: '568', name: '分からない' },
+        { id: '613', name: '天国と地獄 -言ノ葉リンネ-' }, { id: '626', name: '相思創愛' },
+        { id: '673', name: '咲キ誇レ常世ノ華' }, { id: '11001', name: 'BLACK ROSE' },
+        { id: '11002', name: 'Secret Sleuth' }, { id: '11104', name: 'ヤミツキ' }, { id: '11105', name: 'ワードワードワード' },
+        { id: '11168', name: 'シアトリカル・ケース' }, { id: '11169', name: 'ステップアンドライム' },
+        { id: '11170', name: '届かない花束' }, { id: '11365', name: 'アンビバレンス' },
+        { id: '11380', name: 'パーフェクション' }, { id: '11381', name: 'デーモンベット' },
+        { id: '11456', name: '分解収束テイル' }, { id: '11532', name: 'ヱデン' }, { id: '11533', name: 'にゃーにゃー冒険譚' },
+        { id: '11613', name: 'Mystic Parade' }, { id: '11614', name: 'Cry Cry Cry' },
+        { id: '11747', name: '地獄' }, { id: '11748', name: 'シスターシスター' }
+    ];
+    const PURPLE_GATE = {
+        track1: [
+            { id: '328', name: '言ノ葉カルマ' }, { id: '403', name: '悪戯' }, { id: '457', name: '言ノ葉遊戯' },
+            { id: '458', name: 'りばーぶ' }, { id: '532', name: '洗脳' }, { id: '533', name: 'Barbed Eye' },
+            { id: '559', name: '空威張りビヘイビア' }, { id: '568', name: '分からない' },
+            { id: '613', name: '天国と地獄 -言ノ葉リンネ-' }, { id: '626', name: '相思創愛' },
+            { id: '673', name: '咲キ誇レ常世ノ華' }
+        ],
+        track2: [
+            { id: '11001', name: 'BLACK ROSE' }, { id: '11002', name: 'Secret Sleuth' },
+            { id: '11104', name: 'ヤミツキ' }, { id: '11105', name: 'ワードワードワード' },
+            { id: '11168', name: 'シアトリカル・ケース' }, { id: '11169', name: 'ステップアンドライム' },
+            { id: '11170', name: '届かない花束' }, { id: '11365', name: 'アンビバレンス' },
+            { id: '11380', name: 'パーフェクション' }, { id: '11381', name: 'デーモンベット' },
+            { id: '11456', name: '分解収束テイル' }, { id: '11532', name: 'ヱデン' },
+            { id: '11533', name: 'にゃーにゃー冒険譚' }, { id: '11613', name: 'Mystic Parade' },
+            { id: '11614', name: 'Cry Cry Cry' }, { id: '11747', name: '地獄' }, { id: '11748', name: 'シスターシスター' }
+        ],
+        track3: { id: '11749', name: '有明/Ariake' }
+    };
+
+    const BLACK_SONGS = [
+        { id: '11023', name: 'Blows Up Everything' }, { id: '11106', name: 'Valsqotch' },
+        { id: '11221', name: '≠彡"/了→' }, { id: '11222', name: 'BREaK! BREaK! BREaK!' },
+        { id: '11300', name: 'U&iVERSE -銀河鸞翔-' }, { id: '11374', name: 'GIGANTØMAKHIA' },
+        { id: '11458', name: 'Rising on the horizon' }, { id: '11523', name: 'ViRTUS' },
+        { id: '11619', name: 'KHYMΞXΛ' }, { id: '11663', name: '系ぎて' },
+        { id: '11746', name: 'Divide et impera!' }
+    ];
+    const BLACK_GATE = {
+        track1: [
+            { id: '11019', name: 'Scarlet Wings' }, { id: '11020', name: 'Technicians High' },
+            { id: '11021', name: '魔ジョ狩リ' }, { id: '11022', name: 'TwisteD! XD' },
+            { id: '11090', name: 'Flashkick' }, { id: '11091', name: 'Stardust Memories' },
+            { id: '11092', name: 'My My My' }, { id: '11157', name: 'Aetheric Energy' },
+            { id: '11158', name: 'Komplexe' }, { id: '11159', name: 'Beautiful Future' },
+            { id: '11232', name: 'Never Give Up!' }, { id: '11233', name: 'Starry Colors' },
+            { id: '11234', name: 'ほしぞらスペクタクル' }, { id: '11304', name: 'Round Round Spinning Around' },
+            { id: '11305', name: 'Alcyone' }, { id: '11306', name: 'Raven Emperor' },
+            { id: '11382', name: 'HECATONCHEIR' }, { id: '11383', name: 'Irresistible' },
+            { id: '11384', name: 'HAGAKIRI' }, { id: '11459', name: 'You Mean the World to Me' },
+            { id: '11460', name: 'Neon Kingdom' }, { id: '11461', name: '#狂った民族２ PRAVARGYAZOOQA' },
+            { id: '11615', name: 'ぽわわん劇場' }, { id: '11616', name: 'my flow' },
+            { id: '11617', name: 'POWER OF UNITY' }, { id: '11674', name: 'Cider P@rty' },
+            { id: '11675', name: '勦滅' }, { id: '11676', name: 'Lunatic Vibes' },
+            { id: '11750', name: 'Flashback' }, { id: '11751', name: 'Colorfull:Encounter' }
+        ],
+        track2: [
+            { id: '11023', name: 'Blows Up Everything' }, { id: '11089', name: 'STEEL TRANSONIC' },
+            { id: '11160', name: 'Mutation' }, { id: '11235', name: 'VIIIbit Explorer' },
+            { id: '11307', name: 'Yorugao' }, { id: '11385', name: 'N3V3R G3T OV3R' },
+            { id: '11462', name: 'VSpook!' }, { id: '11618', name: 'Energizing Flame' },
+            { id: '11677', name: 'Bloody Trail' }, { id: '11752', name: '雨露霜雪' }
+        ],
+        track3: { id: '11753', name: '宙天' }
+    };
+
+    // 黄门（七彩区域）：钥匙采用「抽卡」式（12 选 1）；门内 TRACK 1/2 各从池中随机；TRACK 3 固定为 Åntinomiε
+    const YELLOW_KEY_SONGS = [
+        { id: '11003', name: 'でらっくmaimai♪てんてこまい!' },
+        { id: '11095', name: '絡めトリック利己ライザー' },
+        { id: '11152', name: 'ぼくたちいつでも しゅわっしゅわ！' },
+        { id: '11224', name: 'Paradisoda' },
+        { id: '11296', name: 'とびだせ！TO THE COSMIC!!' },
+        { id: '11375', name: 'ミルキースター・シューティングスター' },
+        { id: '11452', name: 'ホシシズク' },
+        { id: '11529', name: 'ツムギボシ' },
+        { id: '11608', name: 'NOIZY BOUNCE' },
+        { id: '11669', name: 'エスオーエス' },
+        { id: '11736', name: 'プリズム△▽リズム' },
+        { id: '11806', name: 'Fraq' }
+    ];
+    const YELLOW_GATE = {
+        track1: [
+            { id: '11003', name: 'でらっくmaimai♪てんてこまい!' },
+            { id: '11007', name: '超常マイマイン' },
+            { id: '11006', name: 'P-qoq' },
+            { id: '11005', name: 'バーチャルダム　ネーション' },
+            { id: '11094', name: 'ここからはじまるプロローグ。' },
+            { id: '11095', name: '絡めトリック利己ライザー' },
+            { id: '11096', name: 'モ°ルモ°ル' },
+            { id: '11152', name: 'ぼくたちいつでも　しゅわっしゅわ！' },
+            { id: '11153', name: "Boys O'Clock" },
+            { id: '11154', name: '居並ぶ穀物と溜息まじりの運送屋' },
+            { id: '11224', name: 'Paradisoda' },
+            { id: '11225', name: 'VANTABLACK RAVER' },
+            { id: '11226', name: '時計の国のジェミニ' },
+            { id: '11296', name: 'とびだせ！TO THE COSMIC!!' },
+            { id: '11297', name: '噛み係' },
+            { id: '11298', name: 'トリアージ' },
+            { id: '11375', name: 'ミルキースター・シューティングスター' },
+            { id: '11376', name: 'ｉｓｏｐｈｏｔｅ' },
+            { id: '11377', name: 'パラマウント☆ショータイム！！' },
+            { id: '11452', name: 'ホシシズク' },
+            { id: '11453', name: 'Rainbow Rush Story' },
+            { id: '11454', name: 'Tricolor⁂circuS' },
+            { id: '11526', name: 'トノサマビーム' },
+            { id: '11527', name: 'enchanted wanderer' },
+            { id: '11528', name: 'Comet Panto Men!' },
+            { id: '11608', name: 'NOIZY BOUNCE' },
+            { id: '11609', name: 'サンバディ！' },
+            { id: '11610', name: 'Horoscope Express' },
+            { id: '11669', name: 'エスオーエス' },
+            { id: '11670', name: 'のじゃロリック' },
+            { id: '11671', name: 'Edelweiss' },
+            { id: '11806', name: 'Fraq' },
+            { id: '11807', name: 'ウタヒメナイトストーム' }
+        ],
+        track2: [
+            { id: '11004', name: 'MAXRAGE' },
+            { id: '11093', name: 'UniTas' },
+            { id: '11155', name: 'ARAIS' },
+            { id: '11227', name: 'Xenovcipher' },
+            { id: '11299', name: 'NAGAREBOSHI☆ROCKET' },
+            { id: '11378', name: 'Strive against fate' },
+            { id: '11455', name: '[X]' },
+            { id: '11529', name: 'ツムギボシ' },
+            { id: '11611', name: 'Party☆People☆Princess' },
+            { id: '11672', name: 'QuiQ' },
+            { id: '11808', name: 'Feel The Luv' }
+        ],
+        track3: { id: '11809', name: 'Åntinomiε' }
+    };
+
+    // 红门（龙之区域 4）：版本更新后至少游玩一次下列全部曲目即可获得钥匙
+    const RED_KEY_SONGS = [
+        { id: '212', name: '神室雪月花' },
+        { id: '213', name: 'KONNANじゃないっ！' },
+        { id: '337', name: '鼓動' },
+        { id: '270', name: "Outlaw's Lullaby" },
+        { id: '271', name: 'Brand-new Japanesque' },
+        { id: '11504', name: 'ばかみたい【Taxi Driver Edition】' },
+        { id: '339', name: 'DRAGONLADY' },
+        { id: '453', name: 'Garden Of The Dragon' },
+        { id: '11336', name: 'ドラゴンエネルギー' },
+        {
+            id: '11852',
+            name: '好きな惣菜発表ドラゴン',
+            cover: 'https://maimaidx-eng.com/maimai-mobile/img/Music/f5f0c148fc18e746.png'
+        }
+    ];
+    // 红门 门曲：TRACK 1 从世界树区域（龙之区域 1-4）课题曲随机；TRACK 2 从世界树区域完美挑战曲与「一か罰」随机；TRACK 3 固定为 FLΛME/FRΦST
+    const RED_GATE = {
+        track1: [
+            { id: '11016', name: 'キリキリ舞Mine' },
+            { id: '11017', name: '福宿音屋魂音泉' },
+            { id: '11018', name: 'Now or Never' },
+            { id: '11545', name: '隠密あんみつDX' },
+            { id: '11546', name: '地球' },
+            { id: '11547', name: 'Churros Parlor' },
+            { id: '11678', name: 'RE:INCARNATED DRAGNER' },
+            { id: '11679', name: 'Beginning together!' },
+            { id: '11680', name: 'Shining Ray ～僕らの絆～' },
+            { id: '11811', name: '概して過誤' },
+            { id: '11812', name: 'Unfinished Epic' }
+        ],
+        track2: [
+            { id: '11015', name: '一か罰' },
+            { id: '11548', name: '超熊猫的周遊記（ワンダーパンダートラベラー）' },
+            { id: '11681', name: 'DEVOTION' },
+            { id: '11813', name: '忙シー日' }
+        ],
+        track3: { id: '11814', name: 'FLΛME/FRΦST' }
+    };
+
+    // 棱镜塔（プリズムタワー / 7sRef区域4 第27格 2000km）：Stage 2 第 7 相
+    // TRACK 1 = 7sRefちほー（区域 1~4 全部曲目，排除 ヨミビトシラズ）随机；
+    // TRACK 2 = 7sRef 各区域 Perfect Challenge 曲随机（7sRef1=躯樹の墓守、7sRef2=World's end loneliness、
+    //           7sRef3=Straight into the lights、7sRef4=Amereistr）；
+    // TRACK 3 = 固定 World's end BLACKBOX（artist 打打だいず）。
+    // 注意：区域 Bonus songs 列表为「该区域可用曲目」，含跨区域共享老歌，与现有各门配置口径一致；
+    //       IMBRUED:FLUX、砂の函、Amereistr 为 7sRef4 已知奖励曲（抓取文件中 PRiSM PLUS 部分不全，以 wiki 已知三首为准）；
+    //       id 为空字符串表示 music_data.json（2026-02 版）暂未收录该曲。
+    const PRISM_TRACK1_POOL = [
+        // 7sRefちほー（UNiVERSE）
+        { id: '11310', name: 'Trick tear' },
+        { id: '11309', name: '前衛的Landscape' },
+        // 7sRefちほー2（UNiVERSE PLUS）
+        { id: '11395', name: 'Jouez Avec Moi?' },
+        { id: '11393', name: '白花の天使' }, 
+        { id: '11392', name: 'Metamorphosism' },
+        // 7sRefちほー3（BUDDiES）
+        { id: '11534', name: 'The Great Banquet' },
+        { id: '11535', name: 'Redemption' },
+        { id: '11536', name: 'Ether Second' },
+        // 7sRefちほー4（PRiSM PLUS，wiki 已知奖励曲）
+        { id: '', name: 'IMBRUED:FLUX' }, 
+        { id: '', name: '砂の函' }, 
+    ];
+    const PRISM_TRACK2_POOL = [
+        { id: '11311', name: '躯樹の墓守' },
+        { id: '11394', name: "World's end loneliness" },
+        { id: '11537', name: 'Straight into the lights' },
+        { id: '', name: 'Amereistr' }
+    ];
+    const PRISM_GATE = {
+        track1: PRISM_TRACK1_POOL,
+        track2: PRISM_TRACK2_POOL,
+        track3: { id: '', name: "World's end BLACKBOX" }
+    };
+    // track1 + track2 池合并去重（按曲名）
+    const PRISM_SONGS = (() => {
+        const seen = new Set();
+        const merged = [];
+        [...PRISM_TRACK1_POOL, ...PRISM_TRACK2_POOL].forEach(s => {
+            if (!seen.has(s.name)) { seen.add(s.name); merged.push(s); }
+        });
+        return merged;
+    })();
+
+    // 希望之门（希望の扉 / プリズムエリア）：Stage 2 第 8 相，通关 Phase #???（ERROR / プリズムタワー）后出现。
+    // 亚服/国行无 DX PASS，无需实体卡；三条 TRACK 均为固定曲目，不做随机抽卡。
+    // id 为空字符串表示 music_data.json（2026-02 版）暂未收录该曲。
+    const HOPE_FIXED_TRACKS = [
+        { id: '1736', name: 'プリズム△▽リズム' },        // TRACK 1 [STD]
+        { id: '10835', name: 'Believe The Rainbow' },          // TRACK 2 [DX]
+        { id: '1819', name: 'AFTER PANDORA' }                 // TRACK 3（artist 削除）
+    ];
+
+    // 最终相 KALEIDXSCOPE（FINAL SEQUENCE）：通关希望の扉后直接解锁。
+    // 仅 1 首课题曲 Xaleid◆scopiX（artist xi），仅 Re:MASTER。
+    const FINAL_TRACK = { id: '11820', name: 'Xaleid◆scopiX' };
+
+    global.SongsConfig = {
+        blue: { songs: BLUE_SONGS, gate: BLUE_GATE },
+        white: { songs: WHITE_SONGS, gate: WHITE_GATE },
+        purple: { songs: PURPLE_SONGS, gate: PURPLE_GATE },
+        black: { songs: BLACK_SONGS, gate: BLACK_GATE },
+        yellow: { songs: YELLOW_KEY_SONGS, gate: YELLOW_GATE },
+        red: { songs: RED_KEY_SONGS, gate: RED_GATE },
+        prism: { songs: PRISM_SONGS, gate: PRISM_GATE },
+        hope: { fixedTracks: HOPE_FIXED_TRACKS },
+        final: { track: FINAL_TRACK }
+    };
+})(typeof window !== 'undefined' ? window : globalThis);
