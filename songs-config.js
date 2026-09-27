@@ -225,15 +225,12 @@
             { id: '11016', name: 'キリキリ舞Mine' },
             { id: '11017', name: '福宿音屋魂音泉' },
             { id: '11018', name: 'Now or Never' },
-            { id: '11015', name: '一か罰' },
             { id: '11545', name: '隠密あんみつDX' },
             { id: '11546', name: '地球' },
             { id: '11547', name: 'Churros Parlor' },
-            { id: '11548', name: '超熊猫的周遊記（ワンダーパンダートラベラー）' },
             { id: '11678', name: 'RE:INCARNATED DRAGNER' },
             { id: '11679', name: 'Beginning together!' },
             { id: '11680', name: 'Shining Ray ～僕らの絆～' },
-            { id: '11681', name: 'DEVOTION' },
             { id: '11811', name: '概して過誤' },
             { id: '11812', name: 'Unfinished Epic' }
         ],
@@ -256,45 +253,19 @@
     //       id 为空字符串表示 music_data.json（2026-02 版）暂未收录该曲。
     const PRISM_TRACK1_POOL = [
         // 7sRefちほー（UNiVERSE）
-        { id: '11143', name: 'アトロポスと最果の探究者' }, { id: '11310', name: 'Trick tear' },
-        { id: '11309', name: '前衛的Landscape' }, { id: '11311', name: '躯樹の墓守' },
-        { id: '11232', name: 'Never Give Up!' }, { id: '11233', name: 'Starry Colors' },
-        { id: '11234', name: 'ほしぞらスペクタクル' }, { id: '11235', name: 'VIIIbit Explorer' },
-        { id: '11236', name: 'Last Samurai' }, { id: '11237', name: '蒼穹舞楽' },
-        { id: '11238', name: 'AMABIE' }, { id: '11222', name: 'BREaK! BREaK! BREaK!' },
-        { id: '11166', name: 'ワンダーシャッフェンの法則' }, { id: '11167', name: 'BIRTH' },
-        { id: '11165', name: 'Regulus' }, { id: '11159', name: 'Beautiful Future' },
-        { id: '11160', name: 'Mutation' }, { id: '11157', name: 'Aetheric Energy' },
-        { id: '11103', name: '渦状銀河のシンフォニエッタ' }, { id: '11101', name: 'GRÄNDIR' },
-        { id: '11102', name: '封焔の135秒' }, { id: '11158', name: 'Komplexe' },
-        { id: '11091', name: 'Stardust Memories' }, { id: '11090', name: 'Flashkick' },
-        { id: '11089', name: 'STEEL TRANSONIC' }, { id: '11026', name: 'TEmPTaTiON' },
-        { id: '11027', name: 'アポカリプスに反逆の焔を焚べろ' }, { id: '11092', name: 'My My My' },
-        { id: '11022', name: 'TwisteD! XD' }, { id: '11019', name: 'Scarlet Wings' },
-        { id: '11020', name: 'Technicians High' }, { id: '11023', name: 'Blows Up Everything' },
-        { id: '11021', name: '魔ジョ狩リ' }, { id: '495', name: 'Hyper Active' },
+        { id: '11310', name: 'Trick tear' },
+        { id: '11309', name: '前衛的Landscape' },
         // 7sRefちほー2（UNiVERSE PLUS）
-        { id: '837', name: 'Altale' }, { id: '11051', name: 'Destr0yer' },
-        { id: '11140', name: 'Black Lair' }, { id: '462', name: '7thSense' },
-        { id: '566', name: '天火明命' }, { id: '834', name: 'PANDORA PARADOXXX' },
-        { id: '11228', name: '星めぐり、果ての君へ。' }, { id: '11301', name: '華の集落、秋のお届け' },
-        { id: '11303', name: '星詠みとデスペラード' }, { id: '11302', name: 'BLACK SWAN' },
-        { id: '11304', name: 'Round Round Spinning Around' }, { id: '11395', name: 'Jouez Avec Moi?' },
-        { id: '11393', name: '白花の天使' }, { id: '11392', name: 'Metamorphosism' },
-        { id: '11394', name: "World's end loneliness" },
+        { id: '11395', name: 'Jouez Avec Moi?' },
+        { id: '11393', name: '白花の天使' }, 
+        { id: '11392', name: 'Metamorphosism' },
         // 7sRefちほー3（BUDDiES）
-        { id: '11652', name: 'HUMANBORG' }, { id: '11653', name: 'ULTRA POWER' },
-        { id: '11667', name: 'にっこり^^調査隊のテーマ' }, { id: '11665', name: 'RAD DOGS' },
-        { id: '11666', name: 'アイディスマイル' }, { id: '11650', name: 'ずんだもんの朝食　〜目覚ましずんラップ〜' },
-        { id: '11651', name: 'あなたは世界の終わりにずんだを食べるのだ' }, { id: '11207', name: 'Ether Strike' },
-        { id: '11425', name: 'First Dance' }, { id: '11534', name: 'The Great Banquet' },
-        { id: '11535', name: 'Redemption' }, { id: '11536', name: 'Ether Second' },
-        { id: '11537', name: 'Straight into the lights' }, { id: '11387', name: '星空パーティーチューン' },
-        { id: '11388', name: 'チューリングの跡' }, { id: '11389', name: 'Sage' },
-        { id: '11305', name: 'Alcyone' }, { id: '11306', name: 'Raven Emperor' },
-        { id: '11307', name: 'Yorugao' },
+        { id: '11534', name: 'The Great Banquet' },
+        { id: '11535', name: 'Redemption' },
+        { id: '11536', name: 'Ether Second' },
         // 7sRefちほー4（PRiSM PLUS，wiki 已知奖励曲）
-        { id: '', name: 'IMBRUED:FLUX' }, { id: '', name: '砂の函' }, { id: '', name: 'Amereistr' }
+        { id: '', name: 'IMBRUED:FLUX' }, 
+        { id: '', name: '砂の函' }, 
     ];
     const PRISM_TRACK2_POOL = [
         { id: '11311', name: '躯樹の墓守' },
@@ -321,14 +292,14 @@
     // 亚服/国行无 DX PASS，无需实体卡；三条 TRACK 均为固定曲目，不做随机抽卡。
     // id 为空字符串表示 music_data.json（2026-02 版）暂未收录该曲。
     const HOPE_FIXED_TRACKS = [
-        { id: '11736', name: 'プリズム△▽リズム' },        // TRACK 1 [STD]
-        { id: '', name: 'Believe The Rainbow' },          // TRACK 2 [DX]
-        { id: '', name: 'AFTER PANDORA' }                 // TRACK 3（artist 削除）
+        { id: '1736', name: 'プリズム△▽リズム' },        // TRACK 1 [STD]
+        { id: '10835', name: 'Believe The Rainbow' },          // TRACK 2 [DX]
+        { id: '1819', name: 'AFTER PANDORA' }                 // TRACK 3（artist 削除）
     ];
 
     // 最终相 KALEIDXSCOPE（FINAL SEQUENCE）：通关希望の扉后直接解锁。
     // 仅 1 首课题曲 Xaleid◆scopiX（artist xi），仅 Re:MASTER。
-    const FINAL_TRACK = { id: '', name: 'Xaleid◆scopiX' };
+    const FINAL_TRACK = { id: '11820', name: 'Xaleid◆scopiX' };
 
     global.SongsConfig = {
         blue: { songs: BLUE_SONGS, gate: BLUE_GATE },
