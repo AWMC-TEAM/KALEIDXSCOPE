@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>??? - 乱码之门解锁攻略 - KALEIDXSCOPE</title>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="../github-footer.css">
+    <script src="../site-config.js?v=9-16"></script>
+    <script async src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
+    <script async src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
+    <style>
+        :root {
+            --bg: #050508;
+            --panel: rgba(20, 16, 28, 0.82);
+            --line: rgba(139, 92, 246, 0.35);
+            --accent: #a78bfa;
+            --accent2: #22d3ee;
+            --danger: #f87171;
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.25), transparent),
+                repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,0.015) 2px 4px);
+        }
+        .container { max-width: 920px; margin: 0 auto; padding: 24px 16px 80px; }
+        .back-home-link {
+            display: inline-block; margin-bottom: 16px; color: var(--accent2);
+            text-decoration: none; font-size: 0.95em;
+        }
+        .back-home-link:hover { text-decoration: underline; }
+        header { text-align: center; margin-bottom: 28px; }
+        h1 {
+            font-size: 2em; margin: 8px 0 4px; letter-spacing: 2px;
+            color: #fff; text-shadow: 0 0 12px rgba(167,139,250,0.8), 0 0 32px rgba(34,211,238,0.4);
+        }
+        .glitch { position: relative; display: inline-block; }
+        .glitch::before, .glitch::after {
+            content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%;
+            overflow: hidden; opacity: 0.65;
+        }
+        .glitch::before { color: #f0f; transform: translate(-2px, 1px); animation: gl1 2.4s infinite steps(1); }
+        .glitch::after { color: #0ff; transform: translate(2px, -1px); animation: gl2 3.1s infinite steps(1); }
+        @keyframes gl1 { 0%,92% { clip-path: inset(0 0 100% 0); } 93% { clip-path: inset(20% 0 40% 0); } 96% { clip-path: inset(60% 0 10% 0); } 100% { clip-path: inset(0 0 100% 0); } }
+        @keyframes gl2 { 0%,90% { clip-path: inset(100% 0 0 0); } 91% { clip-path: inset(45% 0 30% 0); } 95% { clip-path: inset(5% 0 75% 0); } 100% { clip-path: inset(100% 0 0 0); } }
+        .subtitle { color: var(--muted); margin: 4px 0; font-size: 0.95em; }
+        .subtitle .warn { color: var(--danger); font-weight: bold; }
+
+        .panel {
+            background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+            padding: 18px 20px; margin: 18px 0; backdrop-filter: blur(4px);
+        }
+        .panel h2 { margin: 0 0 10px; font-size: 1.15em; color: var(--accent); }
+        .panel p { margin: 6px 0; line-height: 1.7; }
+        .errtext {
+            font-family: "SF Mono", Menlo, Consolas, monospace; color: var(--danger);
+            background: rgba(248,113,113,0.08); border: 1px dashed rgba(248,113,113,0.5);
+            border-radius: 8px; padding: 12px 14px; line-height: 1.8; white-space: pre-wrap; font-size: 0.9em;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.95em; }
+        th, td { border: 1px solid rgba(255,255,255,0.12); padding: 8px 10px; text-align: left; }
+        th { background: rgba(124,58,237,0.18); color: #ddd; font-weight: 600; }
+        td .mojibake {
+            font-family: "SF Mono", Menlo, Consolas, monospace; color: #fbbf24; word-break: break-all;
+        }
+        td .real { color: var(--accent2); }
+        .note { color: var(--muted); font-size: 0.85em; }
+        .tag {
+            display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 0.78em;
+            background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.4); color: var(--accent2);
+            margin-left: 6px; vertical-align: middle;
+        }
+        .track-card { border-left: 3px solid var(--accent); }
+        .track-card.t3 { border-left-color: var(--danger); }
+        .track-card h2 .track-badge {
+            display: inline-block; background: var(--accent); color: #0b0612; border-radius: 6px;
+            padding: 0 8px; margin-right: 8px; font-size: 0.85em; font-weight: bold;
+        }
+        .track-card.t3 h2 .track-badge { background: var(--danger); color: #1a0505; }
+        .footnote { color: var(--muted); font-size: 0.82em; line-height: 1.7; }
+        .footnote a { color: var(--accent2); }
+        @media (max-width: 640px) { th, td { padding: 6px; font-size: 0.85em; } }
+    </style>
+    <link rel="stylesheet" href="../gate-experience.css">
+    <script defer src="../gate-site.js"></script>
+    <script defer src="../gate-scene.js"></script>
+    <script src="../gate-boot.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-home-link" data-umami-event="back-to-home-error">← 返回主页</a>
+        <header>
+            <h1><span class="glitch" data-text="■■■ 乱码之门 ■■■">■■■ 乱码之门 ■■■</span></h1>
+            <p class="subtitle">KALEIDXSCOPE 隐藏相位 <strong>Phase #??? : ERROR</strong></p>
+            <p class="subtitle"><span class="warn">⚠ 本页含剧透</span>　—　达成条件：通关棱镜塔（プリズムタワー / Phase #7）后立即出现</p>
+        </header>
+
+        <div class="panel">
+            <h2>这是什么门？</h2>
+            <p>「乱码门」是 KALEIDXSCOPE 活动第二阶段的<strong>隐藏关卡（Phase #??? : ERROR）</strong>。通关棱镜塔后，7sRef 系统检测到异常，本相位立即解锁，无法在列表中重选直至通关。</p>
+            <div class="errtext">システムに異常を確認しました
+これ以上の進行は7sRefの存続に著しい影響を及ぼす可能性があります
+本当に挑戦しますか？
+
+— 检测到系统异常。继续推进可能对 7sRef 的存续造成严重影响。真的要挑战吗？</div>
+            <p class="note">进入该门后，TRACK 1 / 2 的选曲界面不显示历史成绩；最终曲的一切信息（曲名、曲师、封面）都被高速滚动的乱码字符替换，封面变为黑底故障特效。曲目中途屏幕上方出现自 2:38 起倒数、不断减少生命值的红色计时器。</p>
+        </div>
+
+        <div class="panel track-card">
+            <h2><span class="track-badge">TRACK 1</span>曲池（PRiSM / PRiSM PLUS 完美挑战曲随机）</h2>
+            <table>
+                <tr><th style="width:90px">ID</th><th>游戏内显示（乱码 / 原文）</th><th>实际曲名</th></tr>
+                <tr><td>11739</td><td><span class="mojibake">184億回のマルトニツク</span></td><td><span class="real">184億回のマルチトニック</span></td></tr>
+                <tr><td>11744</td><td><span class="mojibake">Deicide</span></td><td><span class="real">Deicide</span></td></tr>
+                <tr><td>11752</td><td><span class="mojibake">雨露霜雪</span></td><td><span class="real">雨露霜雪</span></td></tr>
+                <tr><td>11808</td><td><span class="mojibake">Feel The Luv</span></td><td><span class="real">Feel The Luv</span></td></tr>
+                <tr><td>11813</td><td><span class="mojibake">忙シー日</span></td><td><span class="real">忙シー日</span></td></tr>
+                <tr><td>11817</td><td><span class="mojibake">Amereistr</span></td><td><span class="real">Amereistr</span></td></tr>
+            </table>
+            <p class="note">注：以上曲目本身并非被乱码污染，它们就是各区域的 Perfect Challenge 曲（如 184億回のマルチトニック、Deicide 等）；游戏数据文件里的个别曲名会以错字形态出现（如「マルトニツク」）。</p>
+        </div>
+
+        <div class="panel track-card">
+            <h2><span class="track-badge">TRACK 2</span>曲池（KALEIDXSCOPE 已解锁乐曲随机）</h2>
+            <table>
+                <tr><th style="width:90px">ID</th><th>游戏内显示</th><th>实际曲名（所属门）</th></tr>
+                <tr><td>11740</td><td><span class="mojibake">果ての空、僕らが見た光。</span></td><td><span class="real">果ての空、僕らが見た光。</span><span class="tag">蓝门</span></td></tr>
+                <tr><td>11745</td><td><span class="mojibake">氷滅の135小節</span></td><td><span class="real">氷滅の135小節</span><span class="tag">白门</span></td></tr>
+                <tr><td>11749</td><td><span class="mojibake">有明/Ariake</span></td><td><span class="real">有明/Ariake</span><span class="tag">紫门</span></td></tr>
+                <tr><td>11753</td><td><span class="mojibake">宙天</span></td><td><span class="real">宙天</span><span class="tag">黑门</span></td></tr>
+                <tr><td>11809</td><td><span class="mojibake">Åntinomiε</span></td><td><span class="real">Åntinomiε</span><span class="tag">黄门</span></td></tr>
+                <tr><td>11814</td><td><span class="mojibake">FLΛME/FRΦST</span></td><td><span class="real">FLΛME/FRΦST</span><span class="tag">红门</span></td></tr>
+                <tr><td>11818</td><td><span class="mojibake">World's end BLACKBOX</span></td><td><span class="real">World's end BLACKBOX</span><span class="tag">棱镜塔</span></td></tr>
+            </table>
+        </div>
+
+        <div class="panel track-card t3">
+            <h2><span class="track-badge">TRACK 3</span>最终曲（通关即解锁）</h2>
+            <table>
+                <tr><th style="width:90px">ID</th><th>游戏内显示（通关前）</th><th>实际曲名</th></tr>
+                <tr><td>11879</td><td><span class="mojibake">????????????</span>（信息全部乱码 + 故障封面）</td><td><span class="real">Xaleid◆scopiX</span>　曲师：xi</td></tr>
+            </table>
+            <p>通关 TRACK 1 / 2 后才揭示这首歌的存在，其全部信息被乱码覆盖；曲目中段红计时器归零后谱面并未结束——先是出现「不可能配置」（4 个同时 HOLD + 海量 BREAK），随后游戏画面冻结、蓝屏「崩溃」：</p>
+            <div class="errtext">A problem has been detect and 7sRef.exe
+has been shut down to prevent damage to your world.
+
+Error code: 110112050904241903151605</div>
+            <p>通关本相位后进入收集界面，所有自定义项目被替换为「??????」故障面板，提示 <strong>サイゴノキボウ ヲミツケテ</strong>（去寻找最后的希望）——这正是通往希望之扉（Stage 3）的线索。</p>
+        </div>
+
+        <div class="panel">
+            <h2>失败惩罚</h2>
+            <p>最终曲未通关时：结算界面强制显示 D 评级与 0.0000%（即使超越个人最好成绩也只显示 +0.0000%），其余统计全部归零；最终曲不进入拍照与 maimai DX NET 游玩记录。</p>
+        </div>
+
+        <p class="footnote">资料参考：<a href="https://silentblue.remywiki.com/maimai_DX:KALEIDXSCOPE" target="_blank" rel="noopener noreferrer">SilentBlue.RemyWiki - maimai DX:KALEIDXSCOPE</a>；曲目 ID 与乱码文本来自国行客户端数据（KaleidxScopeMusicGroup081/082/083）。</p>
+    </div>
+
+    <div class="github-footer-float">
+        <div class="footer-float-item">
+            <a href="https://github.com/Michaelwucoc/KALEIDXSCOPE" target="_blank" rel="noopener noreferrer" class="footer-float-link github-footer-link" data-umami-event="github-link" title="GitHub 源码">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <span class="github-footer-update" data-app-version>更新于</span>
+        </div>
+        <div class="footer-float-item">
+            <a href="https://qm.qq.com/q/YyCOXfCveY" target="_blank" rel="noopener noreferrer" class="footer-float-link qq-footer-link" data-umami-event="community-link-footer" title="QQ 社群">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+            </a>
+            <span class="footer-float-label">社群链接</span>
+        </div>
+    </div>
+    <script src="../github-footer.js"></script>
+</body>
+</html>

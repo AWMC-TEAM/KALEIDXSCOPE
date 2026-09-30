@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="../song-detail.css">
     <link rel="stylesheet" href="../github-footer.css">
     <link rel="stylesheet" href="../player-sync.css">
+    <link rel="stylesheet" href="../gate-experience.css">
+    <script defer src="../gate-site.js"></script>
+    <script defer src="../gate-scene.js"></script>
     <script src="../site-config.js?v=9-16"></script>
-    <script defer src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
-    <script defer src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
+    <script async src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
+    <script async src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
     <script
       src="https://static.flashcat.cloud/browser-sdk/v0/flashcat-rum.js"
       type="text/javascript">
@@ -28,17 +31,31 @@
       defaultPrivacyLevel: "allow"
     });
     </script>
+    <script src="../gate-boot.js"></script>
 </head>
-<body class="theme-prism">
+<body class="theme-prism gate-experience" data-gate="prism">
+    <div class="gate-atmosphere" aria-hidden="true"><div class="gate-grid"></div><canvas id="gate-canvas"></canvas></div>
+    <div class="gate-scroll-progress" aria-hidden="true"></div>
     <div class="container">
-        <header>
+        <nav class="gate-topbar" aria-label="页面导航">
             <a href="../index.html" class="back-home-link" data-umami-event="back-to-home-prism">← 返回主页</a>
-            <h1>🔷 舞萌DX - プリズムタワー（棱镜塔） -</h1>
-            <p class="subtitle">🚪 7sRef区域4（2000km）· プリズムタワー</p>
-            <p class="subtitle">🌈 Stage 2 第 7 相 · 通关六门后的进阶课程</p>
-            <p class="subtitle">版本代号：Ver.CN1.56-E · 门扉编号：7</p>
-            <p class="subtitle">AMWC TEAM 制作 - QQ群: 1072033605</p>
+            <span class="gate-wordmark">KALEIDXSCOPE / STAGE 02</span>
+            <div class="gate-settings"><button id="gate-theme-toggle" type="button">外观：自动</button><button id="gate-motion-toggle" type="button" aria-pressed="false">动效：开启</button></div>
+        </nav>
+        <header class="gate-hero">
+            <p class="gate-eyebrow">PHASE 07 / THE REFRACTION</p>
+            <p class="gate-display" aria-hidden="true"><span>PRISM</span><span class="gate-display-outline">TOWER.</span></p>
+            <h1 class="gate-hero-title">棱镜塔 · プリズムタワー</h1>
+            <p class="subtitle">7sRef 区域 4（2000km）· Stage 2 第 7 相</p>
+            <p class="subtitle">通关六门后的进阶课程</p>
+            <p class="subtitle">Ver.CN1.56-E · 门扉编号：7</p>
+            <p class="subtitle">AMWC TEAM 制作 · QQ群：1072033605</p>
+            <div class="gate-hero-bottom"><a class="gate-explore" href="#gate-guide">探索解锁攻略 <span>↓</span></a><span>向下滚动，让光逐渐碎裂</span></div>
+            <span class="gate-coordinate" aria-hidden="true">SPECTRUM / 07<br>REFRACT → FRAGMENT</span>
+            <figure class="gate-hero-art"><img src="../KALEIDXSCOPE_PNG/prism_tower.png" alt="PRISM TOWER 游戏门扉图像" width="444" height="128"><figcaption>PRISM TOWER / ORIGINAL GATE ART</figcaption></figure>
         </header>
+        <nav class="gate-journey" aria-label="Stage 2 门扉"><a href="../PRISMKALEIDXSCOPE/index.html" aria-current="page"><span>07</span> 棱镜塔</a><a href="../HOPKALEIDXSCOPE/index.html"><span>08</span> 希望之门</a><a href="../FINALKALEIDXSCOPE/index.html"><span>∞</span> 最终相</a></nav>
+        <div class="gate-section-marker" id="gate-guide">01 / UNLOCK GUIDE · 解锁指南</div>
 
         <!-- 区域开放倒计时（国行 2026/10/1 10:00:00 北京时间开放） -->
         <div class="countdown-section" id="countdown-section">

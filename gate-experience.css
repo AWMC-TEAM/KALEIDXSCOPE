@@ -1,0 +1,259 @@
+/* Shared visual language; original guide layout and application IDs stay intact. */
+html[data-gate-boot="pending"] body { visibility: hidden; }
+body.gate-experience .container { margin: 0 auto; }
+body.gate-experience .gate-hero .gate-display { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-weight: 600; letter-spacing: -.045em; line-height: 1.18; }
+body.gate-experience .gate-journey { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+body.gate-experience .gate-journey a { padding: 15px 12px; border: 0; border-bottom: 1px solid var(--gate-line); min-width: 0; }
+.gate-door-list { display: flex; flex-direction: column; margin: 0 0 48px; }
+.gate-door { display: grid; grid-template-columns: 60px 1fr 222px 48px; gap: 24px; align-items: center; padding: 24px 20px; border-bottom: 1px solid var(--gate-line); color: var(--gate-ink); text-decoration: none; background: var(--gate-panel); transition: transform .35s, background .35s; }
+.gate-door:first-child { border-top: 1px solid var(--gate-line); }
+.gate-door:hover { transform: translateX(6px); background: var(--gate-inset); }
+.gate-door-number { font: 13px monospace; color: var(--gate-muted); }
+.gate-door-text strong { display: block; font-size: 24px; font-weight: 500; letter-spacing: .05em; }
+.gate-door-text small { color: var(--gate-muted); font-size: 11px; letter-spacing: .12em; }
+.gate-door img { width: 222px; height: auto; opacity: .9; }
+.gate-door-arrow { font-size: 26px; font-weight: 300; }
+.gate-error-seal { font: 18px monospace; letter-spacing: .2em; color: #d86788; }
+.gate-continuation { display: flex; justify-content: space-between; gap: 20px; margin: 48px 0 0; padding: 24px 0; border-top: 1px solid var(--gate-line); }
+.gate-continuation a { color: var(--gate-ink); text-decoration: none; font-size: 22px; }
+.gate-continuation small { display: block; color: var(--gate-muted); font-size: 11px; margin-bottom: 8px; }
+body.gate-experience :is(.panel, .filter-section, .background-notice, .info-section, .community-section) { background: var(--gate-panel); border: 1px solid var(--gate-line); color: var(--gate-ink); border-radius: 8px; padding: 24px; margin: 0 0 24px; box-shadow: none; }
+body.gate-experience :is(.panel h2, .info-section h2, .community-section h2) { color: var(--gate-ink); }
+body.gate-experience :is(.panel p, .info-section p, .community-section p, .progress-text, .filter-label) { color: var(--gate-muted); }
+body.gate-experience :is(select, input[type='text'], input[type='number']) { background: var(--gate-inset); color: var(--gate-ink); border-color: var(--gate-line); }
+body.gate-experience :is(th, td) { border-color: var(--gate-line); }
+body.gate-experience th { background: var(--gate-inset); color: var(--gate-ink); }
+body.gate-experience .panel { overflow-x: auto; }
+body.gate-experience :is(.progress-bar, .progress-container) { background: var(--gate-inset); }
+body.gate-experience .theme-blue, body.gate-experience.theme-blue { --gate-accent: #3689bf; }
+body.gate-experience.theme-white { --gate-accent: #7d8b9d; }
+body.gate-experience.theme-purple { --gate-accent: #a37fd0; }
+body.gate-experience.theme-black { --gate-accent: #8b92a5; }
+body.gate-experience.theme-yellow { --gate-accent: #b49422; }
+body.gate-experience.theme-red { --gate-accent: #d16d81; }
+body.gate-experience.theme-error { --gate-accent: #cf6a92; }
+body.gate-experience.theme-error[data-appearance='dark'] { --gate-bg: #100b17; --gate-panel: rgba(26,17,33,.94); --gate-inset: #22162c; --gate-line: rgba(210,130,181,.2); }
+body.theme-error .gate-grid { transform: skewY(-5deg); background-size: 96px 32px; }
+body.theme-error .gate-display { text-shadow: -3px 0 rgba(241,83,138,.4), 3px 0 rgba(46,216,229,.4); }
+body.theme-error .gate-atmosphere::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(transparent 0 5px, rgba(122,54,132,.08) 5px 6px); }
+body[data-motion='paused'] *, body[data-motion='paused'] *::before, body[data-motion='paused'] *::after { animation-play-state: paused !important; }
+@media (max-width: 760px) {
+    body.gate-experience .gate-journey { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gate-door { grid-template-columns: 26px 1fr 30px; gap: 12px; padding: 22px 12px; }
+    .gate-door img, .gate-door .gate-error-seal { display: none; }
+    .gate-door-text strong { font-size: 21px; }
+    .gate-continuation a { font-size: 17px; }
+}
+
+body.gate-experience {
+    --gate-bg: #f3f6f8;
+    --gate-ink: #172a38;
+    --gate-muted: #526677;
+    --gate-accent: #24758b;
+    --gate-line: rgba(44, 82, 105, .18);
+    --gate-panel: rgba(255, 255, 255, .88);
+    --gate-inset: #edf2f5;
+    --gate-soft: rgba(38, 117, 139, .08);
+    --gate-spectrum: linear-gradient(110deg, #ddbd64, #d779aa, #9582cf, #65b7d0, #87c9b7);
+    color-scheme: light;
+    padding: 0 32px 110px;
+    background: var(--gate-bg);
+    color: var(--gate-ink);
+    line-height: 1.65;
+    isolation: isolate;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+body.gate-experience.theme-hope { --gate-accent: #665399; --gate-soft: rgba(102, 83, 153, .07); }
+body.gate-experience.theme-final { --gate-accent: #446b88; --gate-soft: rgba(68, 107, 136, .08); }
+@media (prefers-color-scheme: dark) {
+    body.gate-experience:not([data-appearance="light"]) {
+        --gate-bg: #09131e;
+        --gate-ink: #e9f0f4;
+        --gate-muted: #a0b1c0;
+        --gate-accent: #92d7e5;
+        --gate-line: rgba(185, 214, 232, .17);
+        --gate-panel: rgba(15, 28, 41, .93);
+        --gate-inset: #162534;
+        --gate-soft: rgba(146, 215, 229, .07);
+        color-scheme: dark;
+    }
+    body.gate-experience.theme-hope:not([data-appearance="light"]) { --gate-bg: #111321; --gate-accent: #c5b3ec; }
+    body.gate-experience.theme-final:not([data-appearance="light"]) { --gate-bg: #0d111b; --gate-accent: #b8d4e6; }
+}
+body.gate-experience[data-appearance="dark"] {
+    --gate-bg: #09131e;
+    --gate-ink: #e9f0f4;
+    --gate-muted: #a0b1c0;
+    --gate-accent: #92d7e5;
+    --gate-line: rgba(185, 214, 232, .17);
+    --gate-panel: rgba(15, 28, 41, .93);
+    --gate-inset: #162534;
+    --gate-soft: rgba(146, 215, 229, .07);
+    color-scheme: dark;
+}
+body.gate-experience.theme-hope[data-appearance="dark"] { --gate-bg: #111321; --gate-accent: #c5b3ec; }
+body.gate-experience.theme-final[data-appearance="dark"] { --gate-bg: #0d111b; --gate-accent: #b8d4e6; }
+.gate-atmosphere { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.gate-atmosphere::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 82% 28%, var(--gate-soft), transparent 65%);
+}
+#gate-canvas { position: absolute; inset: 0; }
+.gate-grid {
+    position: absolute; inset: 0; opacity: .35;
+    background-image: linear-gradient(var(--gate-line) 1px, transparent 1px), linear-gradient(90deg, var(--gate-line) 1px, transparent 1px);
+    background-size: 96px 96px;
+    mask-image: linear-gradient(90deg, transparent 30%, #000 100%);
+}
+.gate-scroll-progress {
+    position: fixed; z-index: 1200; top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--gate-spectrum); transform: scaleX(0); transform-origin: left; pointer-events: none;
+}
+body.gate-experience .container {
+    width: 100%; max-width: 1184px; padding: 0; background: transparent;
+    border: 0; border-radius: 0; box-shadow: none;
+}
+.gate-topbar {
+    min-height: 88px; display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; border-bottom: 1px solid var(--gate-line);
+}
+body.gate-experience .gate-topbar .back-home-link {
+    position: static; padding: 9px 0; min-height: 44px;
+    color: var(--gate-ink); font-size: 13px; letter-spacing: .03em; border-radius: 0;
+}
+body.gate-experience .gate-topbar .back-home-link:hover { color: var(--gate-accent); background: transparent; }
+.gate-wordmark { font-size: 12px; font-weight: 600; letter-spacing: .23em; color: var(--gate-muted); }
+.gate-settings { display: flex; gap: 8px; }
+.gate-settings button {
+    border: 1px solid var(--gate-line); color: var(--gate-muted); background: var(--gate-panel);
+    padding: 8px 12px; font: inherit; font-size: 12px; min-height: 44px; border-radius: 5px; cursor: pointer;
+    transition: border-color .25s, color .25s;
+}
+.gate-settings button:hover { border-color: var(--gate-accent); color: var(--gate-ink); }
+body.gate-experience :is(button, a, input):focus-visible { outline: 2px solid var(--gate-accent); outline-offset: 5px; }
+body.gate-experience .gate-hero {
+    min-height: 655px; position: relative; text-align: left; margin: 0;
+    padding: 78px 0 52px; display: flex; flex-direction: column; align-items: flex-start;
+}
+.gate-eyebrow { display: flex; align-items: center; gap: 13px; font-size: 11px; letter-spacing: .22em; color: var(--gate-muted); }
+.gate-eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gate-accent); }
+body.gate-experience .gate-hero .gate-display {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+    font-size: clamp(68px, 7.9vw, 112px); font-weight: 600; line-height: 1.18; letter-spacing: -.045em;
+    margin: 28px 0 25px; color: var(--gate-ink); background: none; -webkit-text-fill-color: currentColor;
+    text-wrap: balance;
+}
+.gate-display span { display: block; }
+.gate-display .gate-display-outline { -webkit-text-stroke: 1px var(--gate-ink); color: transparent; -webkit-text-fill-color: transparent; }
+body.gate-experience .gate-hero .gate-hero-title {
+    color: var(--gate-ink); font-size: clamp(21px, 2.2vw, 29px); letter-spacing: .08em; font-weight: 500;
+    margin: 0 0 12px; line-height: 1.4; background: none; -webkit-text-fill-color: currentColor;
+}
+body.gate-experience header .subtitle { font-size: 13px; color: var(--gate-muted); line-height: 1.9; max-width: 540px; text-wrap: pretty; }
+.gate-hero-art {
+    position: absolute; right: 3%; bottom: 67px; width: 222px;
+    border: 1px solid var(--gate-line); padding: 7px; background: var(--gate-panel); border-radius: 3px;
+}
+.gate-hero-art img { display: block; width: 100%; height: auto; }
+.gate-hero-art figcaption { color: var(--gate-muted); font-size: 9px; letter-spacing: .13em; padding: 7px 2px 0; }
+.gate-hero-bottom { display: flex; align-items: center; gap: 24px; margin-top: 32px; font-size: 11px; color: var(--gate-muted); letter-spacing: .1em; }
+.gate-explore { color: var(--gate-ink); text-decoration: none; border-bottom: 1px solid var(--gate-accent); padding: 9px 0; min-height: 44px; }
+.gate-explore span { display: inline-block; margin-left: 20px; }
+.gate-coordinate { position: absolute; right: 3%; top: 42px; font: 10px/1.6 monospace; letter-spacing: .12em; color: var(--gate-muted); }
+.gate-section-marker {
+    margin-bottom: 26px; display: flex; align-items: center; gap: 18px;
+    color: var(--gate-muted); font-size: 11px; letter-spacing: .18em; scroll-margin-top: 30px;
+}
+.gate-section-marker::after { content: ''; height: 1px; background: var(--gate-line); flex: 1; }
+.gate-journey { display: flex; border-top: 1px solid var(--gate-line); border-bottom: 1px solid var(--gate-line); margin: 0 0 42px; }
+.gate-journey a {
+    flex: 1; display: flex; align-items: center; gap: 14px; padding: 17px 20px;
+    color: var(--gate-muted); text-decoration: none; font-size: 12px; transition: background .3s;
+}
+.gate-journey a + a { border-left: 1px solid var(--gate-line); }
+.gate-journey a:hover { background: var(--gate-soft); color: var(--gate-ink); }
+.gate-journey a[aria-current="page"] { color: var(--gate-ink); background: var(--gate-soft); }
+.gate-journey span { font: 11px monospace; color: var(--gate-accent); }
+body.gate-experience :is(.countdown-section, .schedule-section, .requirements-section, .gate-challenge-section, .reference-section, .remaining-section) {
+    background: var(--gate-panel); border: 1px solid var(--gate-line); border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .025); padding: 28px; margin-bottom: 24px;
+}
+body.gate-experience .countdown-section {
+    display: grid; grid-template-columns: 1fr auto; text-align: left; align-items: center;
+    column-gap: 24px; padding: 28px 34px;
+}
+body.gate-experience .countdown-section .countdown-title { font-size: 17px; margin: 0 0 4px; color: var(--gate-ink); }
+body.gate-experience .countdown-note { text-align: left; grid-column: 1; grid-row: 2; font-size: 12px; color: var(--gate-muted); font-weight: 400; margin: 0; }
+body.gate-experience .countdown-display { grid-column: 2; grid-row: 1 / 4; gap: 26px; margin: 0; }
+body.gate-experience .countdown-unit { min-width: 48px; }
+body.gate-experience .countdown-value { font-size: 36px; font-weight: 400; line-height: 1.2; color: var(--gate-ink); letter-spacing: -.03em; }
+body.gate-experience .countdown-label { font-size: 10px; color: var(--gate-muted); margin-top: 5px; }
+body.gate-experience .countdown-status { font-size: 12px; color: var(--gate-muted); font-weight: 400; }
+body.gate-experience .countdown-section.open { border-color: #5a967c; }
+body.gate-experience :is(.section-title, .schedule-header h2, .requirements-section h2, .reference-section-title, .gate-challenge-title, .remaining-section h2, .modal-header h2) {
+    color: var(--gate-ink); font-size: 20px; font-weight: 600; letter-spacing: -.02em;
+}
+body.gate-experience :is(.subtitle, .requirements-list, .activation-card span, .song-details, .song-detail-hint, .timeline-note, .schedule-switch-note, .reference-song-id, .gate-challenge-desc, .legend-hint, .stat-label, .filter-section label, .empty-message) { color: var(--gate-muted); }
+body.gate-experience :is(.activation-card, .stat-card, .song-card, .reference-item, .remaining-item, .gate-song-chip, .gate-challenge-body, .modal-content, .player-sync-panel) {
+    color: var(--gate-ink); background: var(--gate-inset); border-color: var(--gate-line); border-radius: 6px;
+}
+body.gate-experience :is(.activation-card strong, .song-name, .stat-number, .reference-song-name, .reference-block-title, .timeline-title, .gate-track-title, .gate-chip-name, .gate-song-chip.selected .gate-chip-name, .modal-body p) { color: var(--gate-ink); }
+body.gate-experience .reference-block-title { font-size: 15px; font-weight: 500; }
+body.gate-experience .song-card:hover { border-color: var(--gate-accent); box-shadow: 0 6px 18px rgba(0,0,0,.07); }
+body.gate-experience .song-card.completed { background: var(--gate-soft); border-color: #5a967c; }
+body.gate-experience .song-card.completed .song-name { color: var(--gate-ink); }
+body.gate-experience :is(.btn-info, .btn-primary, .bilibili-btn, .toggle-btn.active) { color: var(--gate-bg); background: var(--gate-accent); border-color: var(--gate-accent); }
+body.gate-experience :is(.btn-secondary, .gate-challenge-toggle, .toggle-btn:not(.active)) { color: var(--gate-ink); background: var(--gate-inset); border-color: var(--gate-line); }
+body.gate-experience .gate-song-chip.selected { background: var(--gate-soft); border-color: var(--gate-accent); box-shadow: none; }
+body.gate-experience :is(.song-detail-tag, .song-detail-hint) { color: var(--gate-muted); background: var(--gate-inset); border-color: var(--gate-line); }
+body.gate-experience .song-checkbox input { accent-color: var(--gate-accent); }
+body.gate-experience .stat-card { border-width: 1px; }
+body.gate-experience .stat-number { font-weight: 500; }
+body.gate-experience .modal-header { border-color: var(--gate-line); }
+body.gate-experience .community-section { background: transparent; border-color: var(--gate-line); }
+body.gate-experience .community-link { color: var(--gate-accent); }
+body.gate-experience .github-footer-float { background: var(--gate-panel); border: 1px solid var(--gate-line); color: var(--gate-muted); box-shadow: none; }
+body.gate-experience .footer-float-label { color: var(--gate-muted); }
+@media (max-width: 760px) {
+    body.gate-experience { padding: 0 20px 100px; }
+    .gate-topbar { min-height: 76px; gap: 10px; }
+    .gate-wordmark { display: none; }
+    .gate-settings { gap: 5px; }
+    .gate-settings button { padding: 7px 9px; font-size: 11px; }
+    body.gate-experience .gate-hero { min-height: 640px; padding-top: 60px; }
+    body.gate-experience .gate-hero .gate-display { font-size: clamp(62px, 12vw, 90px); margin-top: 32px; }
+    .gate-coordinate { top: 18px; right: 0; font-size: 8px; }
+    .gate-hero-art { right: 0; bottom: 35px; width: 175px; }
+    .gate-hero-bottom { margin-top: 24px; gap: 12px; flex-direction: column; align-items: flex-start; }
+    .gate-journey a { padding: 14px 8px; gap: 6px; font-size: 11px; justify-content: center; }
+    body.gate-experience :is(.countdown-section, .schedule-section, .requirements-section, .gate-challenge-section, .reference-section) { padding: 20px; }
+    body.gate-experience .countdown-section { display: block; text-align: left; }
+    body.gate-experience .countdown-display { justify-content: flex-start; gap: 26px; margin: 20px 0 0; }
+    body.gate-experience .countdown-value { font-size: 30px; }
+    .gate-section-marker { font-size: 10px; gap: 12px; }
+    #gate-canvas { opacity: .65; }
+    body.gate-experience .github-footer-float {
+        position: static; flex-direction: row; justify-content: center; flex-wrap: wrap;
+        gap: 20px; margin: 36px auto 0; padding: 16px; max-width: 350px; border-radius: 6px;
+    }
+    body.gate-experience .footer-float-link { background: var(--gate-inset); color: var(--gate-ink); box-shadow: none; }
+}
+@media (max-width: 420px) {
+    .gate-hero-art { width: 140px; bottom: 20px; }
+    body.gate-experience .gate-hero { min-height: 650px; }
+    body.gate-experience header .subtitle { max-width: 95%; }
+    .gate-hero-bottom > span { font-size: 9px; letter-spacing: .02em; }
+}
+body.gate-experience.theme-blue[data-appearance] { --gate-accent: #63b9eb; }
+body.gate-experience.theme-white[data-appearance] { --gate-accent: #9baabf; }
+body.gate-experience.theme-purple[data-appearance] { --gate-accent: #b296df; }
+body.gate-experience.theme-black[data-appearance] { --gate-accent: #909bb7; }
+body.gate-experience.theme-yellow[data-appearance] { --gate-accent: #c3a437; }
+body.gate-experience.theme-red[data-appearance] { --gate-accent: #df8da0; }
+body.gate-experience.theme-error[data-appearance] { --gate-accent: #cf6a92; }
+@media (prefers-reduced-motion: reduce) {
+    body.gate-experience *, body.gate-experience *::before, body.gate-experience *::after {
+        animation: none !important; transition: none !important; scroll-behavior: auto !important;
+    }
+}

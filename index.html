@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="github-footer.css">
     <script src="site-config.js?v=9-16"></script>
-    <script defer src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
-    <script defer src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
+    <script async src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
+    <script async src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
 <!--    <style>body{transform:rotate(180deg);}</style>-->
     <script
       src="https://static.flashcat.cloud/browser-sdk/v0/flashcat-rum.js"
@@ -27,6 +27,10 @@
       defaultPrivacyLevel: "allow"
     });
     </script>
+    <link rel="stylesheet" href="gate-experience.css">
+    <script defer src="gate-site.js"></script>
+    <script defer src="gate-scene.js"></script>
+    <script src="gate-boot.js"></script>
 </head>
 <body>
     <div class="container">
@@ -107,6 +111,13 @@
                     <div class="door-image-wrapper">
                         <img src="KALEIDXSCOPE_PNG/final.png" alt="KALEIDXSCOPE 最终相" class="door-image" onerror="this.onerror=null;this.style.display='none';var p=this.nextElementSibling;if(p)p.style.display='flex'">
                         <div class="door-placeholder" style="display:none;min-height:200px;align-items:center;justify-content:center;font-size:2em;font-weight:bold;color:#7c3aed">KALEIDXSCOPE</div>
+                    </div>
+                </div>
+
+                <!-- 乱码之门（Phase #??? : ERROR） -->
+                <div class="door-card" onclick="window.location.href='ERRORKALEIDXSCOPE/index.html'" data-umami-event="click-error-door">
+                    <div class="door-image-wrapper">
+                        <div class="door-placeholder" style="min-height:200px;display:flex;align-items:center;justify-content:center;font-size:1.6em;font-weight:bold;color:#a78bfa;text-shadow:2px 0 0 #f0f,-2px 0 0 #0ff">■■■の扉</div>
                     </div>
                 </div>
 

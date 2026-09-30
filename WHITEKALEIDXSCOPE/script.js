@@ -315,7 +315,7 @@ function renderSoloRun() {
         return `
             <div class="run-song-card ${done ? 'completed' : ''}" data-song-id="${id}" data-mode="solo">
                 <div class="song-cover" data-song-id="${id}" title="双击/长按查看乐曲详情">
-                    <img src="${coverUrl}" alt="${(song.name || '').replace(/"/g, '&quot;')}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'%3E%3Crect fill=\'%23ddd\' width=\'200\' height=\'200\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\'%3E无曲绘%3C/text%3E%3C/svg%3E'">
+                    <img src="${coverUrl}" alt="${(song.name || '').replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'">
                 </div>
                 <label class="song-checkbox">
                     <input type="checkbox" ${done ? 'checked' : ''} data-song-id="${id}" data-mode="solo" data-umami-event="run-toggle-solo-white" data-umami-event-song-id="${id}" data-umami-event-song-name="${(song.name || '').replace(/"/g, '&quot;')}">
@@ -364,7 +364,7 @@ function renderMultiRun() {
         return `
             <div class="run-song-card ${done ? 'completed' : ''}" data-song-id="${id}" data-mode="multi">
                 <div class="song-cover" data-song-id="${id}" title="双击/长按查看乐曲详情">
-                    <img src="${coverUrl}" alt="${(song.name || '').replace(/"/g, '&quot;')}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'%3E%3Crect fill=\'%23ddd\' width=\'200\' height=\'200\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\'%3E无曲绘%3C/text%3E%3C/svg%3E'">
+                    <img src="${coverUrl}" alt="${(song.name || '').replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'">
                 </div>
                 <label class="song-checkbox">
                     <input type="checkbox" ${done ? 'checked' : ''} data-song-id="${id}" data-mode="multi" data-umami-event="run-toggle-multi-white" data-umami-event-song-id="${id}" data-umami-event-song-name="${(song.name || '').replace(/"/g, '&quot;')}">
@@ -561,7 +561,7 @@ function renderSongsPool() {
         return `
             <div class="pool-song-card" data-song-id="${song.id}">
                 <div class="song-cover" data-song-id="${song.id}" title="双击/长按查看乐曲详情">
-                    <img src="${coverUrl}" alt="${(song.name || '').replace(/"/g, '&quot;')}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'%3E%3Crect fill=\'%23ddd\' width=\'200\' height=\'200\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\'%3E无曲绘%3C/text%3E%3C/svg%3E'">
+                    <img src="${coverUrl}" alt="${(song.name || '').replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E'">
                 </div>
                 <div class="song-info">
                     <div class="song-name">${(song.name || '-').replace(/</g, '&lt;')}</div>

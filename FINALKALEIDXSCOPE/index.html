@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="../song-detail.css">
     <link rel="stylesheet" href="../github-footer.css">
     <link rel="stylesheet" href="../player-sync.css">
+    <link rel="stylesheet" href="../gate-experience.css">
+    <script defer src="../gate-site.js"></script>
+    <script defer src="../gate-scene.js"></script>
     <script src="../site-config.js?v=9-16"></script>
-    <script defer src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
-    <script defer src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
+    <script async src="https://s.awmc.cc/script.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a"></script>
+    <script async src="https://s.awmc.cc/recorder.js" data-website-id="4416a8d7-49f0-4b07-a14a-e82d30716b2a" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="1200000"></script>
     <script
       src="https://static.flashcat.cloud/browser-sdk/v0/flashcat-rum.js"
       type="text/javascript">
@@ -28,16 +31,31 @@
       defaultPrivacyLevel: "allow"
     });
     </script>
+    <script src="../gate-boot.js"></script>
 </head>
-<body class="theme-final">
+<body class="theme-final gate-experience" data-gate="final">
+    <div class="gate-atmosphere" aria-hidden="true"><div class="gate-grid"></div><canvas id="gate-canvas"></canvas></div>
+    <div class="gate-scroll-progress" aria-hidden="true"></div>
     <div class="container">
-        <header>
+        <nav class="gate-topbar" aria-label="页面导航">
             <a href="../index.html" class="back-home-link" data-umami-event="back-to-home-final">← 返回主页</a>
-            <h1>🌈 舞萌DX - FINAL SEQUENCE · KALEIDXSCOPE -</h1>
-            <p class="subtitle">🚪 最终相 · 通关希望の扉（Phase #8）后直接解锁</p>
-            <p class="subtitle">版本代号：Ver.CN1.56-E · 门扉编号：FINAL</p>
-            <p class="subtitle">AMWC TEAM 制作 - QQ群: 1072033605</p>
+            <span class="gate-wordmark">KALEIDXSCOPE / FINAL SEQUENCE</span>
+            <div class="gate-settings"><button id="gate-theme-toggle" type="button">外观：自动</button><button id="gate-motion-toggle" type="button" aria-pressed="false">动效：开启</button></div>
+        </nav>
+        <header class="gate-hero">
+            <p class="gate-eyebrow">FINAL SEQUENCE / ALL LIGHT CONVERGES</p>
+            <p class="gate-display" aria-hidden="true"><span>KALEIDX</span><span class="gate-display-outline">SCOPE.</span></p>
+            <h1 class="gate-hero-title">最终相 · KALEIDXSCOPE</h1>
+            <p class="subtitle">通关希望の扉（Phase #8）后直接解锁</p>
+            <p class="subtitle">单曲 Xaleid◆scopiX · 两段命条机制</p>
+            <p class="subtitle">Ver.CN1.56-E · 门扉编号：FINAL</p>
+            <p class="subtitle">AMWC TEAM 制作 · QQ群：1072033605</p>
+            <div class="gate-hero-bottom"><a class="gate-explore" href="#gate-guide">探索最终课题 <span>↓</span></a><span>所有折射，终将汇聚于此</span></div>
+            <span class="gate-coordinate" aria-hidden="true">SPECTRUM / ∞<br>ALL GATES → ONE LIGHT</span>
+            <figure class="gate-hero-art"><img src="../KALEIDXSCOPE_PNG/final.png" alt="KALEIDXSCOPE 最终相游戏图像" width="444" height="128"><figcaption>FINAL SEQUENCE / ORIGINAL GATE ART</figcaption></figure>
         </header>
+        <nav class="gate-journey" aria-label="Stage 2 门扉"><a href="../PRISMKALEIDXSCOPE/index.html"><span>07</span> 棱镜塔</a><a href="../HOPKALEIDXSCOPE/index.html"><span>08</span> 希望之门</a><a href="../FINALKALEIDXSCOPE/index.html" aria-current="page"><span>∞</span> 最终相</a></nav>
+        <div class="gate-section-marker" id="gate-guide">01 / FINAL SEQUENCE · 最终课题</div>
 
         <!-- 区域开放倒计时（国行 2026/10/1 10:00:00 北京时间开放） -->
         <div class="countdown-section" id="countdown-section">
