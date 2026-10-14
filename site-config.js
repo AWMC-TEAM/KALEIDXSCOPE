@@ -16,7 +16,7 @@
 
 // 站点全局配置（修改版本时请同步更新各 HTML 中 site-config.js 的 ?v= 参数）
 window.SITE_CONFIG = {
-    version: '9/16',
+    version: '10/14',
     beianDomain: 'awmc.team',
     icp: {
         text: '晋ICP备2025069504号-7',
