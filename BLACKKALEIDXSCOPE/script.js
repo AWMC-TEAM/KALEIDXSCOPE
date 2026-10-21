@@ -319,7 +319,8 @@ function toggleSong(songId) {
 }
 
 function updateStats() {
-    const completed = Object.values(progress).filter(Boolean).length;
+    // Count only songs in the current pool; stale IDs from older song lists must not inflate the total.
+    const completed = songs.filter(song => progress[song.id]).length;
     const remaining = songs.length - completed;
     const percent = Math.round((completed / songs.length) * 100);
     document.getElementById('completed-count').textContent = completed;

@@ -71,6 +71,7 @@
     try { mode = localStorage.getItem('kaleidxscope-appearance') || 'auto'; } catch { /* Storage is optional. */ }
     if (!['auto', 'light', 'dark'].includes(mode)) mode = 'auto';
     let paused = false;
+    try { paused = localStorage.getItem('kaleidxscope-motion') === 'paused'; } catch { /* Storage is optional. */ }
     let width = 0;
     let height = 0;
     let currentProgress = 0;
@@ -78,13 +79,29 @@
     let frame = 0;
     let lastTime = 0;
     let dark = false;
+    const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+    const schemeRules = [];
     const progressElement = document.querySelector('.gate-scroll-progress');
 
     function reduced() { return paused || motionMedia.matches; }
 
+    // Legacy gate styles follow the OS scheme; retarget those media rules to the chosen appearance.
+    function collectSchemeRules(rules) {
+        for (const rule of rules) {
+            const query = rule.media?.mediaText || '';
+            if (/^\(prefers-color-scheme:\s*(dark|light)\)$/.test(query.trim())) schemeRules.push({ rule, dark: query.includes('dark') });
+            else if (rule.cssRules) collectSchemeRules(rule.cssRules);
+        }
+    }
+    for (const sheet of document.styleSheets) {
+        try { collectSchemeRules(sheet.cssRules); } catch { /* Cross-origin sheets are not ours to retarget. */ }
+    }
+
     function applyAppearance() {
         dark = mode === 'dark' || (mode === 'auto' && schemeMedia.matches);
         body.dataset.appearance = dark ? 'dark' : 'light';
+        document.documentElement.dataset.appearance = body.dataset.appearance;
+        schemeRules.forEach(({ rule, dark: wantsDark }) => { rule.media.mediaText = wantsDark === dark ? 'all' : 'not all'; });
         themeButton.textContent = { auto: '外观：自动', light: '外观：浅色', dark: '外观：深色' }[mode];
         themeButton.setAttribute('aria-label', `当前${themeButton.textContent}，点击切换外观`);
         requestDraw();
@@ -276,12 +293,16 @@
         const delta = lastTime ? Math.min(time - lastTime, 64) : 16;
         lastTime = time;
         currentProgress += (targetProgress - currentProgress) * (1 - Math.exp(-delta / 160));
+        const ease = reduced() ? 1 : 1 - Math.exp(-delta / 220);
+        pointer.x += ((reduced() ? 0 : pointer.tx) - pointer.x) * ease;
+        pointer.y += ((reduced() ? 0 : pointer.ty) - pointer.y) * ease;
         const fracture = reduced() ? 0 : currentProgress;
         context.clearRect(0, 0, width, height);
         const mobile = width < 760;
         const size = Math.min(mobile ? width * 0.42 : width * 0.21, height * 0.34, 310);
-        const centerX = mobile ? width * 0.76 : width * 0.76;
-        const centerY = mobile ? height * 0.34 : Math.min(height * 0.44, 410);
+        // The emblem leans gently toward the pointer, like light caught in a turning lens.
+        const centerX = width * 0.76 + pointer.x * size * 0.12;
+        const centerY = (mobile ? height * 0.34 : Math.min(height * 0.44, 410)) + pointer.y * size * 0.09;
         const palette = { blue: 207, white: 215, purple: 272, black: 235, yellow: 48, red: 349, error: 320 };
         const hues = theme === 'prism' ? [184, 201, 231, 259, 190, 222]
             : palette[theme] !== undefined ? Array.from({ length: 6 }, (_, index) => palette[theme] + index * 4)
@@ -289,7 +310,7 @@
         const drift = reduced() ? 0 : Math.sin(time / 4300) * 0.018;
         context.save();
         context.translate(centerX, centerY);
-        context.rotate(theme === 'prism' ? 0.16 + drift : theme === 'final' ? 0 : drift);
+        context.rotate((theme === 'prism' ? 0.16 + drift : theme === 'final' ? 0 : drift) + pointer.x * 0.06);
         drawEmblem(theme, size, time, fracture);
         const glass = ['prism', 'home'].includes(theme);
 
@@ -398,7 +419,16 @@
         try { localStorage.setItem('kaleidxscope-appearance', mode); } catch { /* Continue without persistence. */ }
         applyAppearance();
     });
-    motionButton.addEventListener('click', () => { paused = !paused; updateMotion(); });
+    motionButton.addEventListener('click', () => {
+        paused = !paused;
+        try { localStorage.setItem('kaleidxscope-motion', paused ? 'paused' : 'active'); } catch { /* Continue without persistence. */ }
+        updateMotion();
+    });
+    window.addEventListener('pointermove', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        pointer.tx = event.clientX / width - 0.5;
+        pointer.ty = event.clientY / height - 0.5;
+    }, { passive: true });
     schemeMedia.addEventListener('change', applyAppearance);
     motionMedia.addEventListener('change', updateMotion);
     window.addEventListener('scroll', updateScroll, { passive: true });

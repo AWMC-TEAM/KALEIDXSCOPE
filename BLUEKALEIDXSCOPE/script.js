@@ -187,11 +187,12 @@ function initScheduleView() {
 
 // 从本地存储加载完成状态
 function loadProgress() {
-    const saved = localStorage.getItem('maimai-blue-gate-progress');
-    if (saved) {
-        return JSON.parse(saved);
+    try {
+        const parsed = JSON.parse(localStorage.getItem('maimai-blue-gate-progress') || '{}');
+        return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch {
+        return {};
     }
-    return {};
 }
 
 // 保存进度到本地存储
@@ -263,7 +264,8 @@ function toggleSong(songId) {
 
 // 更新统计信息
 function updateStats() {
-    const completed = Object.values(progress).filter(Boolean).length;
+    // Count only songs in the current pool; stale IDs from older song lists must not inflate the total.
+    const completed = songs.filter(song => progress[song.id]).length;
     const remaining = songs.length - completed;
     const percent = Math.round((completed / songs.length) * 100);
 

@@ -257,3 +257,22 @@ body.gate-experience.theme-error[data-appearance] { --gate-accent: #cf6a92; }
         animation: none !important; transition: none !important; scroll-behavior: auto !important;
     }
 }
+
+/* Home: the legacy white/grey door panel ignored the chosen appearance and boxed the list in. */
+body.gate-experience .doors-section { background: transparent; padding: 0; }
+body.gate-experience .community-section { text-align: center; }
+body.gate-experience .community-link { color: var(--gate-bg); background: var(--gate-accent); font-weight: 600; }
+body.gate-experience .community-link:hover { background: var(--gate-ink); color: var(--gate-bg); }
+body.gate-experience .gate-door:focus-visible { outline-offset: -2px; }
+@media (max-width: 760px) {
+    /* The hero no longer reserves a fixed 640px; the art card flows below the copy. */
+    body.gate-experience .gate-hero { min-height: 0; padding: 56px 0 40px; }
+    body.gate-experience .gate-hero .gate-hero-art { position: relative; right: auto; bottom: auto; margin-top: 28px; width: 200px; }
+    body.gate-experience .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    /* The sticky mobile toolbar keeps its position but follows the gate palette instead of fixed black. */
+    body.gate-experience .controls { background: color-mix(in srgb, var(--gate-panel) 94%, transparent) !important; border: 1px solid var(--gate-line); }
+    body.gate-experience .controls .player-sync-status { color: var(--gate-muted); }
+}
+@media (max-width: 420px) {
+    body.gate-experience .gate-hero { min-height: 0; }
+}
