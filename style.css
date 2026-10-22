@@ -257,6 +257,16 @@ body {
     transform: translateY(-2px);
 }
 
+/* 开场动画入口 */
+.anim-link {
+    margin-top: 16px;
+    background: linear-gradient(100deg, #38bdf8, #a855f7, #ef4444);
+}
+
+.anim-link:hover {
+    background: linear-gradient(100deg, #0ea5e9, #9333ea, #dc2626);
+}
+
 /* 响应式设计 */
 html {
     overflow-x: hidden;
