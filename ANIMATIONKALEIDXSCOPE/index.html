@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>KALEIDXSCOPE - 开场动画</title>
+    <meta name="description" content="舞萌 DX KALEIDXSCOPE 开场动画：九扇门扉，一道折射之光。">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="style.css?v=10-21">
+</head>
+<body>
+    <div id="app">
+        <canvas id="cv" aria-hidden="true"></canvas>
+        <div id="wash" aria-hidden="true"></div>
+        <div id="scan" aria-hidden="true"></div>
+        <div id="vignette" aria-hidden="true"></div>
+
+        <main id="layer">
+            <!-- 序章 -->
+            <section class="scene" id="s-intro">
+                <p class="eyebrow">舞萌 DX · 年度活动</p>
+                <p class="lead">九扇门扉 · 一道折射之光</p>
+                <h1 class="mega rainbow" data-split>KALEIDXSCOPE</h1>
+                <p class="sub">万花筒 · 门扉之旅，现在开启</p>
+            </section>
+
+            <!-- 六色之门（复用） -->
+            <section class="scene" id="s-gate">
+                <div class="gate-burst"></div>
+                <p class="gate-no"></p>
+                <div class="gate-card"><img alt="" class="gate-img"></div>
+                <h2 class="gate-name" data-split></h2>
+                <p class="gate-jp"></p>
+                <p class="gate-area"></p>
+                <p class="gate-stat"><b class="gate-num">0</b><span class="gate-unit"></span></p>
+                <p class="gate-desc"></p>
+            </section>
+
+            <!-- 棱镜塔 -->
+            <section class="scene" id="s-prism">
+                <p class="eyebrow">PHASE 07 / THE REFRACTION</p>
+                <h2 class="big prism-name" data-split>棱镜塔</h2>
+                <p class="jp">プリズムタワー</p>
+                <p class="info">7sRef 区域 4 · 2000km · 通关六门后的进阶课程</p>
+                <p class="refract">REFRACT → FRAGMENT</p>
+            </section>
+
+            <!-- ERROR -->
+            <section class="scene" id="s-error">
+                <p class="err-tag">!! SIGNAL LOST !!</p>
+                <h2 class="big glitch" data-text="PHASE #??? : ERROR">PHASE #??? : ERROR</h2>
+                <p class="glitch jp" data-text="■■■の扉">■■■の扉</p>
+                <pre class="term"><span>&gt; 门扉信号丢失……</span><span>&gt; 譛ｪ遏･縺ｮ謇蛾 ／ 縺薙ｌ縺ｯ蟶梧悍</span><span>&gt; 正在重新折射光谱_</span></pre>
+            </section>
+
+            <!-- 希望之门 -->
+            <section class="scene" id="s-hope">
+                <p class="eyebrow">PHASE 08 / BEYOND THE FRACTURE</p>
+                <h2 class="big gold" data-split>希望之门</h2>
+                <p class="jp">希望の扉</p>
+                <p class="line">穿过碎片，看见新的光</p>
+                <p class="info">通关 Phase #???（ERROR）后出现 · Stage 2 第 8 相</p>
+            </section>
+
+            <!-- 最终相 -->
+            <section class="scene" id="s-final">
+                <div class="build">
+                    <p class="eyebrow">FINAL SEQUENCE</p>
+                    <p class="lead">ALL LIGHT CONVERGES</p>
+                    <p class="line">所有门扉的光，正在汇聚……</p>
+                </div>
+                <div class="climax">
+                    <h2 class="mega rainbow" data-split>KALEIDXSCOPE</h2>
+                    <p class="final-cn">最终相</p>
+                    <p class="final-song">Xaleid◆scopiX · Re:MASTER</p>
+                    <p class="info">两段命条机制 · 通关希望之门后直接解锁</p>
+                </div>
+            </section>
+
+            <!-- 终幕 -->
+            <section class="scene" id="s-end">
+                <h2 class="end-title">所有折射，终将汇聚于此</h2>
+                <div class="door-grid"></div>
+                <p class="credit">KALEIDXSCOPE 解锁攻略 · AWMC TEAM 制作 · QQ群 1072033605</p>
+                <p class="spoiler">本动画含活动剧透内容 · 时间与条件以官方公告为准</p>
+                <div class="end-actions">
+                    <button type="button" class="btn ghost" data-action="replay">↻ 重新播放</button>
+                    <a class="btn solid" href="../index.html">进入攻略站 →</a>
+                </div>
+            </section>
+        </main>
+
+        <div id="flash" aria-hidden="true"></div>
+
+        <!-- 播放控制 -->
+        <nav id="hud" aria-label="播放控制">
+            <span id="chapter">序章</span>
+            <div id="bar" role="slider" aria-label="章节进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div id="fill"></div>
+                <div id="ticks"></div>
+            </div>
+            <button type="button" class="hud-btn" data-action="pause" title="暂停（空格）">❚❚</button>
+            <button type="button" class="hud-btn" data-action="mute" title="静音（M）">♪</button>
+            <button type="button" class="hud-btn" data-action="skip" title="跳到终幕">跳过</button>
+        </nav>
+
+        <!-- 开始遮罩：浏览器要求用户交互后才能播放声音 -->
+        <div id="start">
+            <div class="start-inner">
+                <p class="eyebrow">舞萌 DX · KALEIDXSCOPE</p>
+                <h1 class="start-title">万花筒 · 开场动画</h1>
+                <p class="start-desc">蓝 · 白 · 紫 · 黑 · 黄 · 红 → 棱镜塔 → ERROR → 希望之门 → 最终相</p>
+                <button type="button" class="btn solid big-btn" data-action="start">▶ 开启万花筒</button>
+                <p class="hint">建议佩戴耳机 · 约 55 秒 · 空格 暂停 · M 静音 · ← → 切换章节</p>
+                <a class="back" href="../index.html">← 返回主页</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=10-21"></script>
+</body>
+</html>
