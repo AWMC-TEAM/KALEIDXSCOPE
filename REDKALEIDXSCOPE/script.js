@@ -44,7 +44,7 @@ function escapeAttr(value) {
 }
 
 function getCoverUrl(song) {
-    return song.cover || `https://assets.awmc.cc/covers/${song.id}.png`;
+    return song.cover || KaleidCover.url(song.id);
 }
 
 function parsePeriodDate(str, year, resetHour) {

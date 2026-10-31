@@ -252,7 +252,7 @@ function renderPurpleGateChallengeRun() {
     function renderTrack(pool, selectedId) {
         return pool.map(s => {
             const isSelected = s.id === selectedId;
-            const coverUrl = `https://assets.awmc.cc/covers/${s.id}.png`;
+            const coverUrl = KaleidCover.url(s.id);
             return `
                 <div class="gate-song-chip expandable ${isSelected ? 'selected' : ''}" data-id="${s.id}">
                     <div class="gate-chip-cover" data-song-id="${s.id}" title="双击/长按查看乐曲详情">
@@ -269,7 +269,7 @@ function renderPurpleGateChallengeRun() {
     track3El.innerHTML = `
         <div class="gate-song-chip expandable selected" data-id="${PURPLE_GATE_TRACK3_FIXED.id}">
             <div class="gate-chip-cover" data-song-id="${PURPLE_GATE_TRACK3_FIXED.id}" title="双击/长按查看乐曲详情">
-                <img src="https://assets.awmc.cc/covers/${PURPLE_GATE_TRACK3_FIXED.id}.png" alt="${PURPLE_GATE_TRACK3_FIXED.name}" onerror="this.src='${noCoverSvg}'">
+                <img src="${KaleidCover.url(PURPLE_GATE_TRACK3_FIXED.id)}" alt="${PURPLE_GATE_TRACK3_FIXED.name}" onerror="this.src='${noCoverSvg}'">
             </div>
             <span class="gate-chip-name">${PURPLE_GATE_TRACK3_FIXED.name}</span>
         </div>
@@ -439,7 +439,7 @@ function renderSoloRun() {
     list.innerHTML = run.map(id => {
         const song = songsById[id] || { id, name: '-' };
         const done = (progress.solo && progress.solo.completed && progress.solo.completed[id]) || false;
-        const coverUrl = `https://assets.awmc.cc/covers/${id}.png`;
+        const coverUrl = KaleidCover.url(id);
         return `
             <div class="run-song-card ${done ? 'completed' : ''}" data-song-id="${id}" data-mode="solo">
                 <div class="song-cover" data-song-id="${id}" title="双击/长按查看乐曲详情">
@@ -482,7 +482,7 @@ function renderMultiRun() {
     list.innerHTML = run.map(id => {
         const song = songsById[id] || { id, name: '-' };
         const done = (progress.multi && progress.multi.completed && progress.multi.completed[id]) || false;
-        const coverUrl = `https://assets.awmc.cc/covers/${id}.png`;
+        const coverUrl = KaleidCover.url(id);
         return `
             <div class="run-song-card ${done ? 'completed' : ''}" data-song-id="${id}" data-mode="multi">
                 <div class="song-cover" data-song-id="${id}" title="双击/长按查看乐曲详情">
@@ -514,7 +514,7 @@ function renderSongsPool() {
     const list = document.getElementById('pool-songs-list');
     if (!list) return;
     list.innerHTML = songs.map(song => {
-        const coverUrl = `https://assets.awmc.cc/covers/${song.id}.png`;
+        const coverUrl = KaleidCover.url(song.id);
         return `
             <div class="pool-song-card" data-song-id="${song.id}">
                 <div class="song-cover" data-song-id="${song.id}" title="双击/长按查看乐曲详情">

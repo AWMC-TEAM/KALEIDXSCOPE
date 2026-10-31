@@ -311,7 +311,7 @@ function renderSoloRun() {
         const song = songsById[id];
         if (!song) return '';
         const done = completed[id];
-        const coverUrl = `https://assets.awmc.cc/covers/${id}.png`;
+        const coverUrl = KaleidCover.url(id);
         return `
             <div class="run-song-card ${done ? 'completed' : ''}" data-song-id="${id}" data-mode="solo">
                 <div class="song-cover" data-song-id="${id}" title="双击/长按查看乐曲详情">
@@ -360,7 +360,7 @@ function renderMultiRun() {
         const song = songsById[id];
         if (!song) return '';
         const done = completed[id];
-        const coverUrl = `https://assets.awmc.cc/covers/${id}.png`;
+        const coverUrl = KaleidCover.url(id);
         return `
             <div class="run-song-card ${done ? 'completed' : ''}" data-song-id="${id}" data-mode="multi">
                 <div class="song-cover" data-song-id="${id}" title="双击/长按查看乐曲详情">
@@ -472,7 +472,7 @@ function renderGateChallengeRun() {
     function renderTrack(pool, selectedId) {
         return pool.map(s => {
             const isSelected = s.id === selectedId;
-            const coverUrl = `https://assets.awmc.cc/covers/${s.id}.png`;
+            const coverUrl = KaleidCover.url(s.id);
             return `
                 <div class="gate-song-chip expandable ${isSelected ? 'selected' : ''}" data-id="${s.id}">
                     <div class="gate-chip-cover" data-song-id="${s.id}" title="双击/长按查看乐曲详情">
@@ -489,7 +489,7 @@ function renderGateChallengeRun() {
     track3El.innerHTML = `
         <div class="gate-song-chip expandable selected" data-id="${GATE_TRACK3_FIXED.id}">
             <div class="gate-chip-cover" data-song-id="${GATE_TRACK3_FIXED.id}" title="双击/长按查看乐曲详情">
-                <img src="https://assets.awmc.cc/covers/${GATE_TRACK3_FIXED.id}.png" alt="${GATE_TRACK3_FIXED.name}" onerror="this.src='${noCoverSvg}'">
+                <img src="${KaleidCover.url(GATE_TRACK3_FIXED.id)}" alt="${GATE_TRACK3_FIXED.name}" onerror="this.src='${noCoverSvg}'">
             </div>
             <span class="gate-chip-name">${GATE_TRACK3_FIXED.name}</span>
         </div>
@@ -557,7 +557,7 @@ function renderSongsPool() {
     if (!list) return;
     
     list.innerHTML = songs.map(song => {
-        const coverUrl = `https://assets.awmc.cc/covers/${song.id}.png`;
+        const coverUrl = KaleidCover.url(song.id);
         return `
             <div class="pool-song-card" data-song-id="${song.id}">
                 <div class="song-cover" data-song-id="${song.id}" title="双击/长按查看乐曲详情">
